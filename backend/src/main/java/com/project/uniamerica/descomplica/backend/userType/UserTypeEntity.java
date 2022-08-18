@@ -1,4 +1,5 @@
 package com.project.uniamerica.descomplica.backend.userType;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,5 @@ public class UserTypeEntity {
 
     @Column
     private String name;
-
 
 }
