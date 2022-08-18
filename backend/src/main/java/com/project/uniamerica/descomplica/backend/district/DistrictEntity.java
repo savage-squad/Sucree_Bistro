@@ -1,2 +1,3 @@
-package com.project.uniamerica.descomplica.backend.district;public class DistrictEntity {
+package com.project.uniamerica.descomplica.backend.district;
+public class DistrictEntity {
 }
