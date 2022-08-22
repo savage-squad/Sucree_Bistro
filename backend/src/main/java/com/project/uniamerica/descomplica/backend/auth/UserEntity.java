@@ -24,7 +24,7 @@ public class UserEntity extends PersonEntity {
     private String senha;
 
 
-    //@Column(nullable = false)
-    //@Enumerated(EnumType.STRING)
-    //private Role role;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
