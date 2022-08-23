@@ -1,4 +1,40 @@
 package com.project.uniamerica.descomplica.backend.product;
 
-public class ProductService {
-}
+
+
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+    @Service
+    public class  ProductService {
+
+        final
+        ProductRepository productRepository;
+
+        public ProductService(ProductRepository productRepository) {
+            this.productRepository = productRepository;
+        }
+
+        @Transactional
+        public ProductEntity save(ProductEntity productEntity) {
+            return productRepository.save(productEntity);
+        }
+
+        public List<ProductEntity> findAll() {
+            return productRepository.findAll();
+        }
+
+        public Optional<ProductEntity> findById(UUID id) {
+            return productRepository.findById(id);
+        }
+
+        @Transactional
+        public void delete(
+                ProductEntity productEntity) {
+            productRepository.delete(productEntity);
+        }
+    }
