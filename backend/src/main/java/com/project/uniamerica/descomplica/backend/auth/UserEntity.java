@@ -28,4 +28,11 @@ public class UserEntity extends PersonEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    
+    public Object getId() {
+        return id;
+    }
+
+    public void setId(Object o) {
+    }
 }

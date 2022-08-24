@@ -21,7 +21,7 @@ public class UserImplementService {
         return this.userRepository.save(obj);
     }
     public UserEntity update(UserEntity obj) {
-        if(this.findById(obj.getId())== null){
+        if(this.findById((Long) obj.getId())== null){
             throw new ObjectNotFoundException("Object"+
                     UserEntity.class.getName()+"no found"+obj.getId());
         }
