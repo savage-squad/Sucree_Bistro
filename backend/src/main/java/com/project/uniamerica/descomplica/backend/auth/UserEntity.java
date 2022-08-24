@@ -16,15 +16,16 @@ public class UserEntity extends PersonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email(message="Please provide a valid email address")
+    @Email(message = "Please provide a valid email address")
     @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
-    private String senha;
+    private String password;
 
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
 }
