@@ -1,4 +1,4 @@
-package com.project.uniamerica.descomplica.backend.productType;
+package com.project.uniamerica.descomplica.backend.commandType;
 
 
 import lombok.Data;
@@ -9,8 +9,8 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name="productType")
-public class ProductTypeEntity implements Serializable {
+@Table(name="commandType")
+public class CommandTypeEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

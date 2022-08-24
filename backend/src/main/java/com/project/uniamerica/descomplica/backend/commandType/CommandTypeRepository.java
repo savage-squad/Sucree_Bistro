@@ -1,4 +1,4 @@
-package com.project.uniamerica.descomplica.backend.productType;
+package com.project.uniamerica.descomplica.backend.commandType;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface ProductTypeRepository extends JpaRepository<ProductTypeEntity, UUID> {
+public interface CommandTypeRepository extends JpaRepository<CommandTypeEntity, UUID> {
 
 }

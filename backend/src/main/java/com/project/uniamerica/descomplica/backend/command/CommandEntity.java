@@ -1,4 +1,4 @@
-package com.project.uniamerica.descomplica.backend.product;
+package com.project.uniamerica.descomplica.backend.command;
 
 import lombok.Data;
 
@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name="products")
-public class ProductEntity implements Serializable {
+@Table(name="comands")
+public class CommandEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -17,13 +17,16 @@ public class ProductEntity implements Serializable {
     private UUID id;
 
     @Column(nullable = false, length = 45)
-    private String nomeDoPrato;
+    private int pedidos_id;
 
     @Column(nullable = false, length = 45)
-    private float valor;
+    private int cliente_id;
 
     @Column(nullable = false, length = 45)
-    private int tipoProdutoId;
+    private int mesa_id;
+
+    @Column(nullable = false, length = 45)
+    private int tipoComanda_id;
 
 
 }

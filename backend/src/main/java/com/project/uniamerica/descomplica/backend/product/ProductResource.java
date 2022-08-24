@@ -42,9 +42,9 @@ public class ProductResource {
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneproduct(@PathVariable(value = "id") UUID id) {
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
-//        if (!productEntityOptional.isPresent()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
-//        }
+        if (!productEntityOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
+        }
         return ResponseEntity.status(HttpStatus.OK).body(productEntityOptional.get());
     }
 
