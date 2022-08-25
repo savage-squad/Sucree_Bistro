@@ -1,4 +1,4 @@
-package request;
+package com.project.uniamerica.descomplica.backend.order;
 
 import lombok.Data;
 
@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name="requests")
-public class RequestEntity implements Serializable {
+@Table(name="orders")
+public class OrderEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

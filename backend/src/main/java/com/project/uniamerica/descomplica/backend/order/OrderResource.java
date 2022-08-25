@@ -1,4 +1,4 @@
-package request;
+package com.project.uniamerica.descomplica.backend.order;
 
 
 import org.springframework.beans.BeanUtils;
@@ -15,33 +15,33 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/requests")
-public class RequestResource {
+public class OrderResource {
 
-    final RequestService requestService;
+    final OrderService orderService;
 
     @Autowired
-    public RequestResource(RequestService requestService) {
-        this.requestService = requestService;
+    public OrderResource(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @GetMapping()
-    public ResponseEntity<List<RequestEntity>> getAllRequest() {
-        return ResponseEntity.status(HttpStatus.OK).body(requestService.findAll());
+    public ResponseEntity<List<OrderEntity>> getAllRequest() {
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveRequest(@RequestBody @Valid RequestDto requestDto) {
+    public ResponseEntity<Object> saveRequest(@RequestBody @Valid OrderDto orderDto) {
 
-        var requestEntity = new RequestEntity();
-        BeanUtils.copyProperties(requestDto, requestEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(requestService.save(requestEntity));
+        var requestEntity = new OrderEntity();
+        BeanUtils.copyProperties(orderDto, requestEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(requestEntity));
     }
 
 
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOnerequest(@PathVariable(value = "id") UUID id) {
-        Optional<RequestEntity> requestEntityOptional = requestService.findById(id);
+        Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("request not found.");
         }
@@ -50,25 +50,25 @@ public class RequestResource {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleterequest(@PathVariable(value = "id") UUID id) {
-        Optional<RequestEntity> requestEntityOptional = requestService.findById(id);
+        Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("request not found.");
         }
-        requestService.delete(requestEntityOptional.get());
+        orderService.delete(requestEntityOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("request deleted sucessfully");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updaterequest(@PathVariable(value = "id") UUID id,
-                                              @RequestBody @Valid RequestDto requestDto) {
-        Optional<RequestEntity> requestEntityOptional = requestService.findById(id);
+                                              @RequestBody @Valid OrderDto orderDto) {
+        Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("request not found.");
         }
-        var requestEntity = new RequestEntity();
-        BeanUtils.copyProperties(requestDto, requestEntity);
+        var requestEntity = new OrderEntity();
+        BeanUtils.copyProperties(orderDto, requestEntity);
         requestEntity.setId(requestEntityOptional.get().getId());
-        return ResponseEntity.status(HttpStatus.OK).body(requestService.save(requestEntity));
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.save(requestEntity));
     }
 
 
