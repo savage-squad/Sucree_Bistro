@@ -3,8 +3,10 @@ package com.project.uniamerica.descomplica.backend.commandTypeTest;
 import com.project.uniamerica.descomplica.backend.commandType.CommandTypeEntity;
 import com.project.uniamerica.descomplica.backend.commandType.CommandTypeRepository;
 import com.project.uniamerica.descomplica.backend.commandType.CommandTypeService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ import java.util.function.Function;
 
 class CommandTypeServiceTest {
 
+    @Autowired
+    CommandTypeEntity commandType = new CommandTypeEntity(1);
     @Mock
     CommandTypeService commandTypeService = new CommandTypeService();
 
@@ -174,17 +178,25 @@ class CommandTypeServiceTest {
     };
     @Test
     void save() {
+       commandTypeService.save(commandType);
+        Assertions.assertThat(commandType.getId()).isEqualTo(1);
     }
 
     @Test
     void findAll() {
+        commandTypeService.save(commandType);
+        Assertions.assertThat(commandType.getId()).isNotNull();
     }
 
     @Test
     void findById() {
+        commandTypeService.findById(1);
+        Assertions.assertThat(commandType.getId()).isEqualTo(1);
     }
 
     @Test
     void delete() {
+        commandTypeService.delete(commandType);
+        Assertions.assertThat(commandTypeRepository.findById(commandType.getId())).isEmpty();
     }
 }

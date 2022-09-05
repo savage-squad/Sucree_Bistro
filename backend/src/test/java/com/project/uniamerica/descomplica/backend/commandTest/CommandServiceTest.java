@@ -3,8 +3,10 @@ package com.project.uniamerica.descomplica.backend.commandTest;
 import com.project.uniamerica.descomplica.backend.command.CommandEntity;
 import com.project.uniamerica.descomplica.backend.command.CommandRepository;
 import com.project.uniamerica.descomplica.backend.command.CommandService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ import java.util.function.Function;
 
 class CommandServiceTest {
 
+    @Autowired
+    CommandEntity command = new CommandEntity(1,"jorge");
     @Mock
     CommandService commandService = new CommandService();
 
@@ -175,17 +179,39 @@ class CommandServiceTest {
     @Test
     void save() {
 
+        commandService.save(command);
+        Assertions.assertThat(command.getId()).isEqualTo(1);
     }
 
     @Test
     void findAll() {
+        CommandEntity command = new CommandEntity();
+
+        command.setNome("Willson");
+        command.setId(2);
+        command.setCliente_id(2);
+        command.setMesa_id(4);
+        command.setTipoComanda_id(1);
+        command.setPedidos_id(4);
+
+        Assertions.assertThat(command.getId()).isNotNull();
+        Assertions.assertThat(command.getCliente_id()).isNotNull();
+        Assertions.assertThat(command.getMesa_id()).isNotNull();
+        Assertions.assertThat(command.getPedidos_id()).isNotNull();
+        Assertions.assertThat(command.getTipoComanda_id()).isNotNull();
+        Assertions.assertThat(command.getNome()).isNotNull();
+
     }
 
     @Test
     void findById() {
+        commandService.findById(command.getId());
+        Assertions.assertThat(command.getId()).isEqualTo(1);
     }
 
     @Test
     void delete() {
+        commandService.delete(command);
+        Assertions.assertThat(commandRepository.findById(command.getId())).isEmpty();
     }
 }

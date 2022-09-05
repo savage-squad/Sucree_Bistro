@@ -3,8 +3,10 @@ package com.project.uniamerica.descomplica.backend.productTest;
 import com.project.uniamerica.descomplica.backend.product.ProductEntity;
 import com.project.uniamerica.descomplica.backend.product.ProductRepository;
 import com.project.uniamerica.descomplica.backend.product.ProductService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ import java.util.function.Function;
 
 class ProductServiceTest {
 
+    @Autowired
+    ProductEntity product = new ProductEntity(1,"carne",10);
     @Mock
     ProductService productService = new ProductService();
 
@@ -174,17 +178,40 @@ class ProductServiceTest {
     };
     @Test
     void save() {
+        this.productRepository.save(product);
+
+        Assertions.assertThat(product.getId()).isEqualTo(1);
+        Assertions.assertThat(product.getTipoProdutoId()).isNotNull();
+        Assertions.assertThat(product.getValor()).isEqualTo(10);
+        Assertions.assertThat(product.getNomeDoPrato()).isEqualTo("carne");
     }
 
     @Test
     void findAll() {
+        ProductEntity product = new ProductEntity();
+
+        product.setValor(11);
+        product.setId(2);
+        product.setNomeDoPrato("caviar");
+        product.setTipoProdutoId(5);
+
+        Assertions.assertThat(product.getId()).isNotNull();
+        Assertions.assertThat(product.getNomeDoPrato()).isNotNull();
+        Assertions.assertThat(product.getTipoProdutoId()).isNotNull();
+        Assertions.assertThat(product.getValor()).isNotNull();
     }
 
     @Test
     void findById() {
+        ProductEntity product = new ProductEntity(1,"carne",10);
+        productService.findById(1);
+        Assertions.assertThat(productService.findById(product.getId())).isEmpty();
     }
 
     @Test
     void delete() {
+        ProductEntity product = new ProductEntity(1,"carne",10);
+        this.productService.delete(product);
+        Assertions.assertThat(productRepository.findById(product.getId())).isEmpty();
     }
 }

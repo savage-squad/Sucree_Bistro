@@ -3,8 +3,10 @@ package com.project.uniamerica.descomplica.backend.orderTest;
 import com.project.uniamerica.descomplica.backend.order.OrderEntity;
 import com.project.uniamerica.descomplica.backend.order.OrderRepository;
 import com.project.uniamerica.descomplica.backend.order.OrderService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ import java.util.function.Function;
 
 class OrderServiceTest {
 
+    @Autowired
+    OrderEntity orderEntity = new OrderEntity(1);
     @Mock
     OrderService orderService = new OrderService();
 
@@ -174,17 +178,29 @@ class OrderServiceTest {
     };
     @Test
     void save() {
+        orderService.save(orderEntity);
+        Assertions.assertThat(orderEntity.getId()).isEqualTo(1);
     }
 
     @Test
     void findAll() {
+        OrderEntity order = new OrderEntity();
+
+        order.setId(2);
+        order.setProduct_id(3);
+        order.setStatus_id(2);
+        Assertions.assertThat(order.getId()).isNotNull();
     }
 
     @Test
     void findById() {
+        orderService.findById(1);
+        Assertions.assertThat(orderEntity.getId()).isEqualTo(1);
     }
 
     @Test
     void delete() {
+        orderService.delete(orderEntity);
+        Assertions.assertThat(orderRepository.findById(orderEntity.getId())).isEmpty();
     }
 }
