@@ -2,14 +2,14 @@ package com.project.uniamerica.descomplica.backend.auth;
 
 import com.project.uniamerica.descomplica.backend.person.PersonEntity;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class UserEntity extends PersonEntity {
 
     @Id
@@ -28,7 +28,7 @@ public class UserEntity extends PersonEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    
+
     public Object getId() {
         return id;
     }
