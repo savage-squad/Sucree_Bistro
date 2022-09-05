@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,7 +39,7 @@ public class TableResource {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOnetable(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOnetable(@PathVariable(value = "id") int id) {
         Optional<TableEntity> tableEntityOptional = tableService.findById(id);
         if (!tableEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("table not found.");
@@ -49,7 +48,7 @@ public class TableResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletetable(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deletetable(@PathVariable(value = "id") int id) {
         Optional<TableEntity> tableEntityOptional = tableService.findById(id);
         if (!tableEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("table not found.");
@@ -59,7 +58,7 @@ public class TableResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatetable(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updatetable(@PathVariable(value = "id") int id,
                                                 @RequestBody @Valid TableDto tableDto) {
         Optional<TableEntity> tableEntityOptional = tableService.findById(id);
         if (!tableEntityOptional.isPresent()) {

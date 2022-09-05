@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,7 +39,7 @@ public class OrderResource {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOnerequest(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOnerequest(@PathVariable(value = "id") int id) {
         Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("request not found.");
@@ -49,7 +48,7 @@ public class OrderResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleterequest(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deleterequest(@PathVariable(value = "id") int id) {
         Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("request not found.");
@@ -59,7 +58,7 @@ public class OrderResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updaterequest(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updaterequest(@PathVariable(value = "id") int id,
                                               @RequestBody @Valid OrderDto orderDto) {
         Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {

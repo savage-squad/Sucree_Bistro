@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,7 +39,7 @@ public class ProductTypeResource {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneproductType(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneproductType(@PathVariable(value = "id") int id) {
         Optional<ProductTypeEntity> productTypeEntityOptional = productTypeService.findById(id);
         if (!productTypeEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("productType not found.");
@@ -49,7 +48,7 @@ public class ProductTypeResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteproductType(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deleteproductType(@PathVariable(value = "id") int id) {
         Optional<ProductTypeEntity> productTypeEntityOptional = productTypeService.findById(id);
         if (!productTypeEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("productType not found.");
@@ -59,7 +58,7 @@ public class ProductTypeResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateproductType(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updateproductType(@PathVariable(value = "id") int id,
                                                 @RequestBody @Valid ProductTypeDto productTypeDto) {
         Optional<ProductTypeEntity> productTypeEntityOptional = productTypeService.findById(id);
         if (!productTypeEntityOptional.isPresent()) {

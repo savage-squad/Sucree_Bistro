@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,7 +39,7 @@ public class CommandResource {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOnecommand(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOnecommand(@PathVariable(value = "id") int id) {
         Optional<CommandEntity> commandEntityOptional = commandService.findById(id);
         if (!commandEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("command not found.");
@@ -49,7 +48,7 @@ public class CommandResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletecommand(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deletecommand(@PathVariable(value = "id") int id) {
         Optional<CommandEntity> commandEntityOptional = commandService.findById(id);
         if (!commandEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("command not found.");
@@ -59,7 +58,7 @@ public class CommandResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatecommand(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updatecommand(@PathVariable(value = "id") int id,
                                                 @RequestBody @Valid CommandDto commandDto) {
         Optional<CommandEntity> commandEntityOptional = commandService.findById(id);
         if (!commandEntityOptional.isPresent()) {

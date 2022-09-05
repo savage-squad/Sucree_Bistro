@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -14,10 +13,19 @@ public class OrderEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private int id;
 
     @Column(nullable = false, length = 45)
-    private String mesacol;
+    private int product_id;
 
+    @Column(nullable = false, length = 45)
+    private int status_id;
 
+    public OrderEntity() {
+    }
+
+    public OrderEntity(int id) {
+
+        this.id = id;
+    }
 }

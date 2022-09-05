@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,7 +39,7 @@ public class ProductResource {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneproduct(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneproduct(@PathVariable(value = "id") int id) {
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
         if (!productEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
@@ -49,7 +48,7 @@ public class ProductResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteproduct(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deleteproduct(@PathVariable(value = "id") int id) {
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
         if (!productEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
@@ -59,7 +58,7 @@ public class ProductResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateproduct(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updateproduct(@PathVariable(value = "id") int id,
                                                 @RequestBody @Valid ProductDto productDto) {
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
         if (!productEntityOptional.isPresent()) {

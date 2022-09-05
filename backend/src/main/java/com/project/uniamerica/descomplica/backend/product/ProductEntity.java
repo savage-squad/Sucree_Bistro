@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -14,7 +13,7 @@ public class ProductEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private int id;
 
     @Column(nullable = false, length = 45)
     private String nomeDoPrato;
@@ -25,5 +24,12 @@ public class ProductEntity implements Serializable {
     @Column(nullable = false, length = 45)
     private int tipoProdutoId;
 
+    public ProductEntity() {
+    }
 
+    public ProductEntity(int id, String nomeDoPrato, float valor) {
+        this.id = id;
+        this.nomeDoPrato = nomeDoPrato;
+        this.valor = valor;
+    }
 }

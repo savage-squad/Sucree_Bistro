@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class TableService {
@@ -24,7 +23,7 @@ public class TableService {
         return tableRepository.findAll();
     }
 
-    public Optional<TableEntity> findById(UUID id) {
+    public Optional<TableEntity> findById(int id) {
         return tableRepository.findById(id);
     }
 

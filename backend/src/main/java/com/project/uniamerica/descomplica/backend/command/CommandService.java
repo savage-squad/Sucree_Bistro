@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class CommandService {
@@ -24,7 +23,7 @@ public class CommandService {
         return commandRepository.findAll();
     }
 
-    public Optional<CommandEntity> findById(UUID id) {
+    public Optional<CommandEntity> findById(int id) {
         return commandRepository.findById(id);
     }
 

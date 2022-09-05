@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -14,10 +13,13 @@ public class CommandEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private int id;
 
     @Column(nullable = false, length = 45)
     private int pedidos_id;
+
+    @Column(nullable = false, length = 45)
+    private String nome;
 
     @Column(nullable = false, length = 45)
     private int cliente_id;
@@ -27,6 +29,16 @@ public class CommandEntity implements Serializable {
 
     @Column(nullable = false, length = 45)
     private int tipoComanda_id;
+
+
+    public CommandEntity() {
+
+    }
+
+    public CommandEntity(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
 
 }

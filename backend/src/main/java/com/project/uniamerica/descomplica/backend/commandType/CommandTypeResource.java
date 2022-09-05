@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,7 +39,7 @@ public class CommandTypeResource {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOnecommandType(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOnecommandType(@PathVariable(value = "id") int id) {
         Optional<CommandTypeEntity> commandTypeEntityOptional = commandTypeService.findById(id);
         if (!commandTypeEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("commandType not found.");
@@ -49,7 +48,7 @@ public class CommandTypeResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletecommandType(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deletecommandType(@PathVariable(value = "id") int id) {
         Optional<CommandTypeEntity> commandTypeEntityOptional = commandTypeService.findById(id);
         if (!commandTypeEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("commandType not found.");
@@ -59,7 +58,7 @@ public class CommandTypeResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatecommandType(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updatecommandType(@PathVariable(value = "id") int id,
                                                     @RequestBody @Valid CommandTypeDto commandTypeDto) {
         Optional<CommandTypeEntity> commandTypeEntityOptional = commandTypeService.findById(id);
         if (!commandTypeEntityOptional.isPresent()) {

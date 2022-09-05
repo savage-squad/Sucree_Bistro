@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -14,10 +13,16 @@ public class TableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private int id;
 
     @Column(nullable = false, length = 45)
     private String mesacol;
 
+    public TableEntity() {
+    }
 
+    public TableEntity(int id, String mesacol) {
+        this.id = id;
+        this.mesacol = mesacol;
+    }
 }
