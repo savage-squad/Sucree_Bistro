@@ -1,9 +1,7 @@
 package com.project.uniamerica.descomplica.backend.auth;
 
 import com.project.uniamerica.descomplica.backend.person.PersonEntity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
