@@ -48,7 +48,7 @@ public class CommandRepositoryTest {
 
         CommandEntity command = new CommandEntity(2,"Jorge");
         command.setNome("Willson");
-        this.commandRepository.save(command);
+            this.commandRepository.save(command);
         Assertions.assertThat(command.getNome()).isEqualTo("Willson");
     }
 
@@ -62,6 +62,8 @@ public class CommandRepositoryTest {
         command.setMesa_id(4);
         command.setTipoComanda_id(1);
         command.setPedidos_id(4);
+
+        //assertions
 
         Assertions.assertThat(command.getId()).isNotNull();
         Assertions.assertThat(command.getCliente_id()).isNotNull();

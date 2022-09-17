@@ -1,202 +1,49 @@
 package com.project.uniamerica.descomplica.backend.commandTypeTest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.uniamerica.descomplica.backend.commandType.CommandTypeEntity;
-import com.project.uniamerica.descomplica.backend.commandType.CommandTypeRepository;
-import com.project.uniamerica.descomplica.backend.commandType.CommandTypeService;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import com.project.uniamerica.descomplica.backend.commandType.CommandTypeResource;
+import org.hamcrest.Matchers;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = CommandTypeServiceTest.class)
 class CommandTypeServiceTest {
 
-    @Autowired
-    CommandTypeEntity commandType = new CommandTypeEntity(1);
-    @Mock
-    CommandTypeService commandTypeService = new CommandTypeService();
+    private MockMvc mockMvc;
 
     @Mock
-    CommandTypeRepository commandTypeRepository = new CommandTypeRepository() {
-        @Override
-        public List<CommandTypeEntity> findAll() {
-            return null;
-        }
+    CommandTypeResource commandTypeResource;
 
-        @Override
-        public List<CommandTypeEntity> findAll(Sort sort) {
-            return null;
-        }
-
-        @Override
-        public List<CommandTypeEntity> findAllById(Iterable<Integer> integers) {
-            return null;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> List<S> saveAll(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public void flush() {
-
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> S saveAndFlush(S entity) {
-            return null;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public void deleteAllInBatch(Iterable<CommandTypeEntity> entities) {
-
-        }
-
-        @Override
-        public void deleteAllByIdInBatch(Iterable<Integer> integers) {
-
-        }
-
-        @Override
-        public void deleteAllInBatch() {
-
-        }
-
-        @Override
-        public CommandTypeEntity getOne(Integer integer) {
-            return null;
-        }
-
-        @Override
-        public CommandTypeEntity getById(Integer integer) {
-            return null;
-        }
-
-        @Override
-        public CommandTypeEntity getReferenceById(Integer integer) {
-            return null;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> List<S> findAll(Example<S> example) {
-            return null;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> List<S> findAll(Example<S> example, Sort sort) {
-            return null;
-        }
-
-        @Override
-        public Page<CommandTypeEntity> findAll(Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> S save(S entity) {
-            return null;
-        }
-
-        @Override
-        public Optional<CommandTypeEntity> findById(Integer integer) {
-            return Optional.empty();
-        }
-
-        @Override
-        public boolean existsById(Integer integer) {
-            return false;
-        }
-
-        @Override
-        public long count() {
-            return 0;
-        }
-
-        @Override
-        public void deleteById(Integer integer) {
-
-        }
-
-        @Override
-        public void delete(CommandTypeEntity entity) {
-
-        }
-
-        @Override
-        public void deleteAllById(Iterable<? extends Integer> integers) {
-
-        }
-
-        @Override
-        public void deleteAll(Iterable<? extends CommandTypeEntity> entities) {
-
-        }
-
-        @Override
-        public void deleteAll() {
-
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> Optional<S> findOne(Example<S> example) {
-            return Optional.empty();
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> long count(Example<S> example) {
-            return 0;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity> boolean exists(Example<S> example) {
-            return false;
-        }
-
-        @Override
-        public <S extends CommandTypeEntity, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
-            return null;
-        }
-    };
-    @Test
-    void save() {
-       commandTypeService.save(commandType);
-        Assertions.assertThat(commandType.getId()).isEqualTo(1);
+    @Before
+    public void setUp(){
+        this.mockMvc = MockMvcBuilders.standaloneSetup(commandTypeResource).build();
     }
 
     @Test
-    void findAll() {
-        commandTypeService.save(commandType);
-        Assertions.assertThat(commandType.getId()).isNotNull();
-    }
+    public void criarcommandType() throws Exception {
+        CommandTypeEntity commandTypeEntity = new CommandTypeEntity(1);
+        ObjectMapper mapper = new ObjectMapper();
 
-    @Test
-    void findById() {
-        commandTypeService.findById(1);
-        Assertions.assertThat(commandType.getId()).isEqualTo(1);
-    }
+        String json = mapper.writeValueAsString(commandTypeEntity);
 
-    @Test
-    void delete() {
-        commandTypeService.delete(commandType);
-        Assertions.assertThat(commandTypeRepository.findById(commandType.getId())).isEmpty();
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/commandTypes")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+            )
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.header()
+                        .string("location", Matchers.containsString("http://localhost/commadTypes")));
+
     }
 }
