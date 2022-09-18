@@ -45,6 +45,7 @@ public class ProductResource {
         if (!productEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
         }
+
         return ResponseEntity.status(HttpStatus.OK).body(productEntityOptional.get());
     }
 
@@ -70,6 +71,5 @@ public class ProductResource {
         productEntity.setId(productEntityOptional.get().getId());
         return ResponseEntity.status(HttpStatus.OK).body(productService.save(productEntity));
     }
-
-
 }
+
