@@ -39,16 +39,20 @@ public class ProductResource {
 
 
     @GetMapping("/{id}")
+
     public ResponseEntity<Object> getOneproduct(@PathVariable(value = "id") int id) {
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
         if (!productEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
         }
+
         return ResponseEntity.status(HttpStatus.OK).body(productEntityOptional.get());
     }
 
     @DeleteMapping("/{id}")
+
     public ResponseEntity<Object> deleteproduct(@PathVariable(value = "id") int id) {
+
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
         if (!productEntityOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
@@ -58,7 +62,9 @@ public class ProductResource {
     }
 
     @PutMapping("/{id}")
+
     public ResponseEntity<Object> updateproduct(@PathVariable(value = "id") int id,
+
                                                 @RequestBody @Valid ProductDto productDto) {
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
         if (!productEntityOptional.isPresent()) {
@@ -69,6 +75,5 @@ public class ProductResource {
         productEntity.setId(productEntityOptional.get().getId());
         return ResponseEntity.status(HttpStatus.OK).body(productService.save(productEntity));
     }
-
-
 }
+
