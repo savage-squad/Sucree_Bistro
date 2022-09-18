@@ -1,9 +1,7 @@
 package com.project.uniamerica.descomplica.backend.product;
 
 public class ProductResource {
-<<<<<<< Updated upstream
-}
-=======
+
 
     final ProductService productService;
 
@@ -61,4 +59,3 @@ public class ProductResource {
 
 
 }
->>>>>>> Stashed changes
