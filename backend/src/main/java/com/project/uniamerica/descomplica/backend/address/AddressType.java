@@ -1,4 +1,6 @@
 package com.project.uniamerica.descomplica.backend.address;
 
-public class AddressResource {
+public enum AddressType {
+    RESIDENTIAL,
+    COMMERCIAL
 }
