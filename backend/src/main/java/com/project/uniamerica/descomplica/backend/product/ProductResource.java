@@ -1,3 +1,4 @@
+
 package com.project.uniamerica.descomplica.backend.product;
 
 
@@ -81,4 +82,5 @@ public class ProductResource {
         return ResponseEntity.status(HttpStatus.OK).body(productService.save(productEntity));
     }
 }
+
 
