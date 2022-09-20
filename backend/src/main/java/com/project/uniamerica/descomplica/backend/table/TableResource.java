@@ -1,6 +1,8 @@
 package com.project.uniamerica.descomplica.backend.table;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/tables")
+@Api(value = "API REST Tables")
 public class TableResource {
 
     final TableService tableService;
@@ -24,11 +27,13 @@ public class TableResource {
     }
 
     @GetMapping()
+    @ApiOperation(value="Retorna uma lista mesas")
     public ResponseEntity<List<TableEntity>> getAllTable() {
         return ResponseEntity.status(HttpStatus.OK).body(tableService.findAll());
     }
 
     @PostMapping
+    @ApiOperation(value="Cadastra mesas")
     public ResponseEntity<Object> saveTable(@RequestBody @Valid TableDto tableDto) {
 
         var tableEntity = new TableEntity();
@@ -39,6 +44,7 @@ public class TableResource {
 
 
     @GetMapping("/{id}")
+    @ApiOperation(value="Retorna uma mesa especifica")
     public ResponseEntity<Object> getOnetable(@PathVariable(value = "id") int id) {
         Optional<TableEntity> tableEntityOptional = tableService.findById(id);
         if (!tableEntityOptional.isPresent()) {
@@ -48,6 +54,7 @@ public class TableResource {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value="Deleta mesa")
     public ResponseEntity<Object> deletetable(@PathVariable(value = "id") int id) {
         Optional<TableEntity> tableEntityOptional = tableService.findById(id);
         if (!tableEntityOptional.isPresent()) {
@@ -58,6 +65,7 @@ public class TableResource {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value="Atualiza mesa")
     public ResponseEntity<Object> updatetable(@PathVariable(value = "id") int id,
                                                 @RequestBody @Valid TableDto tableDto) {
         Optional<TableEntity> tableEntityOptional = tableService.findById(id);

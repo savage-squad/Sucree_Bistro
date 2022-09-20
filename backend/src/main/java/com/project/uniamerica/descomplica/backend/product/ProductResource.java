@@ -1,6 +1,8 @@
 package com.project.uniamerica.descomplica.backend.product;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/products")
+@Api(value = "API REST Products")
 public class ProductResource {
 
     final ProductService productService;
@@ -24,11 +27,13 @@ public class ProductResource {
     }
 
     @GetMapping()
+    @ApiOperation(value="Retorna uma lista de produtos")
     public ResponseEntity<List<ProductEntity>> getAllProduct() {
         return ResponseEntity.status(HttpStatus.OK).body(productService.findAll());
     }
 
     @PostMapping
+    @ApiOperation(value="Cadastra produto")
     public ResponseEntity<Object> saveProduct(@RequestBody @Valid ProductDto productDto) {
 
         var productEntity = new ProductEntity();
@@ -39,7 +44,7 @@ public class ProductResource {
 
 
     @GetMapping("/{id}")
-
+    @ApiOperation(value="Retorna um produto especifico")
     public ResponseEntity<Object> getOneproduct(@PathVariable(value = "id") int id) {
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
         if (!productEntityOptional.isPresent()) {
@@ -50,7 +55,7 @@ public class ProductResource {
     }
 
     @DeleteMapping("/{id}")
-
+    @ApiOperation(value="Deleta produto")
     public ResponseEntity<Object> deleteproduct(@PathVariable(value = "id") int id) {
 
         Optional<ProductEntity> productEntityOptional = productService.findById(id);
@@ -62,7 +67,7 @@ public class ProductResource {
     }
 
     @PutMapping("/{id}")
-
+    @ApiOperation(value="Atualiza produto")
     public ResponseEntity<Object> updateproduct(@PathVariable(value = "id") int id,
 
                                                 @RequestBody @Valid ProductDto productDto) {

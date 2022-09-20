@@ -1,6 +1,8 @@
 package com.project.uniamerica.descomplica.backend.order;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,8 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/requests")
+@RequestMapping("/orders")
+@Api(value = "API REST orders")
 public class OrderResource {
 
     final OrderService orderService;
@@ -24,13 +27,14 @@ public class OrderResource {
     }
 
     @GetMapping()
+    @ApiOperation(value="Retorna uma lista de pedidos")
     public ResponseEntity<List<OrderEntity>> getAllRequest() {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.findAll());
     }
 
     @PostMapping
+    @ApiOperation(value="Cadastra um  pedido")
     public ResponseEntity<Object> saveRequest(@RequestBody @Valid OrderDto orderDto) {
-
         var requestEntity = new OrderEntity();
         BeanUtils.copyProperties(orderDto, requestEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(requestEntity));
@@ -39,6 +43,7 @@ public class OrderResource {
 
 
     @GetMapping("/{id}")
+    @ApiOperation(value="Retorna um pedido especifico")
     public ResponseEntity<Object> getOnerequest(@PathVariable(value = "id") int id) {
         Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {
@@ -48,6 +53,7 @@ public class OrderResource {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value="deleta um pedido")
     public ResponseEntity<Object> deleterequest(@PathVariable(value = "id") int id) {
         Optional<OrderEntity> requestEntityOptional = orderService.findById(id);
         if (!requestEntityOptional.isPresent()) {
@@ -58,6 +64,7 @@ public class OrderResource {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value="Atualizar pedido")
     public ResponseEntity<Object> updaterequest(@PathVariable(value = "id") int id,
                                               @RequestBody @Valid OrderDto orderDto) {
         Optional<OrderEntity> requestEntityOptional = orderService.findById(id);

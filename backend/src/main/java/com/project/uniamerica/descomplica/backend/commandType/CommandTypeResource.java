@@ -1,6 +1,8 @@
 package com.project.uniamerica.descomplica.backend.commandType;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/commandTypes")
+@Api(value = "API REST CommandTypes")
 public class CommandTypeResource {
 
     final CommandTypeService commandTypeService;
@@ -24,11 +27,13 @@ public class CommandTypeResource {
     }
 
     @GetMapping()
+    @ApiOperation(value="Retorna uma lista de tipos de Comandas")
     public ResponseEntity<List<CommandTypeEntity>> getAllCommandType() {
         return ResponseEntity.status(HttpStatus.OK).body(commandTypeService.findAll());
     }
 
     @PostMapping
+    @ApiOperation(value="Cadastra um tipo de comanda")
     public ResponseEntity<Object> saveCommandType(@RequestBody @Valid CommandTypeDto commandTypeDto) {
 
         var commandTypeEntity = new CommandTypeEntity();
@@ -39,6 +44,7 @@ public class CommandTypeResource {
 
 
     @GetMapping("/{id}")
+    @ApiOperation(value="Retorna um tipo de comanda especifico")
     public ResponseEntity<Object> getOnecommandType(@PathVariable(value = "id") int id) {
         Optional<CommandTypeEntity> commandTypeEntityOptional = commandTypeService.findById(id);
         if (!commandTypeEntityOptional.isPresent()) {
@@ -48,6 +54,7 @@ public class CommandTypeResource {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value="Deleta um tipo de comanda")
     public ResponseEntity<Object> deletecommandType(@PathVariable(value = "id") int id) {
         Optional<CommandTypeEntity> commandTypeEntityOptional = commandTypeService.findById(id);
         if (!commandTypeEntityOptional.isPresent()) {
@@ -58,6 +65,7 @@ public class CommandTypeResource {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value="Atualiza tipo de comanda")
     public ResponseEntity<Object> updatecommandType(@PathVariable(value = "id") int id,
                                                     @RequestBody @Valid CommandTypeDto commandTypeDto) {
         Optional<CommandTypeEntity> commandTypeEntityOptional = commandTypeService.findById(id);

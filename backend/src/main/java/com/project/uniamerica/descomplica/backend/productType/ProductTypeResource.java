@@ -1,6 +1,8 @@
 package com.project.uniamerica.descomplica.backend.productType;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/productTypes")
+@Api(value = "API REST ProductTypes")
 public class ProductTypeResource {
 
     final ProductTypeService productTypeService;
@@ -24,11 +27,13 @@ public class ProductTypeResource {
     }
 
     @GetMapping()
+    @ApiOperation(value="Retorna uma lista de tipos de produto")
     public ResponseEntity<List<ProductTypeEntity>> getAllProductType() {
         return ResponseEntity.status(HttpStatus.OK).body(productTypeService.findAll());
     }
 
     @PostMapping
+    @ApiOperation(value="Cadastra produto")
     public ResponseEntity<Object> saveProductType(@RequestBody @Valid ProductTypeDto productTypeDto) {
 
         var productTypeEntity = new ProductTypeEntity();
@@ -39,6 +44,7 @@ public class ProductTypeResource {
 
 
     @GetMapping("/{id}")
+    @ApiOperation(value="Retorna um produto especifico")
     public ResponseEntity<Object> getOneproductType(@PathVariable(value = "id") int id) {
         Optional<ProductTypeEntity> productTypeEntityOptional = productTypeService.findById(id);
         if (!productTypeEntityOptional.isPresent()) {
@@ -48,6 +54,7 @@ public class ProductTypeResource {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value="Deleta produto")
     public ResponseEntity<Object> deleteproductType(@PathVariable(value = "id") int id) {
         Optional<ProductTypeEntity> productTypeEntityOptional = productTypeService.findById(id);
         if (!productTypeEntityOptional.isPresent()) {
@@ -58,6 +65,7 @@ public class ProductTypeResource {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value="Atualiza produto")
     public ResponseEntity<Object> updateproductType(@PathVariable(value = "id") int id,
                                                 @RequestBody @Valid ProductTypeDto productTypeDto) {
         Optional<ProductTypeEntity> productTypeEntityOptional = productTypeService.findById(id);
