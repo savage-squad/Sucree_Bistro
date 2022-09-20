@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = OrderServiceTest.class)
-class OrderServiceTest {
+public class OrderServiceTest {
 
     private MockMvc mockMvc;
 
@@ -41,7 +41,7 @@ class OrderServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
                 )
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.header()
                         .string("location", Matchers.containsString("http://localhost/orders")));
 

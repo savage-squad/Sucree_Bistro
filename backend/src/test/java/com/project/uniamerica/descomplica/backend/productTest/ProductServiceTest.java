@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductServiceTest.class)
-class ProductServiceTest {
+public class ProductServiceTest {
 
     private MockMvc mockMvc;
 
@@ -42,7 +42,7 @@ class ProductServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
                 )
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.header()
                         .string("location", Matchers.containsString("http://localhost/products")));
 
