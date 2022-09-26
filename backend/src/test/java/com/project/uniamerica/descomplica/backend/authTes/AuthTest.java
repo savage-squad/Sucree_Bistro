@@ -20,23 +20,6 @@ public class AuthTest {
     private UserImplementService userImplementService;
     private final Faker faker = new Faker(new Locale("pt-br"));
 
-    {/*
-//    @Test
-//    void index() {
-//        List<UserEntity> before = userImplementService.index().getBody();
-//
-//        UserEntity userEntity = new UserEntity();
-//
-//        userEntity.setEmail(faker.internet().emailAddress());
-//        userEntity.setPassword(faker.random().hex());
-//
-//        userImplementService.insert(userEntity);
-//
-//        ResponseEntity<List<UserEntity>> after = userImplementService.index();
-//        Assertions.assertEquals(after.getClass(), before.size() + 1);
-//
-//    }*/}
-    //
     @Test
     void store() {
         UserEntity user = new UserEntity();

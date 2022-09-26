@@ -10,13 +10,9 @@ public class ClientRequest {
     private String cpf;
     private String document;
 
-//    public ClientEntity toModel(){
-//        var client = new ClientEntity();
-//        client.setFullName(fullName);
-//        client.setDocument(document);
-//        client.setCpf(cpf);
-//        client.setEmail(email);
-//        client.setTelephone(telephone);
-//        return client;
-//    }
+   public ClientEntity toModel(){
+       ClientEntity client = new ClientEntity();
+         client.setDocument(document);
+       return client;
+   }
 }
