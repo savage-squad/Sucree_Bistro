@@ -8,6 +8,7 @@ import {
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
 
 import FooterComponents from "./components/_ui/Footer"
+import HomePage from "./pages/Home"
 
 
 
@@ -17,6 +18,7 @@ export const App = () => (
       <Grid minH="100vh" p={3}>
         <ColorModeSwitcher justifySelf="flex-end" />
         {/* <SignInPage /> */}
+        <HomePage/>
 
         <FooterComponents />
       </Grid>
