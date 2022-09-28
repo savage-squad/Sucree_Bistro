@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.10",
     "@chakra-ui/react": "^2.3.4",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
@@ -22,6 +23,7 @@
     "@types/node": "^18.7.23",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.4",
+    "axios": "^0.27.2",
     "colors": "^1.4.0",
     "framer-motion": "^6.2.9",
     "react": "^18.1.0",

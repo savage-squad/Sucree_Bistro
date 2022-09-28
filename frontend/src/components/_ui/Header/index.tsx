@@ -4,7 +4,7 @@ interface HeaderProps extends HeadingProps {
     title: string;
 
 }
-export default function HeaderComponents({
+export default function HeadingComponents({
     title,
     ...rest
 

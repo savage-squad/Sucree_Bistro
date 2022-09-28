@@ -1,11 +1,12 @@
 import ButtonComponents from "../../../components/_ui/Button";
 import InputComponents from "../../../components/_ui/Input";
 import StackComponent from "../../../components/_ui/Stack";
-import React, { MouseEvent } from 'react';
-import { Box, Heading } from "@chakra-ui/react";
+import  { MouseEvent } from 'react';
+import { Box } from "@chakra-ui/react";
+import HeadingComponents from "../../../components/_ui/Header";
 
 
-export default function SignInPage({ ...props }) {
+export default function SignInPage({ ...children }) {
 
   const handleMouseEvent = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -14,8 +15,11 @@ export default function SignInPage({ ...props }) {
   return (
 
     <>
-      <StackComponent style={{ marginLeft: 50 }}>
+      <StackComponent  {...children}>
         <Box p={6} shadow='md' borderWidth='1px'>
+          <HeadingComponents title={'Login'} >
+            (2xl) In love with React & Next
+          </HeadingComponents>
           <InputComponents
             placeholder={'endereço de email'}
             type={'email'}
