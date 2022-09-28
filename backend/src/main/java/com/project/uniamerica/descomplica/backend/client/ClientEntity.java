@@ -18,6 +18,8 @@ public class ClientEntity extends PersonEntity {
     private Long id;
     @Column
     private String document;
+    @Column
+    private String cpf;
 
     @OneToMany(mappedBy = "client",cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AddressEntity> address = new ArrayList<>();

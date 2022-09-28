@@ -8,7 +8,7 @@ import {
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import SignInPage from "./pages/Login/SignIn"
 import FooterComponents from "./components/_ui/Footer"
-
+import HeaderViewComponent from "./components/_ui/Header/navbar"
 
 
 export const App = () => (
