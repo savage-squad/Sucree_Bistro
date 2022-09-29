@@ -1,11 +1,17 @@
+import ArticleListComponent from "../../components/_ui/BlogArticleList";
+
+
+
+
 import WithSpeechBubblesComponent from "../../components/_ui/WithSpeechBubbles";
 
-
-
-export default function HomePage(){
+export default function HomePage() {
     return (
-        <div>
-            <WithSpeechBubblesComponent/>
+        <div >
+            <ArticleListComponent />
+
+           
+            <WithSpeechBubblesComponent />
         </div>
     )
 }

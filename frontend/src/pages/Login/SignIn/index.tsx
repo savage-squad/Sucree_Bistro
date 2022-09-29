@@ -1,6 +1,6 @@
 import ButtonComponents from "../../../components/_ui/Button";
 import InputComponents from "../../../components/_ui/Input";
-import StackComponent from "../../../components/_ui/Stack";
+// import StackComponent from "../../../components/_ui/Stack";
 import  { MouseEvent } from 'react';
 import { Box } from "@chakra-ui/react";
 import HeadingComponents from "../../../components/_ui/Header";
@@ -15,7 +15,7 @@ export default function SignInPage({ ...children }) {
   return (
 
     <>
-      <StackComponent  {...children}>
+      {/* <StackComponent  {...children}> */}
         <Box p={6} shadow='md' borderWidth='1px'>
           <HeadingComponents title={'Login'} >
             (2xl) In love with React & Next
@@ -39,7 +39,7 @@ export default function SignInPage({ ...children }) {
             Entrar
           </ButtonComponents>
         </Box>
-      </StackComponent>
+      {/* </StackComponent> */}
     </>
 
   );
