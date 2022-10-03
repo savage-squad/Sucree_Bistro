@@ -11,9 +11,11 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
-import  { MouseEvent } from 'react';
+
 import SimpleThreeColumnsComponent from '../SimpleThreeColumns';
 import ButtonComponents from '../Button';
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
@@ -58,11 +60,12 @@ const SocialButton = ({
 
 
 
-export default function FooterComponents({ ...props }) {
-  const handleMouseEvent = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
 
-  };
+
+
+
+
+export default function FooterComponents({ ...props }) {
   
   return (
     <Box
@@ -93,17 +96,21 @@ export default function FooterComponents({ ...props }) {
           <ButtonComponents 
            colorScheme='teal'
            size='md'
-           onClick={handleMouseEvent}
+           onClick={() => signIn()}
            style={{ width: '100%' }}
-          
-          >iniciar a sessão</ButtonComponents>
+          >iniciar a sessão
+          </ButtonComponents>
+
+  
+    
           <ButtonComponents 
            colorScheme='yellow'
            size='md'
-           onClick={handleMouseEvent}
+           onClick={() => signOut()}
            style={{ width: '100%' }}
           
-          >Cadastre-se</ButtonComponents>
+          >Cadastre-se
+          </ButtonComponents>
           </Stack>
         </SimpleGrid>
       </Container>

@@ -7,6 +7,8 @@
     "@chakra-ui/react": "^2.3.4",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
+    "@next-auth/prisma-adapter": "^1.0.4",
+    "@prisma/client": "^4.4.0",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-avatar": "^1.0.0",
     "@radix-ui/react-dialog": "^1.0.0",
@@ -20,19 +22,21 @@
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^14.1.0",
     "@types/jest": "^28.1.1",
-    "@types/node": "^18.7.23",
+    "@types/node": "^18.8.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.4",
     "axios": "^0.27.2",
     "colors": "^1.4.0",
     "framer-motion": "^6.2.9",
+    "next-auth": "^4.12.2",
     "react": "^18.1.0",
     "react-app-store-badge": "^1.0.2",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
-    "typescript": "^4.8.3",
+    "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -55,5 +59,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prisma": "^4.4.0"
   }
 }
