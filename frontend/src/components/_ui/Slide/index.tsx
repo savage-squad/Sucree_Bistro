@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 
-export default class FocusOnSelect extends Component {
+export default class FocusOnSelectComponents extends Component {
   render() {
     const settings = {
       focusOnSelect: true,
