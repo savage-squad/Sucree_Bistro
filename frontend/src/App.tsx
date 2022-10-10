@@ -8,6 +8,7 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher"
 
 import FooterComponents from "./components/_ui/Footer"
 import HomePage from "./pages/Home"
+import SignInPage from "./pages/Login/SignIn"
 
 
 export const App = () => (
@@ -16,8 +17,7 @@ export const App = () => (
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
         <ColorModeSwitcher justifySelf="flex-end" />
-        <HomePage/>
-        <FooterComponents />
+        <SignInPage/>
       </Grid>
     </Box>
   </ChakraProvider>
