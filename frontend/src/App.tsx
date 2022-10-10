@@ -5,10 +5,10 @@ import {
   theme,
 } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
-
-import FooterComponents from "./components/_ui/Footer"
-import HomePage from "./pages/Home"
+import RoutesNavegationPage from "../router/index"
 import SignInPage from "./pages/Login/SignIn"
+
+
 
 
 export const App = () => (
@@ -18,6 +18,8 @@ export const App = () => (
       <Grid minH="100vh" p={3}>
         <ColorModeSwitcher justifySelf="flex-end" />
         <SignInPage/>
+        {/* <RoutesNavegationPage /> */}
+  
       </Grid>
     </Box>
   </ChakraProvider>

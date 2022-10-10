@@ -16,6 +16,8 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import GoogleButtonComponents from '../../../components/_ui/Button/GoogleButton';
+import FacebookButtonComponents from '../../../components/_ui/Button/FacebookButton';
 
 
 
@@ -81,14 +83,14 @@ export default function SignInPage() {
                   }}
                 >
                   <Link href="/Home">Entrar</Link>
-                 
+
                 </Button>
               </Stack>
-              <Stack pt={6}>
-                <Text align={'center'}>
-                  cadastrar-se<Link color={'blue.400'}>iniciar a seção</Link>
-                </Text>
+              <Stack>
+               <GoogleButtonComponents />
+               <FacebookButtonComponents/>
               </Stack>
+              
             </Stack>
           </Box>
         </Stack>
