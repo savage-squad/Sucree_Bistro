@@ -10,14 +10,10 @@ export default function HomePage() {
         <>
 
             <CaptionCarouselComponents />
-
-
-            {/* <div>
-                <ArticleListComponent />
-            </div>
-           
-            <div><WithSpeechBubblesComponent /></div>
-            <div> <FooterComponents /></div> */}
+            <ArticleListComponent />
+            
+            <WithSpeechBubblesComponent />
+            <FooterComponents />
 
         </>
     )
