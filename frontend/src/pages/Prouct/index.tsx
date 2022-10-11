@@ -1,35 +1,64 @@
-import React from "react";
 import HeadingComponents from "../../components/_ui/Header";
-import SimpleSidebarComponents from "../../components/_ui/Sidebar";
+
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
+
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
     WrapItem,
     Avatar,
-    Center,
+
+    Stack,
+    Button,
+    AlertIcon,
+    Alert,
+    AlertTitle,
+    AlertDescription,
+
 } from '@chakra-ui/react'
-import { MdOutlinePriceCheck } from "react-icons/md";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import WithSubnavigationComponents from "../../components/_ui/SlideBar/indext";
+
+
 
 
 export default function ProductPage() {
     return (
         <div >
+            <>
+            <WithSubnavigationComponents/>
+                <Stack direction='row' spacing={4} align='center' padding={10} marginLeft={1000}>
+                    <Button colorScheme='blue' variant='solid' >
+                        <AddIcon />
+                        Cadastrar
+                    </Button>
+                    <Button colorScheme='red' variant='solid'>
+                        <DeleteIcon />
+                        Remover
+                    </Button>
+                    <Button colorScheme='yellow' variant='solid'>
+                        <EditIcon />
+                        Editar
+                    </Button>
+
+                </Stack>
+
+            </>
+
             <div className="product-page__container">
+
 
                 <HeadingComponents title={"SucreeBistro"} />
                 <div className="row" >
                     <div className="col-sm-12">
 
                         <TableContainer>
+
                             <Table variant='simple'>
-                                <TableCaption>Listagem de Produtos</TableCaption>
                                 <Thead>
                                     <Tr>
                                         <Th>Id</Th>
@@ -38,7 +67,7 @@ export default function ProductPage() {
                                         <Th>Descricao</Th>
                                         <Th>Categoria</Th>
                                         <Th>Valor</Th>
-                                        <Th sx={{ flexDirection: "row" }}> <MdOutlinePriceCheck /> Status</Th>
+                                        <Th sx={{ flexDirection: "row" }}> Status</Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
@@ -51,9 +80,10 @@ export default function ProductPage() {
                                         <Td>Iguaria</Td>
                                         <Td>Peixe</Td>
                                         <Td>100.0 R$</Td>
-                                        <Td><Center w='130px' h='30px' bg='green.200'>
-                                            Disponivel
-                                        </Center></Td>
+                                        <Td w={20} borderRadius={50}><Alert status='error'>
+                                            <AlertIcon />
+                                            <AlertDescription>Indisponivel</AlertDescription>
+                                        </Alert></Td>
                                     </Tr>
                                     <Tr>
                                         <Td>2</Td>
@@ -64,9 +94,12 @@ export default function ProductPage() {
                                         <Td>pastelaria</Td>
                                         <Td>pastelaria</Td>
                                         <Td>30.48 R$</Td>
-                                        <Td> <Center w='130px' h='30px' bg='tomato'>
-                                            Indisponivel
-                                        </Center></Td>
+                                        <Td w={20} borderRadius={50}> <Alert status='success'>
+                                            <AlertIcon />
+                                            <AlertDescription>
+                                                Disponivel
+                                            </AlertDescription>
+                                        </Alert></Td>
                                     </Tr>
                                     <Tr>
                                         <Td>3</Td>
@@ -77,9 +110,12 @@ export default function ProductPage() {
                                         <Td>Frango tipico</Td>
                                         <Td>Carnes</Td>
                                         <Td>25.0 R$</Td>
-                                        <Td><Center w='130px' h='30px' bg='green.200'>
-                                            Disponivel
-                                        </Center></Td>
+                                        <Td w={20} borderRadius={50}> <Alert status='success'>
+                                            <AlertIcon />
+                                            <AlertDescription>
+                                                Disponivel
+                                            </AlertDescription>
+                                        </Alert></Td>
                                     </Tr>
                                 </Tbody>
 
