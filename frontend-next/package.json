@@ -10,16 +10,13 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.3.5",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "@saas-ui/react": "^1.4.4",
-    "@types/react-slick": "^0.23.10",
-    "framer-motion": "^6",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@nextui-org/react": "^1.0.0-beta.10",
+    "framer-motion": "^7.5.3",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-slick": "^0.29.0",
-    "react-table": "^7.8.0"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.8.5",
