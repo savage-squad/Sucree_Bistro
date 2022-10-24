@@ -44,7 +44,19 @@ export default class AutoPlay extends Component {
 
                     </div>
                     <div>
-                        <h3>Mesas</h3>
+                    <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                            <Image src={this.bebidas.imageUrl} />
+
+                            <Box p='6'>
+                                <Box display='flex' alignItems='baseline'>
+                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                        Entrada
+                                    </Badge>
+
+                                </Box>
+
+                            </Box>
+                        </Box>
                     </div>
                     <div>
                         <h3>Produtos</h3>
