@@ -6,14 +6,25 @@ import Slider from "react-slick";
 export default class AutoPlay extends Component {
 
     property = {
-        imageUrl: 'https://i.pinimg.com/736x/45/fb/18/45fb1836a16b92562589bb9ccabfb90c.jpg',
+        imageUrl: 'https://classic.exame.com/wp-content/uploads/2021/06/cerveja-gelada-e1598542702646-1.jpg?quality=70&strip=info&w=680',
     }
     bebidas = {
         imageUrl: 'https://s2.glbimg.com/3CtrEoDp2XZbALHenH_5JfBuRLk=/940x523/e.glbimg.com/og/ed/f/original/2018/06/20/beverages-cold-colorful-1154756.jpg',
     }
     produtos = {
-        imageUrl: 'https://s2.glbimg.com/3CtrEoDp2XZbALHenH_5JfBuRLk=/940x523/e.glbimg.com/og/ed/f/original/2018/06/20/beverages-cold-colorful-1154756.jpg',
+        imageUrl: 'https://ingenieriademenu.com/wp-content/uploads/2020/06/dise%C3%B1o-de-menus.jpg',
     }
+    comanda = {
+        imageUrl: 'https://servircomrequinte.francobachot.com.br/wp-content/uploads/2018/11/257215-cardapio-eletronico-vale-a-pena-implementar-no-seu-restaurante.jpg',
+    }
+    categorias = {
+        imageUrl: 'https://respostas.sebrae.com.br/wp-content/uploads/2021/01/card%C3%A1pio-.jpg',
+    }
+
+    mesas = {
+        imageUrl: 'https://diaonline.ig.com.br/wp-content/uploads/2018/10/conheca-22-charmosos-restaurantes-em-goiania.jpg',
+    }
+
 
 
     render() {
@@ -28,8 +39,7 @@ export default class AutoPlay extends Component {
             cssEase: "linear"
         };
         return (
-            <div>
-                <h2>Auto Play</h2>
+            <div style={{marginTop:100}}>
                 <Slider {...settings}>
                     <div>
                         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -38,7 +48,7 @@ export default class AutoPlay extends Component {
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
                                     <Badge borderRadius='full' px='2' colorScheme='teal'>
-                                        Entrada
+                                        Bedidas
                                     </Badge>
 
                                 </Box>
@@ -47,14 +57,15 @@ export default class AutoPlay extends Component {
                         </Box>
 
                     </div>
+
                     <div>
                         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                            <Image src={this.bebidas.imageUrl} />
+                            <Image src={this.produtos.imageUrl} />
 
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
                                     <Badge borderRadius='full' px='2' colorScheme='teal'>
-                                        Entrada
+                                        Produtos
                                     </Badge>
 
                                 </Box>
@@ -64,12 +75,12 @@ export default class AutoPlay extends Component {
                     </div>
                     <div>
                         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                            <Image src={this.bebidas.imageUrl} />
+                            <Image src={this.comanda.imageUrl} />
 
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
                                     <Badge borderRadius='full' px='2' colorScheme='teal'>
-                                        Entrada
+                                        Comanda
                                     </Badge>
 
                                 </Box>
@@ -78,13 +89,34 @@ export default class AutoPlay extends Component {
                         </Box>
                     </div>
                     <div>
-                        <h3>Comanda</h3>
+                        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                            <Image src={this.categorias.imageUrl} />
+
+                            <Box p='6'>
+                                <Box display='flex' alignItems='baseline'>
+                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                        Categorias
+                                    </Badge>
+
+                                </Box>
+
+                            </Box>
+                        </Box>
                     </div>
                     <div>
-                        <h3>Categorias</h3>
-                    </div>
-                    <div>
-                        <h3>Bebidas</h3>
+                        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                            <Image src={this.mesas.imageUrl} />
+
+                            <Box p='6'>
+                                <Box display='flex' alignItems='baseline'>
+                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                        Mesas
+                                    </Badge>
+
+                                </Box>
+
+                            </Box>
+                        </Box>
                     </div>
                 </Slider>
             </div>
