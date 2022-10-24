@@ -9,8 +9,12 @@ export default class AutoPlay extends Component {
         imageUrl: 'https://i.pinimg.com/736x/45/fb/18/45fb1836a16b92562589bb9ccabfb90c.jpg',
     }
     bebidas = {
-        imageUrl: 'https://i.pinimg.com/736x/45/fb/18/45fb1836a16b92562589bb9ccabfb90c.jpg',
+        imageUrl: 'https://s2.glbimg.com/3CtrEoDp2XZbALHenH_5JfBuRLk=/940x523/e.glbimg.com/og/ed/f/original/2018/06/20/beverages-cold-colorful-1154756.jpg',
     }
+    produtos = {
+        imageUrl: 'https://s2.glbimg.com/3CtrEoDp2XZbALHenH_5JfBuRLk=/940x523/e.glbimg.com/og/ed/f/original/2018/06/20/beverages-cold-colorful-1154756.jpg',
+    }
+
 
     render() {
         const settings = {
@@ -44,7 +48,7 @@ export default class AutoPlay extends Component {
 
                     </div>
                     <div>
-                    <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                             <Image src={this.bebidas.imageUrl} />
 
                             <Box p='6'>
@@ -59,7 +63,19 @@ export default class AutoPlay extends Component {
                         </Box>
                     </div>
                     <div>
-                        <h3>Produtos</h3>
+                        <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                            <Image src={this.bebidas.imageUrl} />
+
+                            <Box p='6'>
+                                <Box display='flex' alignItems='baseline'>
+                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                        Entrada
+                                    </Badge>
+
+                                </Box>
+
+                            </Box>
+                        </Box>
                     </div>
                     <div>
                         <h3>Comanda</h3>
