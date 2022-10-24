@@ -39,7 +39,7 @@ export default class AutoPlay extends Component {
             cssEase: "linear"
         };
         return (
-            <div style={{marginTop:100}}>
+            <div style={{ marginTop: 100 }}>
                 <Slider {...settings}>
                     <div>
                         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -47,7 +47,7 @@ export default class AutoPlay extends Component {
 
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
-                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                    <Badge borderRadius={2} px='2' bg='#E8E8E8'>
                                         Bedidas
                                     </Badge>
 
@@ -64,7 +64,7 @@ export default class AutoPlay extends Component {
 
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
-                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                    <Badge borderRadius={2} px='2' bg='#E8E8E8'>
                                         Produtos
                                     </Badge>
 
@@ -79,7 +79,7 @@ export default class AutoPlay extends Component {
 
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
-                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                    <Badge borderRadius={2} px='2' bg='#E8E8E8'>
                                         Comanda
                                     </Badge>
 
@@ -94,7 +94,7 @@ export default class AutoPlay extends Component {
 
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
-                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                    <Badge borderRadius={2} px='2' bg='#E8E8E8'>
                                         Categorias
                                     </Badge>
 
@@ -109,7 +109,7 @@ export default class AutoPlay extends Component {
 
                             <Box p='6'>
                                 <Box display='flex' alignItems='baseline'>
-                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
+                                    <Badge borderRadius={2} px='2' bg='#E8E8E8'>
                                         Mesas
                                     </Badge>
 
