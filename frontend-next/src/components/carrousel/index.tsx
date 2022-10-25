@@ -40,25 +40,25 @@ export default function CaptionCarousel() {
   // This can be static or loaded from a server
   const cards = [
     {
-      title: 'Design Projects 1',
+      title: 'Eficiencia',
       text:
-        "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+        "Promentemos eficiencia na satisfação das suas necessidades aqui no nosso Restaurante",
       image:
-        'https://images.unsplash.com/photo-1516796181074-bf453fbfa3e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
+        'https://www.foodconnection.com.br/sites/foodconnection.com/files/equipe-restaurante.jpg',
     },
     {
-      title: 'Design Projects 2',
+      title: 'Qualidade',
       text:
-        "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+        "Com produtos de extrema qualidade prometemos a melhor das experiências conosco",
       image:
-        'https://images.unsplash.com/photo-1438183972690-6d4658e3290e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2274&q=80',
+        'https://media.bizj.us/view/img/10804223/bizwomenwholefoods*1200xx5760-3240-0-300.jpg',
     },
     {
-      title: 'Design Projects 3',
+      title: 'Comodidade',
       text:
-        "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+        "Seu conforto é nossa prioridade aqui!",
       image:
-        'https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
+        'https://static.baratocoletivo.com.br/2018/0619/10016587/g_hotel-villaggio-tudo-bom1a0f2deec5.jpg',
     },
   ];
 

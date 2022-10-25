@@ -88,10 +88,7 @@ export default function ArticleListComponent() {
                         marginTop="2"
                         color={useColorModeValue('gray.700', 'gray.200')}
                         fontSize="lg">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of type
-                        and scrambled it to make a type specimen book.
+                        Um conceito gastronómico com a ideia de oferecer um serviço rápido de comida de qualidade. Os ingredientes que usamos são frescos e naturais. Começamos a nossa produção do zero preparando pequenos lotes, os pratos são preparados no momento e à vista, para desfrutar do sabor dos alimentos preparados na hora com atenção personalizada e uma cozinha aberta...
                     </Text>
 
                 </Box>

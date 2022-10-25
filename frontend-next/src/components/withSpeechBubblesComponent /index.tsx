@@ -97,13 +97,12 @@ export default function WithSpeechBubblesComponent() {
                         <TestimonialContent>
                             <TestimonialHeading>Demandante</TestimonialHeading>
                             <TestimonialText>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                                neque sed imperdiet nibh lectus feugiat nunc sem.
+                                Coordenadora do curso de engenharia de software na UniAmerica que trouxe a demanda do Sucree Para a Turma a partir do edital de demandas.
                             </TestimonialText>
                         </TestimonialContent>
                         <TestimonialAvatar
                             src={
-                                ''
+                                'ttps://media-exp1.licdn.com/dms/image/C5603AQFcvw…eta&t=qoq_Cb1rVhzXPl3Xh3uzRolluihePINj7vyQuXQcsLE'
                             }
                             name={'Marcia David'}
                             title={'Coordenadora'}
@@ -113,13 +112,12 @@ export default function WithSpeechBubblesComponent() {
                         <TestimonialContent>
                             <TestimonialHeading>Desenvolvidor</TestimonialHeading>
                             <TestimonialText>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                                neque sed imperdiet nibh lectus feugiat nunc sem.
+                                Desenvolvedor Full Stack que se colocou á altura do desafio colocado para resolver a demanda do Sucre e satisfazer os pedidos do demandante
                             </TestimonialText>
                         </TestimonialContent>
                         <TestimonialAvatar
                             src={
-                                ''
+                                'https://avatars.githubusercontent.com/u/62483330?v=4'
                             }
                             name={'Ducílio Mateus Manjate'}
                             title={'Estudante'}
@@ -129,13 +127,13 @@ export default function WithSpeechBubblesComponent() {
                         <TestimonialContent>
                             <TestimonialHeading>Desenvolvidor</TestimonialHeading>
                             <TestimonialText>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                                neque sed imperdiet nibh lectus feugiat nunc sem.
+                                Desenvolvedor Full Stack que se colocou á altura do desafio colocado para resolver a demanda do Sucre e satisfazer os pedidos do demandante
+
                             </TestimonialText>
                         </TestimonialContent>
                         <TestimonialAvatar
                             src={
-                                ''}
+                                'https://media-exp1.licdn.com/dms/image/C4D03AQGyjiSsXLMghg/profile-displayphoto-shrink_400_400/0/1661286298053?e=1672272000&v=beta&t=xdHQpTMatjzNpRE0ys1M_gj843nWNpJ8wcEa5c7Cpy4'}
                             name={'Khensane Paulo'}
                             title={'Estudante'}
                         />
