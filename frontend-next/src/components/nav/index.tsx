@@ -26,7 +26,7 @@ import {
     PopoverBody,
 } from '@chakra-ui/react';
 import { BellIcon, ChatIcon, MoonIcon, PhoneIcon, SettingsIcon, SunIcon } from '@chakra-ui/icons';
-import { FaUserEdit } from 'react-icons/fa';
+import { FaShoppingCart, FaUserEdit } from 'react-icons/fa';
 import { BiLogInCircle } from 'react-icons/bi';
 import { useRouter } from 'next/router'
 import { RiNotificationBadgeFill } from 'react-icons/ri';
@@ -79,9 +79,13 @@ export default function NavComponents() {
                         </Popover>
 
                         <Stack direction={'row'} spacing={7}>
+
+                            <FaShoppingCart style={{margin:10}}/>
+                        
                             <Button onClick={toggleColorMode}>
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             </Button>
+                           
 
 
                             <Menu>
