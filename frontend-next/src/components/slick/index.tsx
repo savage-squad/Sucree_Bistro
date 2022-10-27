@@ -2,6 +2,7 @@ import { StarIcon } from "@chakra-ui/icons";
 import { Badge, Box, Image } from "@chakra-ui/react";
 import React, { Component } from "react";
 import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css"; // Add this line
 
 export default class AutoPlay extends Component {
 

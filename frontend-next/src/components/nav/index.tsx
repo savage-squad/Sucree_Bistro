@@ -80,12 +80,12 @@ export default function NavComponents() {
 
                         <Stack direction={'row'} spacing={7}>
 
-                            <FaShoppingCart style={{margin:10}}/>
-                        
+                            <FaShoppingCart style={{ margin: 10 }} />
+
                             <Button onClick={toggleColorMode}>
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             </Button>
-                           
+
 
                             <Menu>
                                 <MenuButton
