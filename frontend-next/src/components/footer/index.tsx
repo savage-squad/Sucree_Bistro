@@ -11,14 +11,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
-
-
-
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from 'next/router'
 import ButtonComponents from '../button';
 import SimpleThreeColumnsComponent from '../simpleThreeColumns';
-
-
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
@@ -61,7 +56,7 @@ const SocialButton = ({
 
 
 export default function FooterComponents({ ...props }) {
-
+  const router = useRouter()
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -91,21 +86,21 @@ export default function FooterComponents({ ...props }) {
             <ButtonComponents
               colorScheme='teal'
               size='md'
-              onClick={() => signIn()}
+              onClick={() => router.push('/login/sigin')}
               style={{ width: '100%' }}
             >iniciar a sessão
             </ButtonComponents>
 
 
 
-            <ButtonComponents
+            {/* <ButtonComponents
               colorScheme='yellow'
               size='md'
-              onClick={() => signOut()}
+              
               style={{ width: '100%' }}
 
             >Cadastre-se
-            </ButtonComponents>
+            </ButtonComponents> */}
           </Stack>
         </SimpleGrid>
       </Container>
