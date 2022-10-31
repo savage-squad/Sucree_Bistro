@@ -1,50 +1,145 @@
+
+// Chakra imports
 import {
-  Button,
-  Checkbox,
+  Box,
   Flex,
+  Button,
   FormControl,
   FormLabel,
   Heading,
   Input,
   Link,
-  Stack,
-  Image,
-  Center,
-} from '@chakra-ui/react';
+  Switch,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { useRouter } from 'next/router'
+// Assets
+import signInImage from "../../../public/signInImage.png";
 
-export default function LoginPage() {
+function SignIn() {
+  // Chakra color mode
+  const titleColor = useColorModeValue("teal.300", "teal.200");
+  const textColor = useColorModeValue("gray.400", "white");
+  const router = useRouter()
   return (
-    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-  <Center bg={'green'} h={"50%"} flex={1} mt={150} justifyContent={'center'}>
-        <Flex p={8} flex={1} align={'center'} justify={'center'}>
-          <Stack spacing={4} w={'full'} maxW={'md'}>
-            <Heading fontSize={'2xl'}>Sign in to your account</Heading>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input type="password" />
-            </FormControl>
-            <Stack spacing={6}>
-              <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                align={'start'}
-                justify={'space-between'}>
-                <Checkbox>Remember me</Checkbox>
-                <Link color={'blue.500'}>Forgot password?</Link>
-              </Stack>
-              <Button colorScheme={'blue'} variant={'solid'}>
-                Sign in
+    <Flex position='relative' mb='40px'>
+      <Flex
+        h={{ sm: "initial", md: "75vh", lg: "85vh" }}
+        w='100%'
+        maxW='1044px'
+        mx='auto'
+        justifyContent='space-between'
+        mb='30px'
+        pt={{ sm: "100px", md: "0px" }}>
+        <Flex
+          alignItems='center'
+          justifyContent='start'
+          style={{ userSelect: "none" }}
+          w={{ base: "100%", md: "50%", lg: "42%" }}>
+          <Flex
+            direction='column'
+            w='100%'
+            background='transparent'
+            p='48px'
+            mt={{ md: "150px", lg: "80px" }}>
+            <Heading color={titleColor} fontSize='32px' mb='10px'>
+              Bem vindo de volta
+            </Heading>
+            <Text
+              mb='36px'
+              ms='4px'
+              color={textColor}
+              fontWeight='bold'
+              fontSize='14px'>
+              Digite seu e-mail e senha para entrar
+            </Text>
+            <FormControl>
+              <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+                Email
+              </FormLabel>
+              <Input
+                borderRadius='15px'
+                mb='24px'
+                fontSize='sm'
+                type='text'
+                placeholder='Seu endereço de e-mail'
+                size='lg'
+              />
+              <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+                Senha
+              </FormLabel>
+              <Input
+                borderRadius='15px'
+                mb='36px'
+                fontSize='sm'
+                type='password'
+                placeholder='Sua senha'
+                size='lg'
+              />
+              <FormControl display='flex' alignItems='center'>
+                <Switch id='remember-login' colorScheme='teal' me='10px' />
+                <FormLabel
+                  htmlFor='remember-login'
+                  mb='0'
+                  ms='1'
+                  fontWeight='normal'>
+                  Lembre de mim
+                </FormLabel>
+              </FormControl>
+              <Button
+                fontSize='10px'
+                type='submit'
+                bg='teal.300'
+                w='100%'
+                h='45'
+                mb='20px'
+                color='white'
+                mt='20px'
+                onClick={() => router.push('/products')}
+                _hover={{
+                  bg: "teal.200",
+                }}
+                _active={{
+                  bg: "teal.400",
+                }}>
+                ENTRAR
               </Button>
-            </Stack>
-          </Stack>
+            </FormControl>
+            <Flex
+              flexDirection='column'
+              justifyContent='center'
+              alignItems='center'
+              maxW='100%'
+              mt='0px'>
+              <Text color={textColor} fontWeight='medium'>
+                Não tem uma conta?
+                <Link color={titleColor} as='span' ms='5px' fontWeight='bold'>
+                  Inscrever-se
+                </Link>
+              </Text>
+            </Flex>
+          </Flex>
         </Flex>
-
-      </Center>
-
-
-    </Stack>
+        <Box
+          display={{ base: "none", md: "block" }}
+          overflowX='hidden'
+          h='100%'
+          w='40vw'
+          position='absolute'
+          right='0px'>
+          <Box
+            bgImage='url(/signInImage.png)'
+            w='100%'
+            h='100%'
+            bgSize='cover'
+            bgPosition='50%'
+            position='absolute'
+            borderBottomLeftRadius='20px'></Box>
+        </Box>
+      </Flex>
+    </Flex>
   );
 }
+
+export default SignIn;

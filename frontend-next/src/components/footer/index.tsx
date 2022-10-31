@@ -91,16 +91,16 @@ export default function FooterComponents({ ...props }) {
             >iniciar a sessão
             </ButtonComponents>
 
+u
 
-
-            {/* <ButtonComponents
+             <ButtonComponents
               colorScheme='yellow'
               size='md'
-              
+              onClick={() => router.push('/login/sigout')}
               style={{ width: '100%' }}
 
             >Cadastre-se
-            </ButtonComponents> */}
+            </ButtonComponents> 
           </Stack>
         </SimpleGrid>
       </Container>
