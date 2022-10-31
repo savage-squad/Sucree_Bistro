@@ -17,14 +17,42 @@ import { useRouter } from 'next/router'
 // Assets
 import signInImage from "../../../public/signInImage.png";
 
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup"
+
+type SignInFormData = {
+  email: string;
+  senha: string;
+};
+
+const signInFormSchema = yup.object().shape({
+  email: yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
+  senha: yup.string().required('Senha obrigatória'),
+})
+
 function SignIn() {
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(signInFormSchema)
+  });
+
+  const { errors } = formState;
+
+  const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    console.log(values);
+  };
+
   // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
   const router = useRouter()
   return (
-    <Flex position='relative' mb='40px'>
+    <Flex position='relative' mb='40px' >
       <Flex
+
         h={{ sm: "initial", md: "75vh", lg: "85vh" }}
         w='100%'
         maxW='1044px'
@@ -33,6 +61,7 @@ function SignIn() {
         mb='30px'
         pt={{ sm: "100px", md: "0px" }}>
         <Flex
+
           alignItems='center'
           justifyContent='start'
           style={{ userSelect: "none" }}
