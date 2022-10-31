@@ -11,7 +11,7 @@ function TablesComponent() {
         data={tablesTableData}
       /> */}
       <ProductComponent
-        title={"Projects Table"}
+        title={"Productos"}
         captions={["Companies", "Budget", "Status", "Completion", ""]}
         data={dashboardTableData}
       />
