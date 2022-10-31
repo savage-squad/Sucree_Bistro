@@ -133,7 +133,7 @@ function SignUp() {
           </Text>
           <FormControl>
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-            CPF
+              CPF
             </FormLabel>
             <Input
               fontSize='sm'
@@ -172,12 +172,12 @@ function SignUp() {
             <FormControl display='flex' alignItems='center' mb='24px'>
               <Switch id='remember-login' colorScheme='teal' me='10px' />
               <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
-              Lembre de mim
+                Lembre de mim
               </FormLabel>
             </FormControl>
             <Button
               type='submit'
-              bg='teal.300'
+              bg='teal'
               fontSize='10px'
               color='white'
               fontWeight='bold'
@@ -188,7 +188,7 @@ function SignUp() {
                 bg: "teal.200",
               }}
               _active={{
-                bg: "teal.400",
+                bg: "teal",
               }}>
               INSCREVER-SE
             </Button>
@@ -200,9 +200,9 @@ function SignUp() {
             maxW='100%'
             mt='0px'>
             <Text color={textColor} fontWeight='medium'>
-            já tem uma conta?
+              já tem uma conta?
               <Link
-                color={titleColor}
+                color="teal"
                 as='span'
                 ms='5px'
                 href='#'

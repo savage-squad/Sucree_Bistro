@@ -1,0 +1,74 @@
+[
+   {
+     "id": "alocasia-portodora",
+     "name": "Alocasia 'Portodora'",
+     "price": 31.73,
+     "image": {
+       "url":"/images/portodora.png"
+     }
+   },
+   {
+     "id": "anthurium-andraeanum",
+     "name": "Anthurium andraeanum",
+     "price": 28.35,
+     "image": {
+      "url":"/images/anthurium.png"
+    }
+   },
+   {
+     "id": "cordyline-fruticosa",
+     "name": "Cordyline fruticosa",
+     "price": 31.05,
+     "image": {
+       "url": "/images/cordyline.png"
+     }
+   },
+   {
+     "id": "croton-variegatum",
+     "name": "Croton variegatum",
+     "price": 16.61,
+     "image": {
+       "url": "/images/croton.png"
+     }
+   },
+   {
+     "id": "dracaena-fragrans",
+     "name": "Dracaena fragrans",
+     "price": 28.35,
+     "image": {
+       "url": "/images/dracaena.png"
+     }
+   },
+   {
+     "id": "alocasia",
+     "name": "Alocasia",
+     "price": 42.5,
+     "image": {
+       "url": "/images/alocasia.png"
+     }
+   },
+   {
+     "id": "yucca",
+     "name": "Yucca",
+     "price": 14.01,
+     "image": {
+       "url": "/images/yucca.png"
+     }
+   },
+   {
+     "id": "hoya-carnosa",
+     "name": "Hoya Carnosa",
+     "price": 25.65,
+     "image": {
+       "url": "/images/hoya.png"
+     }
+   },
+   {
+     "id": "scindapsus",
+     "name": "Scindapsus",
+     "price": 16.88,
+     "image": {
+       "url": "/images/scindapsus.png"
+     }
+   }
+ ]

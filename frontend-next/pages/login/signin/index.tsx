@@ -72,7 +72,7 @@ function SignIn() {
             background='transparent'
             p='48px'
             mt={{ md: "150px", lg: "80px" }}>
-            <Heading color={titleColor} fontSize='32px' mb='10px'>
+            <Heading color="teal" fontSize='32px' mb='10px'>
               Bem vindo de volta
             </Heading>
             <Text
@@ -119,7 +119,7 @@ function SignIn() {
               <Button
                 fontSize='10px'
                 type='submit'
-                bg='teal.300'
+                bg='teal'
                 w='100%'
                 h='45'
                 mb='20px'
@@ -143,7 +143,7 @@ function SignIn() {
               mt='0px'>
               <Text color={textColor} fontWeight='medium'>
                 Não tem uma conta?
-                <Link color={titleColor} as='span' ms='5px' fontWeight='bold'>
+                <Link color="teal" as='span' ms='5px' fontWeight='bold'>
                   Inscrever-se
                 </Link>
               </Text>
