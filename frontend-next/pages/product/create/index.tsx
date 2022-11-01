@@ -21,6 +21,7 @@ import { SideBar } from "../../../src/components/SideBar";
 import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
+import SelectFileComponents from "../../../src/components/filePhoto";
 
 
 const CreateProdutoFormSchema = yup.object().shape({
@@ -101,7 +102,6 @@ export default function CreateProduto() {
                             </SimpleGrid>
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
                                 <Input
-
                                     colorScheme={'whiteAlpha.900'}
 
                                     label="Descrição"
@@ -110,19 +110,29 @@ export default function CreateProduto() {
                                     value={descricao}
 
                                 />
-                                <Input
-
-                                   label="categoria"
-                                    type="option"
-                                    value={categoria}
-                                    
-
-                                    {...register("categoria")}
-                                    onChange={(event) => setCategoria(event.target.value)}
-                                />
+                                <Select
+                                    alignContent={'center'}
+                                    pt={8}
+                                    h="50px"
+                                    colorScheme={'whiteAlpha.900'}
+                                    id="category"
+                                    name="categoria"
+                                    autoComplete="categoria"
+                                    placeholder="Selecione a categoria"
+                                    focusBorderColor="brand.400"
+                                    shadow="sm"
+                                    size="sm"
+                                    w="full"
+                                    rounded="md">
+                                    <option>Bebidas</option>
+                                    <option>Doces</option>
+                                    <option>Sopas</option>
+                                </Select>
+                               
 
                             </SimpleGrid>
                         </VStack>
+                        <SelectFileComponents/>
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
                                 <Link href="/enderecos">
