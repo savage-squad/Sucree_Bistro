@@ -10,6 +10,7 @@ import {
     useToast,
     FormLabel,
     Select,
+    Text,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -18,6 +19,8 @@ import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { SideBar } from "../../../src/components/SideBar";
 import { Input } from "../../../src/components/input";
+import SidebarWithHeader from "../../../src/components/container";
+import FooterComponents from "../../../src/components/footer";
 
 
 const CreateProdutoFormSchema = yup.object().shape({
@@ -31,7 +34,7 @@ const CreateProdutoFormSchema = yup.object().shape({
 export default function CreateProduto() {
     const toast = useToast();
     const [nome, setNome] = useState("");
-    const [descricao, setDescricao] = useState(0);
+    const [descricao, setDescricao] = useState("");
     const [categoria, setCategoria] = useState("");
     const [preco, setPreco] = useState("");
     const [imagem, setImagem] = useState("");
@@ -63,80 +66,84 @@ export default function CreateProduto() {
 
     return (
         <Box>
+            <SidebarWithHeader>
+                <Flex w="100%" my="6" mx="auto" maxWidth={1480} px="6">
+                    <Box
+                        flex="1" borderRadius={8} bg="#483D8B" p="8"
+                    // onSubmit={handleSubmit(createProdutos)}
+                    >
+                        <Heading fontSize="lg" fontWeight="normal">
+                            <Text color="whiteAlpha.900" >
+                                Criar de Produtos
 
-            <Flex w="100%" my="6" mx="auto" maxWidth={1480} px="6">
-                <SideBar />
-                <Box
-                    as="form"
-                    flex="1"
-                    borderRadius={8}
-                    bg="gray.800"
-                    p="8"
-                // onSubmit={handleSubmit(createProdutos)}
-                >
-                    <Heading fontSize="lg" fontWeight="normal">
-                        Criar Produtos
-                    </Heading>
-                    <Divider my="6" borderColor="gray.700" />
-                    <VStack spacing="8">
-                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
-                            <Input
-                                name="nome"
-                                label="Nome"
-                                error={errors.nome}
-                                {...register("nome")}
-                                value={nome}
-                                onChange={(event) => setNome(event.target.value)}
-                            />
-                            <Input
-                                name="preco"
-                                label="Preço"
-                                type="Number"
-                                error={errors.preco}
-                                {...register("preco")}
-                                value={preco}
-                                onChange={(event) => setPreco((event.target.value))}
-                            />
-                        </SimpleGrid>
-                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
-                            <Input
-                                name="descricao"
-                                label="Descrição"
-                                error={errors.descricao}
-                                {...register("descricao")}
-                                value={descricao}
-                                onChange={(event) => setDescricao(event.target.value)}
-                            />
-                            <Input
-                                name="categoria"
-                                label="Categoria"
-                                type="select"
-                                value={categoria}
-                                error={errors.categoria}
-                                {...register("categoria")}
-                                onChange={(event) => setCategoria(event.target.value)}
-                            />
+                            </Text>
+                        </Heading>
+                        <Divider my="6" borderColor="whiteAlpha.200" />
+                        <VStack spacing="8">
+                            <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
+                                <Input
 
-                        </SimpleGrid>
-                    </VStack>
-                    <Flex mt="8" justify="flex-end">
-                        <HStack spacing="4">
-                            <Link href="/enderecos">
-                                <Button as="a" colorScheme="whiteAlpha">
-                                    Cancelar
+                                    label="Nome"
+
+                                    {...register("nome")}
+                                    value={nome}
+                                    onChange={(event) => setNome(event.target.value)}
+                                />
+                                <Input
+
+                                    label="Preço"
+                                    type="Number"
+
+                                    {...register("preco")}
+                                    value={preco}
+                                    onChange={(event) => setPreco((event.target.value))}
+                                />
+                            </SimpleGrid>
+                            <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
+                                <Input
+
+                                    colorScheme={'whiteAlpha.900'}
+
+                                    label="Descrição"
+
+                                    {...register("descricao")}
+                                    value={descricao}
+
+                                />
+                                <Input
+
+                                   label="categoria"
+                                    type="option"
+                                    value={categoria}
+                                    
+
+                                    {...register("categoria")}
+                                    onChange={(event) => setCategoria(event.target.value)}
+                                />
+
+                            </SimpleGrid>
+                        </VStack>
+                        <Flex mt="8" justify="flex-end">
+                            <HStack spacing="4">
+                                <Link href="/enderecos">
+                                    <Button as="a" colorScheme="whiteAlpha">
+                                        Cancelar
+                                    </Button>
+                                </Link>
+                                <Button
+                                    type="submit"
+                                    colorScheme="blue"
+                                    isLoading={formState.isSubmitting}
+                                >
+                                    Criar
                                 </Button>
-                            </Link>
-                            <Button
-                                type="submit"
-                                colorScheme="blue"
-                                isLoading={formState.isSubmitting}
-                            >
-                                Salvar
-                            </Button>
-                        </HStack>
-                    </Flex>
-                </Box>
-            </Flex>
+                            </HStack>
+                        </Flex>
+                    </Box>
+                </Flex>
+                <FooterComponents />
+            </SidebarWithHeader>
+
         </Box>
     );
 }
