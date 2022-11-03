@@ -18,6 +18,7 @@ import {
 import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { useRouter } from 'next/router'
+import FooterComponents from "../../../src/components/footer";
 
 function LoginClient() {
     const router = useRouter()
@@ -219,6 +220,7 @@ function LoginClient() {
                     </Flex>
                 </Flex>
             </Flex>
+            <FooterComponents/>
         </Flex>
     );
 }

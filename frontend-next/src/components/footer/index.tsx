@@ -58,7 +58,7 @@ const SocialButton = ({
 export default function FooterComponents({ ...props }) {
   const router = useRouter()
   return (
-    <Box w="95.4%" my="6" mx="auto" maxWidth={1480} px="6"
+    <Box w="95.4%" my="6" mx="auto" maxWidth={"100%"} px="6"
       borderRadius={8}  p="8" {...props}
       bg={useColorModeValue('gray.50', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}>
