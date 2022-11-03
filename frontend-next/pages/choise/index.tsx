@@ -9,14 +9,16 @@ import {
 } from '@chakra-ui/react';
 import FooterComponents from '../../src/components/footer';
 import WithSubnavigation from '../../src/components/infSlack';
+import { useRouter } from 'next/router'
 
 export default function WithBackgroundImage() {
+    const router = useRouter()
     return (
         <>
-            <WithSubnavigation/>
+            <WithSubnavigation />
             <Flex
                 w={'full'}
-                h={'100vh'}
+                h={'80vh'}
                 backgroundImage={
                     'https://i.pinimg.com/564x/a3/25/f0/a325f0dc5bacd10cf5fdae480980b13f.jpg'
                 }
@@ -33,10 +35,11 @@ export default function WithBackgroundImage() {
                             fontWeight={700}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-                            "O prazer da comida é o único que e o melhor tempero da comida<br/>  e a fome" 🫕
+                            "O prazer da comida é o único que e o melhor tempero da comida<br />  e a fome" 🫕
                         </Text>
                         <Stack direction={'row'}>
                             <Button
+                                onClick={() => router.push('/auth/signin')}
                                 bg={'teal.400'}
                                 rounded={'full'}
                                 color={'white'}
@@ -44,7 +47,7 @@ export default function WithBackgroundImage() {
                                 Administrador
                             </Button>
                             <Button
-
+                                onClick={() => router.push('/auth/client/register')}
                                 bg={'whiteAlpha.300'}
                                 rounded={'full'}
                                 color={'white'}
@@ -57,7 +60,6 @@ export default function WithBackgroundImage() {
             </Flex>
             <Center>
                 <FooterComponents />
-
             </Center>
         </>
     );

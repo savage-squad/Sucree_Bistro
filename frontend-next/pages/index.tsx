@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import SignIn from './auth/signin'
+import WithBackgroundImage from './choise'
 
 
 
@@ -7,14 +7,7 @@ import SignIn from './auth/signin'
 const Home: NextPage = () => {
   return (
     <><div style={{ width: "100%" }}>
-      
-      <SignIn/>
-      {/* <NavComponents />
-      <CaptionCarouselComponents />
-      <ArticleListComponent />
-      <AutoPlay/>
-      <WithSpeechBubblesComponent />
-      <FooterComponents /> */}
+      <WithBackgroundImage/>
     </div>
     </>
   )
