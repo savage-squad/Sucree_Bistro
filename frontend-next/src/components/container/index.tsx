@@ -37,6 +37,8 @@ import { ReactText } from 'react';
 import { FaClipboardList, FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaUserTie,} from 'react-icons/fa';
 import { BiCategoryAlt } from 'react-icons/bi';
 
+
+
 interface LinkItemProps {
     name: string;
     icon: IconType;
@@ -51,12 +53,15 @@ const LinkItems: Array<LinkItemProps> = [
     { name: 'Pedidos', icon: FaShoppingCart },
 ];
 
+
+
 export default function SidebarWithHeader({
     children,
 }: {
     children: ReactNode;
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    
     return (
         <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
             <SidebarContent
