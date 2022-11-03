@@ -125,7 +125,7 @@ function SignIn() {
                 mb='20px'
                 color='white'
                 mt='20px'
-                onClick={() => router.push('/products')}
+                onClick={() => router.push('/product')}
                 _hover={{
                   bg: "teal.200",
                 }}

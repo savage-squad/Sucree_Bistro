@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import SignIn from './login/signin'
+import SignIn from './auth/signin'
 
 
 
