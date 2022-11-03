@@ -8,10 +8,12 @@ import {
     Center,
 } from '@chakra-ui/react';
 import FooterComponents from '../../src/components/footer';
+import WithSubnavigation from '../../src/components/infSlack';
 
 export default function WithBackgroundImage() {
     return (
         <>
+            <WithSubnavigation/>
             <Flex
                 w={'full'}
                 h={'100vh'}
