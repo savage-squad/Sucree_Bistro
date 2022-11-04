@@ -54,7 +54,7 @@ export default function ProdutoList() {
     return (
         <Box>
             <SidebarWithHeader>
-                <Flex w="100%" my="6" mx="auto" maxWidth={1480} px="6">
+                <Flex w="100%" my="6" mx="auto" maxWidth={"100%"} px="6" justifyContent={'center'}>
                     {/* <SideBar /> */}
                     <Box flex="1" borderRadius={8} bg="#483D8B" p="8">
                         <Flex mb="8" justify="space-between" align="center">
