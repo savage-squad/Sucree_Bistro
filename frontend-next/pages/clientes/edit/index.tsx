@@ -22,7 +22,7 @@ import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
-
+import { useRouter } from 'next/router'
 
 const CreateClienteFormSchema = yup.object().shape({
     nome: yup.string().required("nome é obrigatório"),
@@ -64,6 +64,8 @@ export default function CreateCliente() {
     //     });
     //   }
     // }, []);
+
+    const router = useRouter()
 
     return (
         <Box>
@@ -140,6 +142,7 @@ export default function CreateCliente() {
                                     </Button>
                                 </Link>
                                 <Button
+                                onClick={() => router.push('/product')}
                                     type="submit"
                                     colorScheme="blue"
                                     isLoading={formState.isSubmitting}
