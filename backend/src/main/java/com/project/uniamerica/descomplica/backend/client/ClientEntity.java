@@ -16,10 +16,19 @@ import java.util.List;
 public class ClientEntity extends PersonEntity {
     @Id
     private Long id;
+
+    @Column
+    private String name;
     @Column
     private String document;
     @Column
     private String cpf;
+
+    @Column
+    private String email;
+
+    @Column
+    private String telefone;
 
     @OneToMany(mappedBy = "client",cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AddressEntity> address = new ArrayList<>();
