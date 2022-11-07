@@ -75,7 +75,7 @@ export default function CreateCliente() {
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
-                                Criar Clientes
+                                Editar Clientes
 
                             </Text>
                         </Heading>
@@ -144,7 +144,7 @@ export default function CreateCliente() {
                                     colorScheme="blue"
                                     isLoading={formState.isSubmitting}
                                 >
-                                    Criar cliente
+                                    Editar cliente
                                 </Button>
                             </HStack>
                         </Flex>
