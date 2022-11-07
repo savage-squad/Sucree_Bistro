@@ -24,15 +24,15 @@ import { Header } from "../../src/components/hearder";
 import NavComponents from "../../src/components/nav";
 import { SideBar } from "../../src/components/SideBar";
 
-export default function PedidoList() {
+export default function ClienteList() {
     const [data, setData] = useState([]);
-    const [pedidoId, setPedidoId] = useState(0);
+    const [clienteId, setClienteId] = useState(0);
 
-    // async function deleteEndereco(pedido) {
-    //   setPedidoId(pedido.id);
-    //   console.log(pedidoId);
+    // async function deleteEndereco(cliente) {
+    //   setClienteId(cliente.id);
+    //   console.log(clienteId);
     //   try {
-    //     await api.delete(`enderecos/${pedidoId}`);
+    //     await api.delete(`enderecos/${clienteId}`);
     //     getItems();
     //   } catch (error) {
     //     console.log(error);
@@ -60,7 +60,7 @@ export default function PedidoList() {
                         <Flex mb="8" justify="space-between" align="center">
                             <Heading fontSize="lg" fontWeight="normal">
                                 <Text color="whiteAlpha.900" >
-                                    Lista de Pedidos
+                                    Lista de Clientes
 
                                 </Text>
 
@@ -81,9 +81,10 @@ export default function PedidoList() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
+                                    <Th color={'whiteAlpha.900'}>Imagem</Th>
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
-                                    <Th color={'whiteAlpha.900'}>Preço</Th>
-                                    <Th color={'whiteAlpha.900'}>Descrição</Th>
+                                    <Th color={'whiteAlpha.900'}>CPF</Th>
+                                    <Th color={'whiteAlpha.900'}>Endereço</Th>
                                     <Th color={'whiteAlpha.900'}>Status</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
@@ -92,18 +93,24 @@ export default function PedidoList() {
                             <Tbody>
                                 {/* {data.map((endereco) => ( */}
                                 <Tr>
+                                    <Td><Image
+                                        borderRadius={5}
+                                        boxSize='50px'
+                                        src='https://frigorificoarvoredo.com.br/blog/wp-content/uploads/2018/09/picanha.jpg'
+                                        alt='Dan Abramov'
+                                    /></Td>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Picanha</Text>
+                                        <Text fontSize={14} color={'whiteAlpha.900'}>Jorge</Text>
 
                                     </Td>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>54.00 R$</Text>
+                                        <Text fontSize={14} color={'whiteAlpha.900'}>128.379.177-32</Text>
                                     </Td>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Pronto a Servir</Text>
+                                        <Text fontSize={14} color={'whiteAlpha.900'}>Manaus 328</Text>
                                     </Td>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}> Pendente</Text>
+                                        <Text fontSize={14} color={'whiteAlpha.900'}>Ativo</Text>
                                     </Td>
 
                                     <Td>
@@ -130,7 +137,6 @@ export default function PedidoList() {
                                                 <Icon
                                                     as={RiDeleteBinLine}
                                                     fontSize="16"
-
                                                 />
                                             }
                                         >

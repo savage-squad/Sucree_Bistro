@@ -24,15 +24,15 @@ import { Header } from "../../src/components/hearder";
 import NavComponents from "../../src/components/nav";
 import { SideBar } from "../../src/components/SideBar";
 
-export default function PedidoList() {
+export default function CategoriaList() {
     const [data, setData] = useState([]);
-    const [pedidoId, setPedidoId] = useState(0);
+    const [categoriaId, setCategoriaId] = useState(0);
 
-    // async function deleteEndereco(pedido) {
-    //   setPedidoId(pedido.id);
-    //   console.log(pedidoId);
+    // async function deleteEndereco(categoria) {
+    //   setCategoriaId(categoria.id);
+    //   console.log(categoriaId);
     //   try {
-    //     await api.delete(`enderecos/${pedidoId}`);
+    //     await api.delete(`enderecos/${categoriaId}`);
     //     getItems();
     //   } catch (error) {
     //     console.log(error);
@@ -60,7 +60,7 @@ export default function PedidoList() {
                         <Flex mb="8" justify="space-between" align="center">
                             <Heading fontSize="lg" fontWeight="normal">
                                 <Text color="whiteAlpha.900" >
-                                    Lista de Pedidos
+                                    Lista de Categorias
 
                                 </Text>
 
@@ -81,10 +81,8 @@ export default function PedidoList() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
+                                    <Th color={'whiteAlpha.900'}>Imagem</Th>
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
-                                    <Th color={'whiteAlpha.900'}>Preço</Th>
-                                    <Th color={'whiteAlpha.900'}>Descrição</Th>
-                                    <Th color={'whiteAlpha.900'}>Status</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
@@ -92,18 +90,15 @@ export default function PedidoList() {
                             <Tbody>
                                 {/* {data.map((endereco) => ( */}
                                 <Tr>
+                                    <Td><Image
+                                        borderRadius={5}
+                                        boxSize='50px'
+                                        src='https://frigorificoarvoredo.com.br/blog/wp-content/uploads/2018/09/picanha.jpg'
+                                        alt='Dan Abramov'
+                                    /></Td>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Picanha</Text>
+                                        <Text fontSize={14} color={'whiteAlpha.900'}>Carnes</Text>
 
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>54.00 R$</Text>
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Pronto a Servir</Text>
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}> Pendente</Text>
                                     </Td>
 
                                     <Td>

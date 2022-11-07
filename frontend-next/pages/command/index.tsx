@@ -24,15 +24,15 @@ import { Header } from "../../src/components/hearder";
 import NavComponents from "../../src/components/nav";
 import { SideBar } from "../../src/components/SideBar";
 
-export default function PedidoList() {
+export default function ComandaList() {
     const [data, setData] = useState([]);
-    const [pedidoId, setPedidoId] = useState(0);
+    const [comandaId, setComandaId] = useState(0);
 
-    // async function deleteEndereco(pedido) {
-    //   setPedidoId(pedido.id);
-    //   console.log(pedidoId);
+    // async function deleteEndereco(comanda) {
+    //   setComandaId(comanda.id);
+    //   console.log(comandaId);
     //   try {
-    //     await api.delete(`enderecos/${pedidoId}`);
+    //     await api.delete(`enderecos/${comandaId}`);
     //     getItems();
     //   } catch (error) {
     //     console.log(error);
@@ -60,7 +60,7 @@ export default function PedidoList() {
                         <Flex mb="8" justify="space-between" align="center">
                             <Heading fontSize="lg" fontWeight="normal">
                                 <Text color="whiteAlpha.900" >
-                                    Lista de Pedidos
+                                    Lista de Comandas
 
                                 </Text>
 
@@ -82,9 +82,6 @@ export default function PedidoList() {
                             <Thead>
                                 <Tr>
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
-                                    <Th color={'whiteAlpha.900'}>Preço</Th>
-                                    <Th color={'whiteAlpha.900'}>Descrição</Th>
-                                    <Th color={'whiteAlpha.900'}>Status</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
@@ -94,16 +91,6 @@ export default function PedidoList() {
                                 <Tr>
                                     <Td>
                                         <Text fontSize={14} color={'whiteAlpha.900'}>Picanha</Text>
-
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>54.00 R$</Text>
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Pronto a Servir</Text>
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}> Pendente</Text>
                                     </Td>
 
                                     <Td>
