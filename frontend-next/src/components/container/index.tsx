@@ -21,6 +21,7 @@ import {
     MenuDivider,
     MenuItem,
     MenuList,
+    WrapItem,
 } from '@chakra-ui/react';
 import {
     FiHome,
@@ -34,7 +35,7 @@ import {
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
-import { FaClipboardList, FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaUserTie,} from 'react-icons/fa';
+import { FaClipboardList, FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaUserTie, } from 'react-icons/fa';
 import { BiCategoryAlt } from 'react-icons/bi';
 
 
@@ -45,9 +46,9 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
     { name: 'Home', icon: FiHome },
-    { name: 'Produtos', icon: FaProductHunt},
+    { name: 'Produtos', icon: FaProductHunt },
     { name: 'Categorias', icon: BiCategoryAlt },
-    { name: 'Comanda', icon: FaListAlt},
+    { name: 'Comanda', icon: FaListAlt },
     { name: 'Mesa', icon: FaPizzaSlice },
     { name: 'Clientes', icon: FaUserTie },
     { name: 'Pedidos', icon: FaShoppingCart },
@@ -61,7 +62,7 @@ export default function SidebarWithHeader({
     children: ReactNode;
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    
+
     return (
         <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
             <SidebarContent
@@ -105,9 +106,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             h="full"
             {...rest}>
             <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-                <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-                    Sucree_Bistro
-                </Text>
+                <WrapItem>
+                    <Avatar
+                        size='lg'
+                        name='Prosper Otemuyiwa'
+                        src='/logo.png'
+                    />{' '}
+                </WrapItem>
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
             {LinkItems.map((link) => (
