@@ -75,7 +75,7 @@ export default function CreateProduto() {
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
-                                Criar de Produtos
+                                Edição de Produtos
 
                             </Text>
                         </Heading>
@@ -142,7 +142,7 @@ export default function CreateProduto() {
                                     colorScheme="teal"
                                     isLoading={formState.isSubmitting}
                                 >
-                                    Criar produto
+                                    Editar produto
                                 </Button>
                             </HStack>
                         </Flex>
