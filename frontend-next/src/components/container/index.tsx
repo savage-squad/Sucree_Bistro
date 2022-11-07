@@ -25,18 +25,15 @@ import {
 } from '@chakra-ui/react';
 import {
     FiHome,
-    FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
     FiMenu,
     FiBell,
     FiChevronDown,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
-import { FaClipboardList, FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaUserTie, } from 'react-icons/fa';
-import { BiCategoryAlt } from 'react-icons/bi';
+import { FaClipboardList,  FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaUserTie, } from 'react-icons/fa';
+import { BiCategoryAlt, BiPhoneIncoming } from 'react-icons/bi';
+import { PhoneIcon } from '@chakra-ui/icons';
 
 
 
@@ -52,6 +49,8 @@ const LinkItems: Array<LinkItemProps> = [
     { name: 'Mesa', icon: FaPizzaSlice },
     { name: 'Clientes', icon: FaUserTie },
     { name: 'Pedidos', icon: FaShoppingCart },
+    { name: 'Contactos', icon: BiPhoneIncoming },
+
 ];
 
 
@@ -109,7 +108,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 <WrapItem>
                     <Avatar
                         size='lg'
-                        name='Prosper Otemuyiwa'
                         src='/logo.png'
                     />{' '}
                 </WrapItem>
