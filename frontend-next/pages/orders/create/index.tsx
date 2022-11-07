@@ -84,7 +84,7 @@ export default function CreatePedido() {
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                                 <Input
 
-                                    label="Nome"
+                                    placeholder="Nome"
 
                                     {...register("nome")}
                                     value={nome}
@@ -92,8 +92,8 @@ export default function CreatePedido() {
                                 />
                                 <Input
 
-                                    label="Preço"
-                                    type="Number"
+                                    placeholder="Preço"
+                                    type="currency"
 
                                     {...register("preco")}
                                     value={preco}
@@ -104,15 +104,16 @@ export default function CreatePedido() {
                                 <Input
                                     colorScheme={'whiteAlpha.900'}
 
-                                    label="Descrição"
+                                    placeholder="Descrição do pedido"
 
                                     {...register("descricao")}
                                     value={descricao}
 
                                 />
                                 <Select
+                                    bg="white"
                                     alignContent={'center'}
-                                    pt={8}
+        
                                     h="50px"
                                     colorScheme={'whiteAlpha.900'}
                                     id="category"
@@ -142,7 +143,7 @@ export default function CreatePedido() {
                                 </Link>
                                 <Button
                                     type="submit"
-                                    colorScheme="blue"
+                                    colorScheme="teal"
                                     isLoading={formState.isSubmitting}
                                 >
                                     Criar

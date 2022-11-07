@@ -65,8 +65,9 @@ export default function ProdutoList() {
                                 </Text>
 
                             </Heading>
-                            <Link href="/enderecos/create" passHref>
+                            <Link href="/product/create" passHref>
                                 <Button
+                                    mr={"4"}
                                     as="a"
                                     size="sm"
                                     fontSize="sm"
@@ -114,7 +115,7 @@ export default function ProdutoList() {
                                     </Td>
 
                                     <Td>
-                                        <Link href={`/#`}>
+                                        <Link href={'/product/edit'}>
                                             <Button
                                                 as="a"
                                                 size="sm"
