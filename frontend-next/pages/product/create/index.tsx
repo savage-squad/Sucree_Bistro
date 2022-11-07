@@ -22,6 +22,7 @@ import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
+import { useRouter } from 'next/router'
 
 
 const CreateProdutoFormSchema = yup.object().shape({
@@ -64,6 +65,8 @@ export default function CreateProduto() {
     //     });
     //   }
     // }, []);
+
+    const router = useRouter()
 
     return (
         <Box>
@@ -132,12 +135,13 @@ export default function CreateProduto() {
                         <SelectFileComponents />
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
-                                <Link href="/enderecos">
+                                <Link href="#">
                                     <Button as="a" colorScheme="whiteAlpha">
                                         Cancelar
                                     </Button>
                                 </Link>
                                 <Button
+                                    onClick={() => router.push('/product')}
                                     type="submit"
                                     colorScheme="teal"
                                     isLoading={formState.isSubmitting}
