@@ -83,16 +83,14 @@ export default function CreateProduto() {
                         <VStack spacing="8">
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                                 <Input
-
-                                    label="Nome"
+                                    placeholder="Nome"
 
                                     {...register("nome")}
                                     value={nome}
                                     onChange={(event) => setNome(event.target.value)}
                                 />
                                 <Input
-
-                                    label="Preço"
+                                    placeholder="Preço"
                                     type="Number"
 
                                     {...register("preco")}
@@ -103,16 +101,15 @@ export default function CreateProduto() {
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
                                 <Input
                                     colorScheme={'whiteAlpha.900'}
-
-                                    label="Descrição"
+                                    placeholder="Descrição"
 
                                     {...register("descricao")}
                                     value={descricao}
 
                                 />
                                 <Select
+                                    bg='white'
                                     alignContent={'center'}
-                                    pt={8}
                                     h="50px"
                                     colorScheme={'whiteAlpha.900'}
                                     id="category"
@@ -128,11 +125,11 @@ export default function CreateProduto() {
                                     <option>Doces</option>
                                     <option>Sopas</option>
                                 </Select>
-                               
+
 
                             </SimpleGrid>
                         </VStack>
-                        <SelectFileComponents/>
+                        <SelectFileComponents />
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
                                 <Link href="/enderecos">

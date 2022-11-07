@@ -128,7 +128,7 @@ export default function SelectFileComponents() {
                     animate="rest"
                     whileHover="hover"
                 >
-                    <Box position="relative" height="100%" width="100%">
+                    <Box position="relative" height="100%" width="100%" bg={"white"}>
                         <Box
                             position="absolute"
                             top="0"
@@ -164,7 +164,7 @@ export default function SelectFileComponents() {
                                     <Heading fontSize="lg" color="gray.700" fontWeight="bold">
                                         Adicione o produto
                                     </Heading>
-                                    <Text fontWeight="light">o haga clic para cargar</Text>
+                                    <Text fontWeight="light">Carregar a foto</Text>
                                 </Stack>
                             </Stack>
                         </Box>
