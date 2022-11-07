@@ -73,7 +73,7 @@ export default function CategoriaList() {
                                     colorScheme="teal"
                                     leftIcon={<Icon as={RiAddLine} fontSize="20" />}
                                 >
-                                    Cadastrar novo
+                                    Cadastrar nova categoria
                                 </Button>
                             </Link>
                         </Flex>

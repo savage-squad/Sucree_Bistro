@@ -68,7 +68,7 @@ export default function CreateComanda() {
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
-                                Criar Comandas
+                                Editar Comandas
 
                             </Text>
                         </Heading>
@@ -98,7 +98,7 @@ export default function CreateComanda() {
                                     colorScheme="blue"
                                     isLoading={formState.isSubmitting}
                                 >
-                                    Criar Comanda
+                                    Editar Comanda
                                 </Button>
                             </HStack>
                         </Flex>
