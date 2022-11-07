@@ -135,7 +135,7 @@ export default function CreatePedido() {
                         <SelectFileComponents />
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
-                                <Link href="/enderecos">
+                                <Link href="/orders">
                                     <Button as="a" colorScheme="whiteAlpha">
                                         Cancelar
                                     </Button>

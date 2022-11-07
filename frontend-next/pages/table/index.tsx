@@ -65,7 +65,7 @@ export default function MesaList() {
                                 </Text>
 
                             </Heading>
-                            <Link href="/enderecos/create" passHref>
+                            <Link href="/table/create" passHref>
                                 <Button
                                     as="a"
                                     size="sm"

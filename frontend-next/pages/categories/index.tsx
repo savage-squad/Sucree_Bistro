@@ -65,7 +65,7 @@ export default function CategoriaList() {
                                 </Text>
 
                             </Heading>
-                            <Link href="/enderecos/create" passHref>
+                            <Link href="/categories/create" passHref>
                                 <Button
                                     as="a"
                                     size="sm"

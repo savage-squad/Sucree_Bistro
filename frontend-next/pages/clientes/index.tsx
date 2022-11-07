@@ -65,7 +65,7 @@ export default function ClienteList() {
                                 </Text>
 
                             </Heading>
-                            <Link href="/enderecos/create" passHref>
+                            <Link href="/clientes/create" passHref>
                                 <Button
                                     as="a"
                                     size="sm"

@@ -65,7 +65,7 @@ export default function ComandaList() {
                                 </Text>
 
                             </Heading>
-                            <Link href="/enderecos/create" passHref>
+                            <Link href="/command/create" passHref>
                                 <Button
                                     as="a"
                                     size="sm"
