@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
     List<AddressEntity> findAllByClient(ClientEntity client);
+
 }

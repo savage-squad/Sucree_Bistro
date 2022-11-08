@@ -18,9 +18,7 @@ export default function ButtonComponents({
         value={value}
 
         {...rest}
-      />
-
-    </>
+      /> </>
 
   );
 }
