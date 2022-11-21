@@ -1,5 +1,3 @@
-
-// Chakra imports
 import {
   Box,
   Flex,
@@ -13,8 +11,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useRouter } from 'next/router'
-// Assets
+import { useRouter } from 'next/router';
 import signInImage from "../../../public/signInImage.png";
 
 import { SubmitHandler, useForm } from "react-hook-form";

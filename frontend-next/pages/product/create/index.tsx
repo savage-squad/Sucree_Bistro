@@ -17,12 +17,23 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
-import { SideBar } from "../../../src/components/SideBar";
+import { api } from "../../services/api";
 import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
 import { useRouter } from 'next/router'
+
+type CreateProductsFormData = {
+    name: string;
+};
+
+interface IData {
+    id: number;
+    nomeDoPrato: string
+    valor: GLfloat
+    
+}
 
 
 const CreateProdutoFormSchema = yup.object().shape({
@@ -46,25 +57,26 @@ export default function CreateProduto() {
     });
 
     const { errors } = formState;
-    // const createProdutos = useCallback(async (data) => {
-    //   try {
-    //     await api.post("produtos", data);
-    //     toast({
-    //       title: "Endereço criado.",
-    //       status: "success",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast({
-    //       title: "Problema ao criar produto",
-    //       status: "error",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   }
-    // }, []);
+
+    const createProdutos = useCallback(async (data:IData) => {
+        try {
+            await api.post("/products", data);
+            toast({
+                title: "Endereço criado.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            });
+        } catch (error) {
+            console.log(error);
+            toast({
+                title: "Problema ao criar produto",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+        }
+    }, []);
 
     const router = useRouter()
 
@@ -74,7 +86,7 @@ export default function CreateProduto() {
                 <Flex w="100%" my="6" mx="auto" maxWidth={1480} px="6">
                     <Box
                         flex="1" borderRadius={8} bg="#483D8B" p="8"
-                    // onSubmit={handleSubmit(createProdutos)}
+                        onSubmit={handleSubmit(createProdutos)}
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
@@ -108,6 +120,7 @@ export default function CreateProduto() {
 
                                     {...register("descricao")}
                                     value={descricao}
+                                    onChange={(event) => setDescricao(event.target.value)}
 
                                 />
                                 <Select
@@ -116,14 +129,18 @@ export default function CreateProduto() {
                                     h="50px"
                                     colorScheme={'whiteAlpha.900'}
                                     id="category"
-                                    name="categoria"
+
                                     autoComplete="categoria"
                                     placeholder="Selecione a categoria"
                                     focusBorderColor="brand.400"
                                     shadow="sm"
                                     size="sm"
                                     w="full"
-                                    rounded="md">
+                                    rounded="md"
+                                    {...register("categoria")}
+                                    value={categoria}
+                                    onChange={(event) => setCategoria(event.target.value)}
+                                >
                                     <option>Bebidas</option>
                                     <option>Doces</option>
                                     <option>Sopas</option>
@@ -135,7 +152,7 @@ export default function CreateProduto() {
                         <SelectFileComponents />
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
-                                <Link href="#">
+                                <Link href="/product">
                                     <Button as="a" colorScheme="whiteAlpha">
                                         Cancelar
                                     </Button>

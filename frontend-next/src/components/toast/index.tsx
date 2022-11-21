@@ -3,7 +3,7 @@ import { Box, Flex, Icon, chakra } from "@chakra-ui/react";
 import React from "react";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 
-export default function TostComponent() {
+export default function ToastComponent() {
     const Toast = chakra(Flex, {
         baseStyle: {
             position: "fixed",
