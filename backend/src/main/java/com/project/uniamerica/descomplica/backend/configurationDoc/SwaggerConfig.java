@@ -1,4 +1,4 @@
-package com.project.uniamerica.descomplica.backend.configuration;
+package com.project.uniamerica.descomplica.backend.configurationDoc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
