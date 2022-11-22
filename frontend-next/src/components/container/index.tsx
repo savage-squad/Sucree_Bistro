@@ -37,21 +37,23 @@ import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 import { FaClipboardList, FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaUserTie, } from 'react-icons/fa';
 import { BiCategoryAlt } from 'react-icons/bi';
+import router from 'next/router';
 
 
 
 interface LinkItemProps {
     name: string;
     icon: IconType;
+    route: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-    { name: 'Home', icon: FiHome },
-    { name: 'Produtos', icon: FaProductHunt },
-    { name: 'Categorias', icon: BiCategoryAlt },
-    { name: 'Comanda', icon: FaListAlt },
-    { name: 'Mesa', icon: FaPizzaSlice },
-    { name: 'Clientes', icon: FaUserTie },
-    { name: 'Pedidos', icon: FaShoppingCart },
+    { name: 'Home', icon: FiHome, route: '/' },
+    { name: 'Produtos', icon: FaProductHunt, route: '/product' },
+    { name: 'Categorias', icon: BiCategoryAlt, route: '/categories' },
+    { name: 'Comanda', icon: FaListAlt, route: '/command' },
+    { name: 'Mesa', icon: FaPizzaSlice, route: '/table' },
+    { name: 'Clientes', icon: FaUserTie, route: '/clients' },
+    { name: 'Pedidos', icon: FaShoppingCart, route: '/orders' },
 ];
 
 
@@ -116,7 +118,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
             {LinkItems.map((link) => (
-                <NavItem key={link.name} icon={link.icon}>
+                <NavItem key={link.name} icon={link.icon} onClick={() => router.push(link.route)}>
                     {link.name}
                 </NavItem>
             ))}

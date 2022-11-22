@@ -3,7 +3,6 @@ package com.project.uniamerica.descomplica.backend.authTes;
 import com.github.javafaker.Faker;
 import com.project.uniamerica.descomplica.backend.auth.Role;
 import com.project.uniamerica.descomplica.backend.auth.UserEntity;
-import com.project.uniamerica.descomplica.backend.auth.UserImplementService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

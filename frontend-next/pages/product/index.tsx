@@ -21,8 +21,7 @@ import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
 import SidebarWithHeader from "../../src/components/container";
 import FooterComponents from "../../src/components/footer";
 import { Header } from "../../src/components/hearder";
-import NavComponents from "../../src/components/nav";
-import { SideBar } from "../../src/components/SideBar";
+
 
 export default function ProdutoList() {
     const [data, setData] = useState([]);
@@ -67,6 +66,7 @@ export default function ProdutoList() {
                             </Heading>
                             <Link href="/product/create" passHref>
                                 <Button
+                                    mr={"4"}
                                     as="a"
                                     size="sm"
                                     fontSize="sm"
@@ -114,7 +114,7 @@ export default function ProdutoList() {
                                     </Td>
 
                                     <Td>
-                                        <Link href={`/#`}>
+                                        <Link href={'/product/edit'}>
                                             <Button
                                                 as="a"
                                                 size="sm"
