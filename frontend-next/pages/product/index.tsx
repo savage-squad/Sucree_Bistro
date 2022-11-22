@@ -21,8 +21,7 @@ import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
 import SidebarWithHeader from "../../src/components/container";
 import FooterComponents from "../../src/components/footer";
 import { Header } from "../../src/components/hearder";
-import NavComponents from "../../src/components/nav";
-import { SideBar } from "../../src/components/SideBar";
+
 
 export default function ProdutoList() {
     const [data, setData] = useState([]);
