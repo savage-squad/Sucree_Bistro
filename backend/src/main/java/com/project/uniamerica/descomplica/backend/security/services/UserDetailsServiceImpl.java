@@ -1,7 +1,7 @@
 package com.project.uniamerica.descomplica.backend.security.services;
 
 import com.project.uniamerica.descomplica.backend.security.model.User;
-import com.project.uniamerica.descomplica.backend.user.UserRepository;
+import com.project.uniamerica.descomplica.backend.security.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
