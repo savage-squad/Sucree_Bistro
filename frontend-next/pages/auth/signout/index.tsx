@@ -12,17 +12,62 @@ import {
   Switch,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 // Assets
 // import BgSignUp from "assets/img/BgSignUp.png";
-import React from "react";
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { api } from "../../services/api";
 
 function SignUp() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
+
+  const router = useRouter()
+  const toast = useToast()
+
+  const [loadingRequest, setLoadingRequest] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  async function handleSignUp() {
+    setLoadingRequest(true);
+    try {
+      const response = await api.post("/api/auth/signup", {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      });
+      console.log(response);
+      setLoadingRequest(false);
+      toast({
+        title: "Cadastro realizado com sucesso",
+        description: "Você já pode fazer login na aplicação",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      router.push("/api/auth/signin");
+    } catch (error) {
+      setLoadingRequest(false);
+      toast({
+        title: "Erro ao realizar cadastro",
+        description: "Verifique se os dados estão corretos",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
+
   return (
     <Flex
       direction='column'
@@ -131,19 +176,27 @@ function SignUp() {
             mb='22px'>
             ou
           </Text>
-          <FormControl>
+          <FormControl 
+            id="name"
+            isRequired
+            mb='22px'
+            
+          >
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-              CPF
+              Nome do usuário
             </FormLabel>
             <Input
               fontSize='sm'
               ms='4px'
               borderRadius='15px'
-              type='number'
+              type='text'
               maxLength={11}
-              placeholder='CPF'
+              placeholder='Seu nome de usuário'
               mb='24px'
               size='lg'
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+
             />
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
               Email
@@ -202,11 +255,30 @@ function SignUp() {
             <Text color={textColor} fontWeight='medium'>
               já tem uma conta?
               <Link
+              onClick={() => router.push('/auth/signin')}
                 color="teal"
                 as='span'
                 ms='5px'
-                href='#'
-                fontWeight='bold'>
+                href='/auth/signin'
+                fontWeight='bold'
+                _hover={{
+                  textDecoration: "none",
+                }}
+                _active={{
+                  textDecoration: "none",
+                }}
+                _focus={{
+                  textDecoration: "none",
+                }}
+                _visited={{
+                  textDecoration: "none",
+                }}
+          
+                _disabled={{
+                  textDecoration: "none",
+                }}
+                
+                >
                 Entrar
               </Link>
             </Text>

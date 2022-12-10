@@ -69,7 +69,7 @@ function SignIn() {
   async function HandleSubmit() {
     try {
         setLoadingRequest(true);
-        const response = await api.post("api/auth/signup", form);
+        const response = await api.post("api/auth/signin", form);
         window.localStorage.setItem(
             "session",
             JSON.stringify({
@@ -213,7 +213,9 @@ function SignIn() {
               mt='0px'>
               <Text color={textColor} fontWeight='medium'>
                 Não tem uma conta?
-                <Link color="teal" as='span' ms='5px' fontWeight='bold'>
+                <Link color="teal" as='span' ms='5px' fontWeight='bold'  
+                  onClick={() => router.push("/auth/signout")}
+                >
                   Inscrever-se
                 </Link>
               </Text>
