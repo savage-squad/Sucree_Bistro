@@ -10,31 +10,41 @@ import {
   Switch,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from 'next/router';
 import signInImage from "../../../public/signInImage.png";
+import React, { useState } from 'react';
 
-import { SubmitHandler, useForm } from "react-hook-form";
+
+import { SubmitHandler, useForm, Resolver } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
+import { api } from "../../services/api";
 
-type SignInFormData = {
+interface SignInFormData {
   email: string;
   senha: string;
 };
 
-const signInFormSchema = yup.object().shape({
-  email: yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
+
+const schema = yup.object({
+  email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
   senha: yup.string().required('Senha obrigatória'),
-})
+
+
+
+}).required();
 
 function SignIn() {
 
-  const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(signInFormSchema)
-  });
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    remember: false,
+});
 
-  const { errors } = formState;
+
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -42,10 +52,46 @@ function SignIn() {
     console.log(values);
   };
 
+
+  const { register, handleSubmit, formState: { errors } } = useForm<SignInFormData>({
+    resolver: yupResolver(schema)
+  });
+  const onSubmit = (data: SignInFormData) => console.log(data);
+
   // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
   const router = useRouter()
+  const toast = useToast()
+
+  const [loadingRequest, setLoadingRequest] = useState(false);
+
+  async function HandleSubmit() {
+    try {
+        setLoadingRequest(true);
+        const response = await api.post("api/auth/signup", form);
+        window.localStorage.setItem(
+            "session",
+            JSON.stringify({
+                token: response.data.accessToken,
+                _id: response.data._id,
+                name: response.data.username,
+                image: response.data.image,
+            })
+        );
+        setLoadingRequest(false);
+        router.push("/");
+    } catch (error) {
+        setLoadingRequest(false);
+        toast({
+            title: "Erro ao realizar login",
+            description: "Verifique se os dados estão corretos",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+        });
+    }
+}
   return (
     <Flex position='relative' mb='40px' >
       <Flex
@@ -80,36 +126,50 @@ function SignIn() {
               fontSize='14px'>
               Digite seu e-mail e senha para entrar
             </Text>
-            <FormControl>
+            <FormControl onSubmit={handleSubmit(onSubmit)}>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                 Email
               </FormLabel>
               <Input
+                id="email"
                 borderRadius='15px'
                 mb='24px'
                 fontSize='sm'
                 type='text'
                 placeholder='Seu endereço de e-mail'
                 size='lg'
+                {...register("email")}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+
               />
+              <p>{errors.email?.message}</p>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                 Senha
               </FormLabel>
               <Input
+                id="senha"
+                required
+                {...register("senha")}
                 borderRadius='15px'
                 mb='36px'
                 fontSize='sm'
                 type='password'
                 placeholder='Sua senha'
                 size='lg'
+                {...register("senha")}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               />
+              <p>{errors.senha?.message}</p>
               <FormControl display='flex' alignItems='center'>
                 <Switch id='remember-login' colorScheme='teal' me='10px' />
                 <FormLabel
                   htmlFor='remember-login'
                   mb='0'
                   ms='1'
-                  fontWeight='normal'>
+                  fontWeight='normal'
+                  id="remember"
+                  >
                   Lembre de mim
                 </FormLabel>
               </FormControl>
@@ -122,7 +182,20 @@ function SignIn() {
                 mb='20px'
                 color='white'
                 mt='20px'
-                onClick={() => router.push('/product')}
+                onClick={() =>
+                  toast({
+                    title: "Login realizado com sucesso",
+                    status: "success",
+                    duration: 700,
+                    isClosable: true,
+                    colorScheme: "teal"
+
+                  })
+                }
+                _focus={{
+                  boxShadow: "none",
+                }}
+
                 _hover={{
                   bg: "teal.200",
                 }}
