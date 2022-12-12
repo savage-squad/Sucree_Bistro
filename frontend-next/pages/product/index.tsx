@@ -15,40 +15,49 @@ import {
 } from "@chakra-ui/react";
 import { subtle } from "crypto";
 import Link from "next/link";
+import { type } from "os";
 import { useState } from "react";
 import { useEffect } from "react";
 import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
+import api from "../../service";
 import SidebarWithHeader from "../../src/components/container";
 import FooterComponents from "../../src/components/footer";
 import { Header } from "../../src/components/hearder";
 
+type Product = {
+    id: number;
+    nomeDoPrato: "string",
+    valor: number,
+    tipoProdutoId: number
+}
+
 
 export default function ProdutoList() {
-    const [data, setData] = useState([]);
-    const [produtoId, setProdutoId] = useState(0);
+    const [data, setData] = useState<Product[]>([]);
+    const [productId, setProductId] = useState(0);
 
-    // async function deleteEndereco(produto) {
-    //   setProdutoId(produto.id);
-    //   console.log(produtoId);
-    //   try {
-    //     await api.delete(`enderecos/${produtoId}`);
-    //     getItems();
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
-    // async function getItems() {
-    //   try {
-    //     const response = await api.get("products");
-    //     setData(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    async function deleteProduct(id: number,) {
+        setProductId(id);
+        console.log(productId);
+        try {
+            await api.delete(`products/${productId}`);
+            getItems();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async function getItems() {
+        try {
+            const response = await api.get("products");
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-    // useEffect(() => {
-    //   getItems();
-    // }, []);
+    useEffect(() => {
+        getItems();
+    }, []);
 
     return (
         <Box>
@@ -81,71 +90,66 @@ export default function ProdutoList() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
+                                    <Th color={'whiteAlpha.900'}>Id</Th>
                                     <Th color={'whiteAlpha.900'}>Imagem</Th>
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
                                     <Th color={'whiteAlpha.900'}>Preço</Th>
-                                    <Th color={'whiteAlpha.900'}>Descrição</Th>
+
                                     <Th color={'whiteAlpha.900'}>Categoria</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {/* {data.map((endereco) => ( */}
-                                <Tr>
-                                    <Td><Image
-                                        borderRadius={5}
-                                        boxSize='50px'
-                                        src='https://frigorificoarvoredo.com.br/blog/wp-content/uploads/2018/09/picanha.jpg'
-                                        alt='Dan Abramov'
-                                    /></Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Picanha</Text>
+                                {data.map((product) => (
+                                    <Tr key={product.id}>
+                                        <Td>{product.id}</Td>
+                                        <Td></Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{product.nomeDoPrato}</Text>
 
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>54.00 R$</Text>
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Pronto a Servir</Text>
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}> Carnes</Text>
-                                    </Td>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{product.valor}</Text>
+                                        </Td>
 
-                                    <Td>
-                                        <Link href={'/product/edit'}>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}> {product.tipoProdutoId}</Text>
+                                        </Td>
+
+                                        <Td>
+                                            <Link href={`/product/${product.id}/edit`}>
+                                                <Button
+                                                    as="a"
+                                                    size="sm"
+                                                    fontSize="sm"
+                                                    colorScheme="yellow"
+                                                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                                                >
+                                                    Editar
+                                                </Button>
+                                            </Link>
+                                        </Td>
+                                        <Td>
                                             <Button
                                                 as="a"
                                                 size="sm"
                                                 fontSize="sm"
-                                                colorScheme="yellow"
-                                                leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                                            >
-                                                Editar
-                                            </Button>
-                                        </Link>
-                                    </Td>
-                                    <Td>
-                                        <Button
-                                            as="a"
-                                            size="sm"
-                                            fontSize="sm"
-                                            colorScheme="red"
-                                            // onClick={}
-                                            leftIcon={
-                                                <Icon
-                                                    as={RiDeleteBinLine}
-                                                    fontSize="16"
+                                                colorScheme="red"
+                                                onClick={() => deleteProduct(product.id)}
+                                                leftIcon={
+                                                    <Icon
+                                                        as={RiDeleteBinLine}
+                                                        fontSize="16"
 
-                                                />
-                                            }
-                                        >
-                                            Excluir
-                                        </Button>
-                                    </Td>
-                                </Tr>
-                                {/* ))} */}
+                                                    />
+                                                }
+                                            >
+                                                Excluir
+                                            </Button>
+                                        </Td>
+                                    </Tr>
+                                ))}
                             </Tbody>
                         </Table>
                     </Box>

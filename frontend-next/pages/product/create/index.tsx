@@ -24,43 +24,30 @@ import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
 import { useRouter } from 'next/router'
 
-type CreateProductsFormData = {
-    name: string;
-};
-
-interface IData {
-    id: number;
-    nomeDoPrato: string
-    valor: GLfloat
-    
-}
-
-
-const CreateProdutoFormSchema = yup.object().shape({
-    nome: yup.string().required("nome é obrigatório"),
-    descricao: yup.string().required("descrição é obrigatório"),
-    categoria: yup.string().required("categoria é obrigatório"),
-    preco: yup.number().required("preço é obrigatório"),
-
+const CreateProductFormSchema = yup.object().shape({
+    name: yup.string().required("Nome obrigatório"),
+    price: yup.number().required("Preço obrigatório"),
+    description: yup.string().required("Descrição obrigatória"),
+    category: yup.string().required("Categoria obrigatória"),
 });
 
 export default function CreateProduto() {
     const toast = useToast();
+    const router = useRouter();
+    const [file, setFile] = useState<File>();
     const [nome, setNome] = useState("");
+    const [preco, setPreco] = useState("");
     const [descricao, setDescricao] = useState("");
     const [categoria, setCategoria] = useState("");
-    const [preco, setPreco] = useState("");
-    const [imagem, setImagem] = useState("");
+    const [url, setUrl] = useState("");
 
     const { formState, register, handleSubmit } = useForm({
-        resolver: yupResolver(CreateProdutoFormSchema),
+        resolver: yupResolver(CreateProductFormSchema),
     });
-
     const { errors } = formState;
-
-    const createProdutos = useCallback(async (data:IData) => {
+    const createProducts = useCallback(async (data) => {
         try {
-            await api.post("/products", data);
+            await api.post("products", data);
             toast({
                 title: "Endereço criado.",
                 status: "success",
@@ -70,7 +57,7 @@ export default function CreateProduto() {
         } catch (error) {
             console.log(error);
             toast({
-                title: "Problema ao criar produto",
+                title: "Problema ao criar endereço.",
                 status: "error",
                 duration: 3000,
                 isClosable: true,
@@ -78,7 +65,6 @@ export default function CreateProduto() {
         }
     }, []);
 
-    const router = useRouter()
 
     return (
         <Box>
@@ -86,7 +72,7 @@ export default function CreateProduto() {
                 <Flex w="100%" my="6" mx="auto" maxWidth={1480} px="6">
                     <Box
                         flex="1" borderRadius={8} bg="#483D8B" p="8"
-                        onSubmit={handleSubmit(createProdutos)}
+                        onSubmit={handleSubmit(createProducts)}
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
@@ -98,29 +84,34 @@ export default function CreateProduto() {
                         <VStack spacing="8">
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                                 <Input
+                                    name="name"
                                     placeholder="Nome"
-
-                                    {...register("nome")}
+                                    type="text"
+                                    isRequired={true}
+                                    {...register("name")}
                                     value={nome}
-                                    onChange={(event) => setNome(event.target.value)}
+                                    onChange={(e) => setNome(e.target.value)}
                                 />
                                 <Input
+                                    
                                     placeholder="Preço"
                                     type="Number"
-
-                                    {...register("preco")}
+                                    isRequired={true}
+                                    {...register("price")}
                                     value={preco}
-                                    onChange={(event) => setPreco((event.target.value))}
+                                    onChange={(e) => setPreco(e.target.value)}
+                                    pattern="[0-9]*"
                                 />
                             </SimpleGrid>
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
                                 <Input
                                     colorScheme={'whiteAlpha.900'}
                                     placeholder="Descrição"
-
-                                    {...register("descricao")}
+                                    type="text"
+                                    isRequired={true}
+                                    {...register("description")}
                                     value={descricao}
-                                    onChange={(event) => setDescricao(event.target.value)}
+                                    onChange={(e) => setDescricao(e.target.value)}
 
                                 />
                                 <Select
@@ -129,7 +120,6 @@ export default function CreateProduto() {
                                     h="50px"
                                     colorScheme={'whiteAlpha.900'}
                                     id="category"
-
                                     autoComplete="categoria"
                                     placeholder="Selecione a categoria"
                                     focusBorderColor="brand.400"
@@ -137,13 +127,12 @@ export default function CreateProduto() {
                                     size="sm"
                                     w="full"
                                     rounded="md"
-                                    {...register("categoria")}
-                                    value={categoria}
-                                    onChange={(event) => setCategoria(event.target.value)}
+
                                 >
-                                    <option>Bebidas</option>
-                                    <option>Doces</option>
-                                    <option>Sopas</option>
+                                    <option value="1">Categoria 1</option>
+                                    <option value="2">Categoria 2</option>
+                                    <option value="3">Categoria 3</option>
+
                                 </Select>
 
 
@@ -158,7 +147,6 @@ export default function CreateProduto() {
                                     </Button>
                                 </Link>
                                 <Button
-                                    onClick={() => router.push('/product')}
                                     type="submit"
                                     colorScheme="teal"
                                     isLoading={formState.isSubmitting}
