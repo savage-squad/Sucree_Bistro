@@ -25,6 +25,7 @@ import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
 import { useRouter } from 'next/router'
+import axios from "axios";
 
 
 export default function CreateProduto() {
@@ -33,23 +34,27 @@ export default function CreateProduto() {
 
     const [nomeDoPrato, setNomeDoPrato] = useState("");
     const [valor, setValor] = useState(0);
-    const [tipoProdutoId, setTipoProdutoId] = useState("");
+    const [tipoProdutoId, setTipoProdutoId] = useState(0);
 
 
     const [error, setError] = useState(false);
 
     async function onSubmit() {
-
+const token = localStorage.getItem("token");
         try {
-            await api.post('products', {
+            await api.post("products", {
                 nomeDoPrato,
                 valor,
                 tipoProdutoId
-            }).then(({ data }) => {
-                return router.push('/products');
+            }, {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("token"),
+                }
+            })
 
-            });
+            return router.push('/product')
         } catch (error) {
+            console.log(error)
             setError(true)
         }
     };
@@ -96,22 +101,32 @@ export default function CreateProduto() {
                                 <Input
                                     name="price"
                                     placeholder="Preço"
-                                    type="Number"
+                                    type="number"
                                     isRequired={true}
                                     value={valor}
                                     onChange={(e) => setValor(Number(e.target.value))}
                                     pattern="[0-9]*"
                                 />
+                                   {/* <Input
+                                    name="description"
+                                    placeholder="descrição"
+                                    type="text"
+                                    isRequired={true}
+                                    value={descricao}
+                                    onChange={(e) => setDescricao(e.target.value)}
+                                    
+                                    
+                                /> */}
                             </SimpleGrid>
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
                                 <Input
                                     name="tipoProdutoId"
                                     colorScheme={'whiteAlpha.900'}
                                     placeholder="Categoria"
-                                    type="text"
+                                    type="number"
                                     isRequired={true}
                                     value={tipoProdutoId}
-                                    onChange={(e) => setTipoProdutoId(e.target.value)}
+                                    onChange={(e) => setTipoProdutoId(Number(e.target.value))}
                                 />
                                 {/* <Select
                                     bg='white'

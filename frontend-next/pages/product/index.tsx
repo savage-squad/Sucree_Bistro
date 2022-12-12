@@ -34,13 +34,12 @@ type Product = {
 
 export default function ProdutoList() {
     const [data, setData] = useState<Product[]>([]);
-    const [productId, setProductId] = useState(0);
+    
 
     async function deleteProduct(id: number,) {
-        setProductId(id);
-        console.log(productId);
+    
         try {
-            await api.delete(`products/${productId}`);
+            await api.delete(`products/${id}`);
             getItems();
         } catch (error) {
             console.log(error);
@@ -132,11 +131,12 @@ export default function ProdutoList() {
                                         </Td>
                                         <Td>
                                             <Button
+                                                type="button"
                                                 as="a"
                                                 size="sm"
                                                 fontSize="sm"
                                                 colorScheme="red"
-                                                onClick={() => deleteProduct(product.id)}
+                                                onClick={()=> deleteProduct(product.id)}
                                                 leftIcon={
                                                     <Icon
                                                         as={RiDeleteBinLine}

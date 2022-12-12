@@ -21,6 +21,7 @@ import { SubmitHandler, useForm, Resolver } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
 import { api } from "../../services/api";
+import { setToken } from "../../../service";
 
 interface SignInFormData {
   username: string;
@@ -60,14 +61,19 @@ function SignIn() {
 
   const [loadingRequest, setLoadingRequest] = useState(false);
 
+  
+
   async function HandleSubmit() {
     try {
       setLoadingRequest(true);
       const response = await api.post("api/auth/signin", {
+        
         username: form.username,
         password: form.password,
 
       });
+
+      console.log(response.data)
       toast({
         title: "Login realizado com sucesso",
         status: "success",
@@ -75,14 +81,12 @@ function SignIn() {
         isClosable: true,
       });
       window.localStorage.setItem(
-        "session",
-        JSON.stringify({
-          token: response.data.accessToken,
-          _id: response.data._id,
-          name: response.data.username,
-          image: response.data.image,
-        })
+        "token",
+        response.data.token
       );
+
+      setToken(response.data.token);
+
       setLoadingRequest(false);
       router.push("/product");
     } catch (error) {
