@@ -32,8 +32,8 @@ export default function CreateProduto() {
     const router = useRouter();
 
     const [nomeDoPrato, setNomeDoPrato] = useState("");
-    const [valor, setValor] = useState();
-    const [tipoProdutoId, setTipoProdutoId] = useState();
+    const [valor, setValor] = useState(0);
+    const [tipoProdutoId, setTipoProdutoId] = useState("");
 
 
     const [error, setError] = useState(false);
