@@ -11,6 +11,8 @@ import {
     FormLabel,
     Select,
     Text,
+    Alert,
+    AlertIcon,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -24,46 +26,46 @@ import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
 import { useRouter } from 'next/router'
 
-const CreateProductFormSchema = yup.object().shape({
-    name: yup.string().required("Nome obrigatório"),
-    price: yup.number().required("Preço obrigatório"),
-    description: yup.string().required("Descrição obrigatória"),
-    category: yup.string().required("Categoria obrigatória"),
-});
 
 export default function CreateProduto() {
     const toast = useToast();
     const router = useRouter();
-    const [file, setFile] = useState<File>();
-    const [nome, setNome] = useState("");
-    const [preco, setPreco] = useState("");
-    const [descricao, setDescricao] = useState("");
-    const [categoria, setCategoria] = useState("");
-    const [url, setUrl] = useState("");
 
-    const { formState, register, handleSubmit } = useForm({
-        resolver: yupResolver(CreateProductFormSchema),
-    });
-    const { errors } = formState;
-    const createProducts = useCallback(async (data) => {
+    const [nomeDoPrato, setNomeDoPrato] = useState("");
+    const [valor, setValor] = useState();
+    const [tipoProdutoId, setTipoProdutoId] = useState();
+
+
+    const [error, setError] = useState(false);
+
+    async function onSubmit() {
+
         try {
-            await api.post("products", data);
-            toast({
-                title: "Endereço criado.",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
+            await api.post('products', {
+                nomeDoPrato,
+                valor,
+                tipoProdutoId
+            }).then(({ data }) => {
+                return router.push('/products');
+
             });
         } catch (error) {
-            console.log(error);
-            toast({
-                title: "Problema ao criar endereço.",
-                status: "error",
-                duration: 3000,
-                isClosable: true,
-            });
+            setError(true)
         }
-    }, []);
+    };
+
+
+    const ShowAlertError = () => {
+        if (error) {
+            return (
+                <Alert status="error" mb={5}>
+                    <AlertIcon />
+                    Upzz !Não foi possível cadastrar o prato da comida / Tente novamente
+                </Alert>
+            );
+        }
+        return null;
+    };
 
 
     return (
@@ -72,7 +74,7 @@ export default function CreateProduto() {
                 <Flex w="100%" my="6" mx="auto" maxWidth={1480} px="6">
                     <Box
                         flex="1" borderRadius={8} bg="#483D8B" p="8"
-                        onSubmit={handleSubmit(createProducts)}
+
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
@@ -85,36 +87,33 @@ export default function CreateProduto() {
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                                 <Input
                                     name="name"
-                                    placeholder="Nome"
+                                    placeholder="Nome da comida"
                                     type="text"
                                     isRequired={true}
-                                    {...register("name")}
-                                    value={nome}
-                                    onChange={(e) => setNome(e.target.value)}
+                                    value={nomeDoPrato}
+                                    onChange={(e) => setNomeDoPrato(e.target.value)}
                                 />
                                 <Input
-                                    
+                                    name="price"
                                     placeholder="Preço"
                                     type="Number"
                                     isRequired={true}
-                                    {...register("price")}
-                                    value={preco}
-                                    onChange={(e) => setPreco(e.target.value)}
+                                    value={valor}
+                                    onChange={(e) => setValor(Number(e.target.value))}
                                     pattern="[0-9]*"
                                 />
                             </SimpleGrid>
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
                                 <Input
+                                    name="tipoProdutoId"
                                     colorScheme={'whiteAlpha.900'}
-                                    placeholder="Descrição"
+                                    placeholder="Categoria"
                                     type="text"
                                     isRequired={true}
-                                    {...register("description")}
-                                    value={descricao}
-                                    onChange={(e) => setDescricao(e.target.value)}
-
+                                    value={tipoProdutoId}
+                                    onChange={(e) => setTipoProdutoId(e.target.value)}
                                 />
-                                <Select
+                                {/* <Select
                                     bg='white'
                                     alignContent={'center'}
                                     h="50px"
@@ -127,18 +126,17 @@ export default function CreateProduto() {
                                     size="sm"
                                     w="full"
                                     rounded="md"
-
+                                    value={tipoProdutoId}
+                                    onChange={(e) => setTipoProdutoId(Number(e.target.value))}
                                 >
                                     <option value="1">Categoria 1</option>
                                     <option value="2">Categoria 2</option>
                                     <option value="3">Categoria 3</option>
 
-                                </Select>
-
-
+                                </Select> */}
                             </SimpleGrid>
                         </VStack>
-                        <SelectFileComponents />
+                        {/* <SelectFileComponents /> */}
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
                                 <Link href="/product">
@@ -149,7 +147,8 @@ export default function CreateProduto() {
                                 <Button
                                     type="submit"
                                     colorScheme="teal"
-                                    isLoading={formState.isSubmitting}
+                                    onClick={
+                                        onSubmit}
                                 >
                                     Criar produto
                                 </Button>

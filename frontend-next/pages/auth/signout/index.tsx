@@ -38,6 +38,7 @@ function SignUp() {
 
   const [error, setError] = useState(false);
 
+
   async function onSubmit() {
 
     try {
@@ -47,6 +48,7 @@ function SignUp() {
         username
       }).then(({ data }) => {
         return router.push('/product');
+
       });
     } catch (error) {
       setError(true)
