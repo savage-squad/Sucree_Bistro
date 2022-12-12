@@ -174,6 +174,7 @@ function SignIn() {
                 </FormLabel>
               </FormControl>
               <Button
+              
                 fontSize='10px'
                 type='submit'
                 bg='teal'
@@ -182,16 +183,7 @@ function SignIn() {
                 mb='20px'
                 color='white'
                 mt='20px'
-                onClick={() =>
-                  toast({
-                    title: "Login realizado com sucesso",
-                    status: "success",
-                    duration: 700,
-                    isClosable: true,
-                    colorScheme: "teal"
-
-                  })
-                }
+                onClick={() => router.push('/product' )}
                 _focus={{
                   boxShadow: "none",
                 }}

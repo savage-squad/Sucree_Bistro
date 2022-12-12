@@ -87,17 +87,17 @@ export default function FooterComponents({ ...props }) {
             <ButtonComponents
               colorScheme='teal'
               size='md'
-              onClick={() => router.push('/login/sigin')}
+              onClick={() => router.push('/auth/signin')}
               style={{ width: '100%' }}
             >iniciar a sessão
             </ButtonComponents>
 
-u
+
 
              <ButtonComponents
               colorScheme='yellow'
               size='md'
-              onClick={() => router.push('/login/sigout')}
+              onClick={() => router.push('/auth/signout')}
               style={{ width: '100%' }}
 
             >Cadastre-se

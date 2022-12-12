@@ -1,5 +1,6 @@
-// Chakra imports
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Flex,
@@ -7,7 +8,6 @@ import {
   FormLabel,
   HStack,
   Icon,
-  Input,
   Link,
   Switch,
   Text,
@@ -15,11 +15,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-// Assets
-// import BgSignUp from "assets/img/BgSignUp.png";
-import React, { useState } from "react";
+
+import React, { useCallback, useEffect, useState } from "react";
+
 import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { api } from "../../services/api";
+import api from "../../../service";
+import { Input } from "../../../src/components/input";
+
+
 
 function SignUp() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
@@ -28,45 +31,43 @@ function SignUp() {
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
 
   const router = useRouter()
-  const toast = useToast()
 
-  const [loadingRequest, setLoadingRequest] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
 
-  async function handleSignUp() {
-    setLoadingRequest(true);
+  const [error, setError] = useState(false);
+
+  async function onSubmit() {
+
     try {
-      const response = await api.post("/api/auth/signup", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
+      await api.post('api/auth/signup', {
+        email,
+        password,
+        username
+      }).then(({ data }) => {
+
+
+        return router.push('/product');
       });
-      console.log(response);
-      setLoadingRequest(false);
-      toast({
-        title: "Cadastro realizado com sucesso",
-        description: "Você já pode fazer login na aplicação",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
-      router.push("/api/auth/signin");
     } catch (error) {
-      setLoadingRequest(false);
-      toast({
-        title: "Erro ao realizar cadastro",
-        description: "Verifique se os dados estão corretos",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
+      setError(true)
     }
-  }
+  };
+
+
+  const ShowAlertError = () => {
+    if (error) {
+      return (
+        <Alert status="error" mb={5}>
+          <AlertIcon />
+          Não foi possível cadastrar-se! Tente novamente
+        </Alert>
+      );
+    }
+    return null;
+  };
+
 
   return (
     <Flex
@@ -176,16 +177,9 @@ function SignUp() {
             mb='22px'>
             ou
           </Text>
-          <FormControl 
-            id="name"
-            isRequired
-            mb='22px'
-            
-          >
-            <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-              Nome do usuário
-            </FormLabel>
+          <Box >
             <Input
+              name="username"
               fontSize='sm'
               ms='4px'
               borderRadius='15px'
@@ -194,14 +188,10 @@ function SignUp() {
               placeholder='Seu nome de usuário'
               mb='24px'
               size='lg'
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-
+              onChange={e => setUserName(e.target.value)}
             />
-            <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-              Email
-            </FormLabel>
             <Input
+              name="email"
               fontSize='sm'
               ms='4px'
               borderRadius='15px'
@@ -209,11 +199,10 @@ function SignUp() {
               placeholder='Seu endereço de email'
               mb='24px'
               size='lg'
+              onChange={e => setEmail(e.target.value)}
             />
-            <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-              Senha
-            </FormLabel>
             <Input
+              name="password"
               fontSize='sm'
               ms='4px'
               borderRadius='15px'
@@ -221,7 +210,11 @@ function SignUp() {
               placeholder='Sua senha'
               mb='24px'
               size='lg'
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              isRequired={true}
+              onChange={e => setPassword(e.target.value)}
             />
+
             <FormControl display='flex' alignItems='center' mb='24px'>
               <Switch id='remember-login' colorScheme='teal' me='10px' />
               <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
@@ -229,6 +222,8 @@ function SignUp() {
               </FormLabel>
             </FormControl>
             <Button
+              onClick={
+                onSubmit}
               type='submit'
               bg='teal'
               fontSize='10px'
@@ -243,9 +238,11 @@ function SignUp() {
               _active={{
                 bg: "teal",
               }}>
-              INSCREVER-SE
+              Criar conta
             </Button>
-          </FormControl>
+
+
+          </Box>
           <Flex
             flexDirection='column'
             justifyContent='center'
@@ -255,7 +252,7 @@ function SignUp() {
             <Text color={textColor} fontWeight='medium'>
               já tem uma conta?
               <Link
-              onClick={() => router.push('/auth/signin')}
+                onClick={() => router.push('/auth/signin')}
                 color="teal"
                 as='span'
                 ms='5px'
@@ -273,12 +270,12 @@ function SignUp() {
                 _visited={{
                   textDecoration: "none",
                 }}
-          
+
                 _disabled={{
                   textDecoration: "none",
                 }}
-                
-                >
+
+              >
                 Entrar
               </Link>
             </Text>
