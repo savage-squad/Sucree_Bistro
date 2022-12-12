@@ -38,7 +38,7 @@ function SignIn() {
     username: "",
     password: "",
     remember: false,
-});
+  });
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -62,34 +62,40 @@ function SignIn() {
 
   async function HandleSubmit() {
     try {
-        setLoadingRequest(true);
-        const response = await api.post("api/auth/signin", {
-            username: form.username,
-            password: form.password,
-            
-        });
-        window.localStorage.setItem(
-            "session",
-            JSON.stringify({
-                token: response.data.accessToken,
-                _id: response.data._id,
-                name: response.data.username,
-                image: response.data.image,
-            })
-        );
-        setLoadingRequest(false);
-        router.push("/product");
+      setLoadingRequest(true);
+      const response = await api.post("api/auth/signin", {
+        username: form.username,
+        password: form.password,
+
+      });
+      toast({
+        title: "Login realizado com sucesso",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      window.localStorage.setItem(
+        "session",
+        JSON.stringify({
+          token: response.data.accessToken,
+          _id: response.data._id,
+          name: response.data.username,
+          image: response.data.image,
+        })
+      );
+      setLoadingRequest(false);
+      router.push("/product");
     } catch (error) {
-        setLoadingRequest(false);
-        toast({
-            title: "Erro ao realizar login",
-            description: "Verifique se os dados estão corretos",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-        });
+      setLoadingRequest(false);
+      toast({
+        title: "Erro ao realizar login",
+        description: "Verifique se os dados estão corretos",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
-}
+  }
   return (
     <Flex position='relative' mb='40px' >
       <Flex
@@ -129,20 +135,20 @@ function SignIn() {
                 Usuario
               </FormLabel>
               <Input
-            
+
                 borderRadius='15px'
                 mb='24px'
                 fontSize='sm'
                 type='text'
                 placeholder='Seu endereço de e-mail'
                 size='lg'
-            
+
                 onChange={(e) => setForm({ ...form, username: e.target.value })}
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 
 
               />
- 
+
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                 Senha
               </FormLabel>
@@ -168,12 +174,12 @@ function SignIn() {
                   ms='1'
                   fontWeight='normal'
                   id="remember"
-                  >
+                >
                   Lembre de mim
                 </FormLabel>
               </FormControl>
               <Button
-              
+
                 fontSize='10px'
                 type='submit'
                 bg='teal'
@@ -204,7 +210,7 @@ function SignIn() {
               mt='0px'>
               <Text color={textColor} fontWeight='medium'>
                 Não tem uma conta?
-                <Link color="teal" as='span' ms='5px' fontWeight='bold'  
+                <Link color="teal" as='span' ms='5px' fontWeight='bold'
                   onClick={() => router.push("/auth/signout")}
                 >
                   Inscrever-se
