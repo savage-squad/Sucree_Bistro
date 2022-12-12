@@ -23,28 +23,22 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { api } from "../../services/api";
 
 interface SignInFormData {
-  email: string;
+  username: string;
   senha: string;
 };
 
-
 const schema = yup.object({
-  email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
   senha: yup.string().required('Senha obrigatória'),
-
-
-
+  username: yup.string().required('Nome obrigatório'),
 }).required();
 
 function SignIn() {
 
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
     remember: false,
 });
-
-
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -69,7 +63,11 @@ function SignIn() {
   async function HandleSubmit() {
     try {
         setLoadingRequest(true);
-        const response = await api.post("api/auth/signin", form);
+        const response = await api.post("api/auth/signin", {
+            username: form.username,
+            password: form.password,
+            
+        });
         window.localStorage.setItem(
             "session",
             JSON.stringify({
@@ -80,7 +78,7 @@ function SignIn() {
             })
         );
         setLoadingRequest(false);
-        router.push("/");
+        router.push("/product");
     } catch (error) {
         setLoadingRequest(false);
         toast({
@@ -124,25 +122,27 @@ function SignIn() {
               color={textColor}
               fontWeight='bold'
               fontSize='14px'>
-              Digite seu e-mail e senha para entrar
+              Digite seu usuario e senha para entrar
             </Text>
             <FormControl onSubmit={handleSubmit(onSubmit)}>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                Email
+                Usuario
               </FormLabel>
               <Input
-                id="email"
+            
                 borderRadius='15px'
                 mb='24px'
                 fontSize='sm'
                 type='text'
                 placeholder='Seu endereço de e-mail'
                 size='lg'
-                {...register("email")}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
+            
+                onChange={(e) => setForm({ ...form, username: e.target.value })}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+
 
               />
-              <p>{errors.email?.message}</p>
+ 
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                 Senha
               </FormLabel>
@@ -156,7 +156,6 @@ function SignIn() {
                 type='password'
                 placeholder='Sua senha'
                 size='lg'
-                {...register("senha")}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               />
@@ -183,7 +182,7 @@ function SignIn() {
                 mb='20px'
                 color='white'
                 mt='20px'
-                onClick={() => router.push('/product' )}
+                onClick={HandleSubmit}
                 _focus={{
                   boxShadow: "none",
                 }}
@@ -194,7 +193,7 @@ function SignIn() {
                 _active={{
                   bg: "teal.400",
                 }}>
-                ENTRAR
+                Entrar
               </Button>
             </FormControl>
             <Flex

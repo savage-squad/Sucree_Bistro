@@ -46,8 +46,6 @@ function SignUp() {
         password,
         username
       }).then(({ data }) => {
-
-
         return router.push('/product');
       });
     } catch (error) {
