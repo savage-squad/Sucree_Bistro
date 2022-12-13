@@ -33,6 +33,7 @@ export default function CreateProduto() {
     const router = useRouter();
 
     const [nomeDoPrato, setNomeDoPrato] = useState("");
+    const [descricao, setDescricao] = useState("");
     const [valor, setValor] = useState(0);
     const [tipoProdutoId, setTipoProdutoId] = useState(0);
 
@@ -44,6 +45,7 @@ export default function CreateProduto() {
         try {
             await api.post("products", {
                 nomeDoPrato,
+                descricao,
                 valor,
                 tipoProdutoId
             }, {
@@ -107,19 +109,8 @@ export default function CreateProduto() {
                                     onChange={(e) => setValor(Number(e.target.value))}
                                     pattern="[0-9]*"
                                 />
-                                {/* <Input
-                                    name="description"
-                                    placeholder="descrição"
-                                    type="text"
-                                    isRequired={true}
-                                    value={descricao}
-                                    onChange={(e) => setDescricao(e.target.value)}
-                                    
-                                    
-                                /> */}
-                            </SimpleGrid>
-                            <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
-                                <Input
+                                {<Input
+
                                     name="tipoProdutoId"
                                     colorScheme={'whiteAlpha.900'}
                                     placeholder="Categoria"
@@ -127,6 +118,18 @@ export default function CreateProduto() {
                                     isRequired={true}
                                     value={tipoProdutoId}
                                     onChange={(e) => setTipoProdutoId(Number(e.target.value))}
+
+                                />}
+                            </SimpleGrid>
+                            <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
+                                <Input
+
+                                    name="description"
+                                    placeholder="descrição"
+                                    type="text"
+                                    isRequired={true}
+                                    value={descricao}
+                                    onChange={(e) => setDescricao(e.target.value)}
                                 />
                                 {/* <Select
                                     bg='white'

@@ -18,6 +18,9 @@ public class ProductEntity implements Serializable {
     @Column(nullable = false, length = 45)
     private String nomeDoPrato;
 
+    @Column(nullable = false, length = 100)
+    private String descricao;
+
     @Column(nullable = false, length = 45)
     private float valor;
 

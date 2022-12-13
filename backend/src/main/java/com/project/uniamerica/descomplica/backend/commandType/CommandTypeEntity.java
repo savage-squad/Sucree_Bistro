@@ -16,10 +16,14 @@ public class CommandTypeEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false, length = 45)
+    private String nome;
+
     public CommandTypeEntity() {
     }
 
-    public CommandTypeEntity(int id) {
+    public CommandTypeEntity(int id, String nome) {
         this.id = id;
+        this.nome = nome;
     }
 }

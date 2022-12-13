@@ -32,7 +32,7 @@ public class CommandTypeServiceTest {
 
     @Test
     public void criarcommandType() throws Exception {
-        CommandTypeEntity commandTypeEntity = new CommandTypeEntity(1);
+        CommandTypeEntity commandTypeEntity = new CommandTypeEntity(1, "");
         ObjectMapper mapper = new ObjectMapper();
 
         String json = mapper.writeValueAsString(commandTypeEntity);

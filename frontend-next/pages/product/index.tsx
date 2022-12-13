@@ -27,6 +27,7 @@ import { Header } from "../../src/components/hearder";
 type Product = {
     id: number;
     nomeDoPrato: "string",
+    descricao: "string",
     valor: number,
     tipoProdutoId: number
 }
@@ -34,11 +35,11 @@ type Product = {
 
 export default function ProdutoList() {
     const [data, setData] = useState<Product[]>([]);
-    
+
 
     async function deleteProduct(id: number,) {
         console.log(id)
-    
+
         try {
             await api.delete(`products/${id}`);
             getItems();
@@ -93,8 +94,8 @@ export default function ProdutoList() {
                                     <Th color={'whiteAlpha.900'}>Id</Th>
                                     {/* <Th color={'whiteAlpha.900'}>Imagem</Th> */}
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
+                                    <Th color={'whiteAlpha.900'}>Descrição</Th>
                                     <Th color={'whiteAlpha.900'}>Preço</Th>
-
                                     <Th color={'whiteAlpha.900'}>Quantidade</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
@@ -103,13 +104,16 @@ export default function ProdutoList() {
                             <Tbody>
                                 {data.map((product) => (
                                     <Tr key={product.id}>
-                                           
+
                                         <Td> {product.id}</Td>
                                         <Td>
                                             <Text fontSize={14} color={'whiteAlpha.900'}>{product.nomeDoPrato}</Text>
 
                                         </Td>
-                                     
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{product.descricao}</Text>
+
+                                        </Td>
                                         <Td>
                                             <Text fontSize={14} color={'whiteAlpha.900'}>{product.valor}</Text>
                                         </Td>
@@ -138,7 +142,7 @@ export default function ProdutoList() {
                                                 size="sm"
                                                 fontSize="sm"
                                                 colorScheme="red"
-                                                onClick={()=> deleteProduct(product.id)}
+                                                onClick={() => deleteProduct(product.id)}
                                                 leftIcon={
                                                     <Icon
                                                         as={RiDeleteBinLine}

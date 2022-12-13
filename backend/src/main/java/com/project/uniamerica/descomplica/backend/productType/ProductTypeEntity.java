@@ -16,10 +16,14 @@ public class ProductTypeEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false, length = 45)
+    private String nome;
+
     public ProductTypeEntity() {
     }
 
-    public ProductTypeEntity(int id) {
+    public ProductTypeEntity(int id, String nome) {
         this.id = id;
+        this.nome = nome;
     }
 }

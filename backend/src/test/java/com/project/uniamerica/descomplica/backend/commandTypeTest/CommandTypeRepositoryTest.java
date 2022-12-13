@@ -25,7 +25,7 @@ class CommandTypeRepositoryTest {
     @Test
     public void createShouldPersistData(){
 
-        CommandTypeEntity commandType = new CommandTypeEntity(1);
+        CommandTypeEntity commandType = new CommandTypeEntity(1, "");
         this.commandTypeRepository.save(commandType);
         Assertions.assertThat(commandType.getId()).isEqualTo(1);
 
@@ -33,7 +33,7 @@ class CommandTypeRepositoryTest {
 
     @Test
     public void deleteShouldDeleteData(){
-        CommandTypeEntity commandType = new CommandTypeEntity(1);
+        CommandTypeEntity commandType = new CommandTypeEntity(1, "");
         this.commandTypeRepository.delete(commandType);
         Assertions.assertThat(commandTypeRepository.findById(commandType.getId())).isEmpty();
     }

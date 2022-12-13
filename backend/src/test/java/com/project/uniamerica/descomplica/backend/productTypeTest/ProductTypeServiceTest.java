@@ -32,7 +32,7 @@ public class ProductTypeServiceTest {
 
     @Test
     public void criarproductType() throws Exception {
-        ProductTypeEntity productTypeEntity = new ProductTypeEntity(1);
+        ProductTypeEntity productTypeEntity = new ProductTypeEntity(1, "");
         ObjectMapper mapper = new ObjectMapper();
 
         String json = mapper.writeValueAsString(productTypeEntity);

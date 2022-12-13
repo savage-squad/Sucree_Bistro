@@ -25,7 +25,7 @@ class ProductTypeRepositoryTest {
     @Test
     public void createShouldPersistData(){
 
-        ProductTypeEntity productType = new ProductTypeEntity(1);
+        ProductTypeEntity productType = new ProductTypeEntity(1, "");
         this.productTypeRepository.save(productType);
         Assertions.assertThat(productType.getId()).isEqualTo(1);
 
@@ -34,14 +34,14 @@ class ProductTypeRepositoryTest {
     @Test
     public void deleteShouldDeleteData(){
 
-        ProductTypeEntity productType = new ProductTypeEntity(1);
+        ProductTypeEntity productType = new ProductTypeEntity(1, "");
         this.productTypeRepository.delete(productType);
         Assertions.assertThat(productTypeRepository.findById(productType.getId())).isEmpty();
     }
     @Test
     public void updateShouldChangeAndPersistData(){
 
-        ProductTypeEntity productType = new ProductTypeEntity(1);
+        ProductTypeEntity productType = new ProductTypeEntity(1, "");
         productType.setId(3);
         this.productTypeRepository.save(productType);
         Assertions.assertThat(productType.getId()).isEqualTo(3);
