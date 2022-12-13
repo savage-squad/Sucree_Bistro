@@ -35,7 +35,7 @@ export default function WithBackgroundImage() {
                             fontWeight={700}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-                            "O prazer da comida é o único que e o melhor tempero da comida<br />  e a fome" 🫕
+                            "O prazer da comida é único, e o melhor tempero da comida<br />  e a fome" 🫕
                         </Text>
                         <Stack direction={'row'}>
                             <Button
