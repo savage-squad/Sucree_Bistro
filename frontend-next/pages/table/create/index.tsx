@@ -11,52 +11,66 @@ import {
     FormLabel,
     Select,
     Text,
+    Alert,
+    AlertIcon,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
-import { SideBar } from "../../../src/components/SideBar";
+import { useRouter } from 'next/router'
+
 import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
+import { api } from "../../services/api";
 
 
-const CreateMesaFormSchema = yup.object().shape({
-    nome: yup.string().required("nome é obrigatório"),
-});
+
 
 export default function CreateMesa() {
     const toast = useToast();
-    const [nome, setNome] = useState("");
+
+    const router = useRouter();
+
+    const [mesacol, setMesacol] = useState("");
+
+ 
+    const [error, setError] = useState(false);
+
+    async function onSubmit() {
+
+        try {
+            await api.post("orders", {
+                mesacol
+            }, {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("token"),
+                }
+            })
+
+            return router.push('/table')
+        } catch (error) {
+            console.log(error)
+            setError(true)
+        }
+    };
 
 
-    const { formState, register, handleSubmit } = useForm({
-        resolver: yupResolver(CreateMesaFormSchema),
-    });
+    const ShowAlertError = () => {
+        if (error) {
+            return (
+                <Alert status="error" mb={5}>
+                    <AlertIcon />
+                    Upzz !Não foi possível cadastrar a mesa / Tente novamente
+                </Alert>
+            );
+        }
+        return null;
+    };
 
-    const { errors } = formState;
-    // const createMesas = useCallback(async (data) => {
-    //   try {
-    //     await api.post("mesas", data);
-    //     toast({
-    //       title: "Endereço criado.",
-    //       status: "success",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast({
-    //       title: "Problema ao criar mesa",
-    //       status: "error",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   }
-    // }, []);
 
     return (
         <Box>
@@ -76,12 +90,11 @@ export default function CreateMesa() {
                         <VStack spacing="8">
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                                 <Input
-
-                                    label="Nome"
-
-                                    {...register("nome")}
-                                    value={nome}
-                                    onChange={(event) => setNome(event.target.value)}
+                                    label="Mesa"
+                                    name="mesacol"
+                                    type="text"
+                                    isRequired={true}
+                                    onChange={(e) => setMesacol(e.target.value)}
                                 />
 
                             </SimpleGrid>
@@ -98,7 +111,8 @@ export default function CreateMesa() {
                                 <Button
                                     type="submit"
                                     colorScheme="blue"
-                                    isLoading={formState.isSubmitting}
+                                    onClick={
+                                        onSubmit}
                                 >
                                     Criar
                                 </Button>

@@ -21,35 +21,40 @@ import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
 import SidebarWithHeader from "../../src/components/container";
 import FooterComponents from "../../src/components/footer";
 import { Header } from "../../src/components/hearder";
-import NavComponents from "../../src/components/nav";
-import { SideBar } from "../../src/components/SideBar";
+import { api } from "../services/api";
+
+type Pedidos = {
+    id: number;
+    product_id: number;
+    status_id: number;
+}
 
 export default function PedidoList() {
-    const [data, setData] = useState([]);
-    const [pedidoId, setPedidoId] = useState(0);
+    const [data, setData] = useState<Pedidos[]>([]);
 
-    // async function deleteEndereco(pedido) {
-    //   setPedidoId(pedido.id);
-    //   console.log(pedidoId);
-    //   try {
-    //     await api.delete(`enderecos/${pedidoId}`);
-    //     getItems();
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
-    // async function getItems() {
-    //   try {
-    //     const response = await api.get("products");
-    //     setData(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    async function deletePedido(id: number,) {
+        console.log(id)
+    
+        try {
+            await api.delete(`orders/${id}`);
+            getItems();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async function getItems() {
+        try {
+            const response = await api.get("orders");
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+   
 
-    // useEffect(() => {
-    //   getItems();
-    // }, []);
+    useEffect(() => {
+        getItems();
+    }, []);
 
     return (
         <Box>
@@ -65,7 +70,7 @@ export default function PedidoList() {
                                 </Text>
 
                             </Heading>
-                            <Link href="/enderecos/create" passHref>
+                            <Link href="/orders/create" passHref>
                                 <Button
                                     as="a"
                                     size="sm"
@@ -81,33 +86,33 @@ export default function PedidoList() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
-                                    <Th color={'whiteAlpha.900'}>Nome</Th>
-                                    <Th color={'whiteAlpha.900'}>Preço</Th>
-                                    <Th color={'whiteAlpha.900'}>Descrição</Th>
-                                    <Th color={'whiteAlpha.900'}>Status</Th>
+                                    <Th color={'whiteAlpha.900'}>id</Th>
+                                    <Th color={'whiteAlpha.900'}>Id_Produto</Th>
+                             
+                                    <Th color={'whiteAlpha.900'}>Id_Status</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {/* {data.map((endereco) => ( */}
-                                <Tr>
+                            {data.map((order) => (
+                                <Tr key={order.id}>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Picanha</Text>
+                                    {order.id}
 
                                     </Td>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>54.00 R$</Text>
+                                        <Text fontSize={14} color={'whiteAlpha.900'}>{order.product_id}</Text>
                                     </Td>
                                     <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Pronto a Servir</Text>
+                                        <Text fontSize={14} color={'whiteAlpha.900'}>{order.status_id}</Text>
                                     </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}> Pendente</Text>
-                                    </Td>
+                                
 
                                     <Td>
-                                        <Link href={`/#`}>
+                                        <Link 
+                                        href={`/orders/edit/${order.id}`}
+                                        >
                                             <Button
                                                 as="a"
                                                 size="sm"
@@ -125,7 +130,7 @@ export default function PedidoList() {
                                             size="sm"
                                             fontSize="sm"
                                             colorScheme="red"
-                                            // onClick={}
+                                            onClick={() => deletePedido(order.id)}
                                             leftIcon={
                                                 <Icon
                                                     as={RiDeleteBinLine}
@@ -138,7 +143,7 @@ export default function PedidoList() {
                                         </Button>
                                     </Td>
                                 </Tr>
-                                {/* ))} */}
+                                ))} 
                             </Tbody>
                         </Table>
                     </Box>

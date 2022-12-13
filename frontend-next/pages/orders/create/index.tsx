@@ -17,7 +17,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
-import { SideBar } from "../../../src/components/SideBar";
+
 import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
@@ -44,26 +44,7 @@ export default function CreatePedido() {
         resolver: yupResolver(CreatePedidoFormSchema),
     });
 
-    const { errors } = formState;
-    // const createPedidos = useCallback(async (data) => {
-    //   try {
-    //     await api.post("predidos", data);
-    //     toast({
-    //       title: "Endereço criado.",
-    //       status: "success",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast({
-    //       title: "Problema ao criar predido",
-    //       status: "error",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   }
-    // }, []);
+
 
     return (
         <Box>
@@ -113,7 +94,7 @@ export default function CreatePedido() {
                                 <Select
                                     bg="white"
                                     alignContent={'center'}
-        
+
                                     h="50px"
                                     colorScheme={'whiteAlpha.900'}
                                     id="category"

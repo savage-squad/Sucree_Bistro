@@ -26,11 +26,22 @@ import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
 import { useRouter } from 'next/router'
 import axios from "axios";
+import { get } from "http";
+
+type Product = {
+    id: number;
+    nomeDoPrato: "string",
+    valor: number,
+    tipoProdutoId: number
+}
 
 
-export default function CreateProduto() {
+export default function EditProduto() {
     const toast = useToast();
     const router = useRouter();
+
+    const [product, setProduct] = useState({} as Product);
+    const [id, setId] = useState(0);
 
     const [nomeDoPrato, setNomeDoPrato] = useState("");
     const [valor, setValor] = useState(0);
@@ -39,10 +50,47 @@ export default function CreateProduto() {
 
     const [error, setError] = useState(false);
 
+    const getProduct = useCallback(async () => {
+        const response = await api.get(`products/${id}`,
+            {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("token"),
+                }
+            }
+        );
+        setProduct(response.data);
+    }, [id]);
+
+    useEffect(() => {
+        if (router && router.query) {
+            {
+                setId((Number(router.query.id)))
+            }
+        }
+    }, [router]);
+
+
+
+    useEffect(() => {
+        if (id) {
+            getProduct()
+        }
+    }, [id, getProduct]);
+
+    useEffect(() => {
+        if (product) {
+            setNomeDoPrato(product.nomeDoPrato)
+            setValor(product.valor)
+            setTipoProdutoId(product.tipoProdutoId)
+
+        }
+    }, [product, setNomeDoPrato, setValor, setTipoProdutoId]);
+
+
     async function onSubmit() {
-        const token = localStorage.getItem("token");
+       
         try {
-            await api.post("products", {
+            await api.put(`products/${id}`, {
                 nomeDoPrato,
                 valor,
                 tipoProdutoId
@@ -83,7 +131,7 @@ export default function CreateProduto() {
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
-                                Criar de Produtos
+                                Editar de Produtos
 
                             </Text>
                         </Heading>

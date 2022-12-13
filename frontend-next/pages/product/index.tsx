@@ -37,6 +37,7 @@ export default function ProdutoList() {
     
 
     async function deleteProduct(id: number,) {
+        console.log(id)
     
         try {
             await api.delete(`products/${id}`);
@@ -90,11 +91,11 @@ export default function ProdutoList() {
                             <Thead>
                                 <Tr>
                                     <Th color={'whiteAlpha.900'}>Id</Th>
-                                    <Th color={'whiteAlpha.900'}>Imagem</Th>
+                                    {/* <Th color={'whiteAlpha.900'}>Imagem</Th> */}
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
                                     <Th color={'whiteAlpha.900'}>Preço</Th>
 
-                                    <Th color={'whiteAlpha.900'}>Categoria</Th>
+                                    <Th color={'whiteAlpha.900'}>Quantidade</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
@@ -102,12 +103,13 @@ export default function ProdutoList() {
                             <Tbody>
                                 {data.map((product) => (
                                     <Tr key={product.id}>
-                                        <Td>{product.id}</Td>
-                                        <Td></Td>
+                                           
+                                        <Td> {product.id}</Td>
                                         <Td>
                                             <Text fontSize={14} color={'whiteAlpha.900'}>{product.nomeDoPrato}</Text>
 
                                         </Td>
+                                     
                                         <Td>
                                             <Text fontSize={14} color={'whiteAlpha.900'}>{product.valor}</Text>
                                         </Td>
