@@ -47,7 +47,7 @@ export default function WithBackgroundImage() {
                                 Administrador
                             </Button>
                             <Button
-                                onClick={() => router.push('/auth/client/register')}
+                                onClick={() => router.push('/homeClient')}
                                 bg={'whiteAlpha.300'}
                                 rounded={'full'}
                                 color={'white'}
