@@ -10,6 +10,7 @@ import {
 import FooterComponents from '../../src/components/footer';
 import WithSubnavigation from '../../src/components/infSlack';
 import { useRouter } from 'next/router'
+import background from '../../public/background.jpg';
 
 export default function WithBackgroundImage() {
     const router = useRouter()
@@ -20,7 +21,7 @@ export default function WithBackgroundImage() {
                 w={'full'}
                 h={'80vh'}
                 backgroundImage={
-                    'https://i.pinimg.com/564x/a3/25/f0/a325f0dc5bacd10cf5fdae480980b13f.jpg'
+                    'https://bestlifeonline.com/wp-content/uploads/sites/3/2017/12/fine-dining-cuisine-food.jpg?quality=82&strip=all'
                 }
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}>

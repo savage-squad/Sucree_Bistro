@@ -34,7 +34,7 @@ public class CommandResource {
 
     @PostMapping
     @ApiOperation(value="Cadastra comanda")
-    public ResponseEntity<Object> saveCommand(@RequestBody @Valid CommandDto commandDto) {
+    public ResponseEntity<Object> saveCommand(@RequestBody @Valid CommandEntity commandDto) {
 
         var commandEntity = new CommandEntity();
         BeanUtils.copyProperties(commandDto, commandEntity);

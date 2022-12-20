@@ -93,6 +93,7 @@ export default function CreateProduto() {
                         <VStack spacing="8">
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                                 <Input
+                                    label="Nome do Prato"
                                     name="name"
                                     placeholder="Nome da comida"
                                     type="text"
@@ -101,6 +102,7 @@ export default function CreateProduto() {
                                     onChange={(e) => setNomeDoPrato(e.target.value)}
                                 />
                                 <Input
+                                    label="Preço"
                                     name="price"
                                     placeholder="Preço"
                                     type="number"
@@ -110,7 +112,7 @@ export default function CreateProduto() {
                                     pattern="[0-9]*"
                                 />
                                 {<Input
-
+                                    label="Categoria Id"
                                     name="tipoProdutoId"
                                     colorScheme={'whiteAlpha.900'}
                                     placeholder="Categoria"
@@ -123,7 +125,7 @@ export default function CreateProduto() {
                             </SimpleGrid>
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
                                 <Input
-
+                                    label="Descrição"
                                     name="description"
                                     placeholder="descrição"
                                     type="text"

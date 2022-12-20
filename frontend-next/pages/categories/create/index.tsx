@@ -89,7 +89,7 @@ export default function CreateCategoria() {
                             </SimpleGrid>
 
                         </VStack>
-                        <SelectFileComponents />
+
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
                                 <Link href="/#">

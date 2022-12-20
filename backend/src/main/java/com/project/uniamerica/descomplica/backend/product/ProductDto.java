@@ -1,5 +1,6 @@
 package com.project.uniamerica.descomplica.backend.product;
 
+import com.project.uniamerica.descomplica.backend.productType.ProductTypeDto;
 import lombok.Data;
 @Data
 public class ProductDto {
@@ -7,5 +8,6 @@ public class ProductDto {
     private String nomeDoPrato;
     private String descricao;
     private float valor;
-    private int tipoProdutoId;
+    private boolean ativo;
+    private ProductTypeDto categoria;
 }

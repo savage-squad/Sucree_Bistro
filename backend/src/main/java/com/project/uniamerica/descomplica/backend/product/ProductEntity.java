@@ -1,6 +1,10 @@
 package com.project.uniamerica.descomplica.backend.product;
 
+import com.project.uniamerica.descomplica.backend.productType.ProductTypeDto;
+import com.project.uniamerica.descomplica.backend.productType.ProductTypeEntity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,20 +16,31 @@ public class ProductEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Getter @Setter
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false, length = 45)
+    @Getter @Setter
+    @Column(nullable = false, length = 45, unique = true)
     private String nomeDoPrato;
 
+    @Getter @Setter
     @Column(nullable = false, length = 100)
     private String descricao;
 
+    @Getter @Setter
     @Column(nullable = false, length = 45)
     private float valor;
 
+
+    @Getter @Setter
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private ProductTypeEntity categoria;
+
+    @Getter @Setter
     @Column(nullable = false, length = 45)
-    private int tipoProdutoId;
+    private boolean ativo;
 
     public ProductEntity() {
     }

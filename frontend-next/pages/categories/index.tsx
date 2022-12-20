@@ -21,8 +21,7 @@ import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
 import SidebarWithHeader from "../../src/components/container";
 import FooterComponents from "../../src/components/footer";
 import { Header } from "../../src/components/hearder";
-import NavComponents from "../../src/components/nav";
-import { SideBar } from "../../src/components/SideBar";
+
 
 export default function CategoriaList() {
     const [data, setData] = useState([]);
@@ -81,7 +80,6 @@ export default function CategoriaList() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
-                                    <Th color={'whiteAlpha.900'}>Imagem</Th>
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
@@ -90,12 +88,6 @@ export default function CategoriaList() {
                             <Tbody>
                                 {/* {data.map((endereco) => ( */}
                                 <Tr>
-                                    <Td><Image
-                                        borderRadius={5}
-                                        boxSize='50px'
-                                        src='https://frigorificoarvoredo.com.br/blog/wp-content/uploads/2018/09/picanha.jpg'
-                                        alt='Dan Abramov'
-                                    /></Td>
                                     <Td>
                                         <Text fontSize={14} color={'whiteAlpha.900'}>Carnes</Text>
 
