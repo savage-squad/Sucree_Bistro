@@ -10,7 +10,6 @@ import {
 import FooterComponents from '../../src/components/footer';
 import WithSubnavigation from '../../src/components/infSlack';
 import { useRouter } from 'next/router'
-import background from '../../public/background.jpg';
 
 export default function WithBackgroundImage() {
     const router = useRouter()
@@ -21,7 +20,7 @@ export default function WithBackgroundImage() {
                 w={'full'}
                 h={'80vh'}
                 backgroundImage={
-                    'https://bestlifeonline.com/wp-content/uploads/sites/3/2017/12/fine-dining-cuisine-food.jpg?quality=82&strip=all'
+                    'https://i.pinimg.com/564x/a3/25/f0/a325f0dc5bacd10cf5fdae480980b13f.jpg'
                 }
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}>
@@ -36,7 +35,7 @@ export default function WithBackgroundImage() {
                             fontWeight={700}
                             lineHeight={1.2}
                             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-                            "O prazer da comida é único, e o melhor tempero da comida<br />  e a fome" 🫕
+                            "O prazer da comida é o único que e o melhor tempero da comida<br />  e a fome" 🫕
                         </Text>
                         <Stack direction={'row'}>
                             <Button
@@ -48,7 +47,7 @@ export default function WithBackgroundImage() {
                                 Administrador
                             </Button>
                             <Button
-                                onClick={() => router.push('/homeClient')}
+                                onClick={() => router.push('/auth/client/register')}
                                 bg={'whiteAlpha.300'}
                                 rounded={'full'}
                                 color={'white'}

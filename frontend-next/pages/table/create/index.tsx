@@ -35,16 +35,19 @@ export default function CreateMesa() {
 
     const router = useRouter();
 
-    const [mesacol, setMesacol] = useState("");
+    const [referenciaMesa, setReferenciaMesa] = useState("");
+    const [status, setStatus] = useState("");
 
- 
+
+
     const [error, setError] = useState(false);
 
     async function onSubmit() {
 
         try {
-            await api.post("orders", {
-                mesacol
+            await api.post("tables", {
+                referenciaMesa,
+                status
             }, {
                 headers: {
                     "authorization": "Bearer " + localStorage.getItem("token"),
@@ -88,19 +91,39 @@ export default function CreateMesa() {
                         </Heading>
                         <Divider my="6" borderColor="whiteAlpha.200" />
                         <VStack spacing="8">
-                            <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
+                            <SimpleGrid minChildWidth="240px" spacing="8" width="70%">
                                 <Input
-                                    label="Mesa"
-                                    name="mesacol"
+                                    label="Referencia da Mesa"
+                                    name="referenciaMessa"
+                                    placeholder="nome da mesa"
                                     type="text"
                                     isRequired={true}
-                                    onChange={(e) => setMesacol(e.target.value)}
+                                    onChange={(e) => setReferenciaMesa(e.target.value)}
                                 />
+
+                                <Select style={{ marginTop: "30px" }}
+                                    bg="white"
+                                    alignContent={'center'}
+                                    h="50px"
+                                    colorScheme={'whiteAlpha.900'}
+                                    id="category"
+                                    name="status"
+                                    autoComplete="status"
+                                    placeholder="Selecione o status"
+                                    focusBorderColor="brand.400"
+                                    shadow="sm"
+                                    size="sm"
+                                    w="full"
+                                    rounded="md"
+                                    onChange={(event) => setStatus(event.target.value)}
+                                >
+                                    <option value="ocupado">Ocupado</option>
+                                    <option value="vazio">Vazio</option>
+                                </Select>
 
                             </SimpleGrid>
 
                         </VStack>
-                        <SelectFileComponents />
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
                                 <Link href="/enderecos">
@@ -114,7 +137,7 @@ export default function CreateMesa() {
                                     onClick={
                                         onSubmit}
                                 >
-                                    Criar
+                                    Criar mesa
                                 </Button>
                             </HStack>
                         </Flex>

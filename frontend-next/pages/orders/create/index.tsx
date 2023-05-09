@@ -22,6 +22,8 @@ import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
+import { api } from "../../services/api";
+import router from "next/router";
 
 
 const CreatePedidoFormSchema = yup.object().shape({
@@ -32,18 +34,107 @@ const CreatePedidoFormSchema = yup.object().shape({
 
 });
 
+type Produtos = {
+    id: number;
+    nomeDoPrato: "string",
+    descricao: "string",
+    ativo: boolean,
+    valor: "float",
+    categoria: {
+        nome: "string",
+    }
+}
+
+type Comandas = {
+    id: number;
+    cliente_id: number;
+    table: {
+        id: number;
+        referenciaMesa: string;
+        status: string;
+    };
+}
+
 export default function CreatePedido() {
     const toast = useToast();
-    const [nome, setNome] = useState("");
-    const [descricao, setDescricao] = useState("");
+
+    const [observacao, setObservacao] = useState("");
     const [status, setStatus] = useState("");
-    const [preco, setPreco] = useState("");
-    const [imagem, setImagem] = useState("");
+    const [total, setTotal] = useState(0);
+    const [command, setComanda] = useState({});
+    const [product, setProduto] = useState({});
+
+    const [comandaLista, setComandaLista] = useState<Comandas[]>([]);
+    const [produtosLista, setProdutosLista] = useState<Produtos[]>([]);
+
+
+
+    async function setComandaSelected(comanda: React.ChangeEvent<HTMLSelectElement>) {
+        for (var i = 0; i < comandaLista.length; i++) {
+            if (Number(comanda.target.value) == comandaLista[i].id) {
+                setComanda(comandaLista[i])
+                console.log(comandaLista[i])
+            }
+        }
+    }
+
+    async function setProdutoSelected(produto: React.ChangeEvent<HTMLSelectElement>) {
+        for (var i = 0; i < produtosLista.length; i++) {
+            if (Number(produto.target.value) == produtosLista[i].id) {
+                setProduto(produtosLista[i])
+            }
+        }
+    }
 
     const { formState, register, handleSubmit } = useForm({
         resolver: yupResolver(CreatePedidoFormSchema),
     });
 
+    async function getCommands() {
+        try {
+            const response = await api.get("commands");
+            setComandaLista(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function getProducts() {
+        try {
+            const response = await api.get("products");
+            setProdutosLista(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const [error, setError] = useState(false);
+
+    async function onSubmit() {
+        const token = localStorage.getItem("token");
+        try {
+            await api.post("orders", {
+                observacao,
+                total,
+                product,
+                command,
+                status,
+            }, {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("token"),
+                }
+            })
+
+            return router.push('/orders')
+        } catch (error) {
+            console.log(error)
+            setError(true)
+        }
+    };
+
+    useEffect(() => {
+        getCommands();
+        getProducts();
+    }, []);
 
 
     return (
@@ -62,59 +153,71 @@ export default function CreatePedido() {
                         </Heading>
                         <Divider my="6" borderColor="whiteAlpha.200" />
                         <VStack spacing="8">
-                            <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
-                                <Input
+                            <SimpleGrid minChildWidth="240px" spacing="8" width="30%" >
 
-                                    placeholder="Nome"
-
-                                    {...register("nome")}
-                                    value={nome}
-                                    onChange={(event) => setNome(event.target.value)}
-                                />
-                                <Input
-
-                                    placeholder="Preço"
-                                    type="currency"
-
-                                    {...register("preco")}
-                                    value={preco}
-                                    onChange={(event) => setPreco((event.target.value))}
-                                />
-                            </SimpleGrid>
-                            <SimpleGrid minChildWidth="240px" spacing="8" width="100%" >
                                 <Input
                                     colorScheme={'whiteAlpha.900'}
-
-                                    placeholder="Descrição do pedido"
-
-                                    {...register("descricao")}
-                                    value={descricao}
-
+                                    label="Observação"
+                                    placeholder="Observação ex: sem cebola"
+                                    {...register("observacao")}
+                                    value={observacao}
+                                    onChange={(event) => setObservacao(event.target.value)}
                                 />
+
+                                <Input
+                                    placeholder="Preço"
+                                    type="currency"
+                                    label="valor total"
+                                    {...register("total")}
+                                    value={total}
+                                    onChange={(event) => setTotal(Number(event.target.value))}
+                                /><label>comanda</label>
+                                <select style={{ height: "40px", borderRadius: "8px" }} id="command-input" className="select-command" name="coin" onChange={(e) => setComandaSelected(e)}>
+                                    {comandaLista.map((command) => {
+                                        return (
+                                            <option key={command.id} value={command.id}>
+                                                {command.id}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                                <label>Status</label>
                                 <Select
                                     bg="white"
                                     alignContent={'center'}
-
                                     h="50px"
                                     colorScheme={'whiteAlpha.900'}
                                     id="category"
                                     name="status"
                                     autoComplete="status"
-                                    placeholder="Selecione a status"
+                                    placeholder="Selecione o status"
                                     focusBorderColor="brand.400"
                                     shadow="sm"
                                     size="sm"
                                     w="full"
-                                    rounded="md">
-                                    <option>Pendente</option>
-                                    <option>Concluido</option>
-                                    <option>Cancelado</option>
+                                    rounded="md"
+                                    onChange={(event) => setStatus(event.target.value)}
+                                >
+                                    <option value="pendente">Pendente</option>
+                                    <option value="aceite">Concluido</option>
+                                    <option value="concluido">Cancelado</option>
+                                    <option value="cancelado">Cancelado</option>
+
                                 </Select>
 
-
+                                <label>Seleccionar um produto</label>
+                                <select style={{ height: "40px", borderRadius: "8px" }} id="product-input" className="select-product" name="coin" onChange={(e) => setProdutoSelected(e)}>
+                                    {produtosLista.map((produto) => {
+                                        return (
+                                            <option key={produto.id} value={produto.id}>
+                                                {produto.nomeDoPrato}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
                             </SimpleGrid>
-                        </VStack>
 
+                        </VStack>
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
                                 <Link href="/orders">
@@ -126,6 +229,7 @@ export default function CreatePedido() {
                                     type="submit"
                                     colorScheme="teal"
                                     isLoading={formState.isSubmitting}
+                                    onClick={onSubmit}
                                 >
                                     Criar
                                 </Button>
@@ -139,3 +243,5 @@ export default function CreatePedido() {
         </Box>
     );
 }
+
+

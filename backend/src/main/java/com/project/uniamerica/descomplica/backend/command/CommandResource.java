@@ -1,6 +1,7 @@
 package com.project.uniamerica.descomplica.backend.command;
 
 
+import com.project.uniamerica.descomplica.backend.table.TableEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -36,9 +37,20 @@ public class CommandResource {
     @ApiOperation(value="Cadastra comanda")
     public ResponseEntity<Object> saveCommand(@RequestBody @Valid CommandEntity commandDto) {
 
-        var commandEntity = new CommandEntity();
-        BeanUtils.copyProperties(commandDto, commandEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(commandService.save(commandEntity));
+        CommandEntity command = new CommandEntity();
+        TableEntity table = new TableEntity();
+
+        table.setId(commandDto.getTable().getId());
+        table.setStatus(commandDto.getTable().getStatus());
+        table.setReferenciaMesa(commandDto.getTable().getReferenciaMesa());
+
+        command.setId(commandDto.getId());
+        command.setCliente_id(commandDto.getCliente_id());
+        command.setTable(table);
+
+        CommandEntity commandEntity =  commandService.save(command);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(commandEntity);
     }
 
 

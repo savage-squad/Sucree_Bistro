@@ -11,54 +11,66 @@ import {
     FormLabel,
     Select,
     Text,
+    Alert,
+    AlertIcon,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
-import { SideBar } from "../../../src/components/SideBar";
+import { api } from "../../services/api";
 import { Input } from "../../../src/components/input";
 import SidebarWithHeader from "../../../src/components/container";
 import FooterComponents from "../../../src/components/footer";
 import SelectFileComponents from "../../../src/components/filePhoto";
+import { useRouter } from 'next/router'
+import axios from "axios";
 
 
-const CreateCategoriaFormSchema = yup.object().shape({
-    nome: yup.string().required("nome é obrigatório"),
-
-
-});
-
-export default function CreateCategoria() {
+export default function CreateProduto() {
     const toast = useToast();
-    const [nome, setNome] = useState("");
-    const [imagem, setImagem] = useState("");
+    const router = useRouter();
 
-    const { formState, register, handleSubmit } = useForm({
-        resolver: yupResolver(CreateCategoriaFormSchema),
-    });
+    const [name,setName] = useState("");
+    const [id,setId] = useState(0);
 
-    const { errors } = formState;
-    // const createCategorias = useCallback(async (data) => {
-    //   try {
-    //     await api.post("categorias", data);
-    //     toast({
-    //       title: "Endereço criado.",
-    //       status: "success",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast({
-    //       title: "Problema ao criar categoria",
-    //       status: "error",
-    //       duration: 3000,
-    //       isClosable: true,
-    //     });
-    //   }
-    // }, []);
+
+
+    const [error, setError] = useState(false);
+
+    async function onSubmit() {
+        const token = localStorage.getItem("token");
+        try {
+            await api.post("productTypes", {
+                name,
+               
+            }, {
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("token"),
+                }
+            })
+
+            return router.push('/categories')
+        } catch (error) {
+            console.log(error)
+            setError(true)
+        }
+    };
+
+
+    const ShowAlertError = () => {
+        if (error) {
+            return (
+                <Alert status="error" mb={5}>
+                    <AlertIcon />
+                    Upzz !Não foi possível cadastrar o prato da comida / Tente novamente
+                </Alert>
+            );
+        }
+        return null;
+    };
+
 
     return (
         <Box>
@@ -66,11 +78,11 @@ export default function CreateCategoria() {
                 <Flex w="100%" my="6" mx="auto" maxWidth={1480} px="6">
                     <Box
                         flex="1" borderRadius={8} bg="#483D8B" p="8"
-                    // onSubmit={handleSubmit(createCategorias)}
+
                     >
                         <Heading fontSize="lg" fontWeight="normal">
                             <Text color="whiteAlpha.900" >
-                                Criar de Categorias
+                                Criar de categoria
 
                             </Text>
                         </Heading>
@@ -78,31 +90,32 @@ export default function CreateCategoria() {
                         <VStack spacing="8">
                             <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                                 <Input
-
-                                    label="Nome"
-
-                                    {...register("nome")}
-                                    value={nome}
-                                    onChange={(event) => setNome(event.target.value)}
+                                    name="name"
+                                    placeholder="Nome da categoria comida"
+                                    type="text"
+                                    isRequired={true}
+                                    onChange={(e) => setName(e.target.value)}
+                                    value={name}
                                 />
-
                             </SimpleGrid>
-
+                           
+                           
                         </VStack>
-
+                        {/* <SelectFileComponents /> */}
                         <Flex mt="8" justify="flex-end">
                             <HStack spacing="4">
-                                <Link href="/#">
+                                <Link href="/product">
                                     <Button as="a" colorScheme="whiteAlpha">
                                         Cancelar
                                     </Button>
                                 </Link>
                                 <Button
                                     type="submit"
-                                    colorScheme="blue"
-                                    isLoading={formState.isSubmitting}
+                                    colorScheme="teal"
+                                    onClick={
+                                        onSubmit}
                                 >
-                                    Criar
+                                    Criar produto
                                 </Button>
                             </HStack>
                         </Flex>

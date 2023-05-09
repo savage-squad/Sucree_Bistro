@@ -28,13 +28,17 @@ type Product = {
     id: number;
     nomeDoPrato: "string",
     descricao: "string",
-    valor: number,
-    tipoProdutoId: number
+    ativo: boolean,
+    valor: "float",
+    categoria: {
+        nome: "string",
+    }
 }
 
 
 export default function ProdutoList() {
     const [data, setData] = useState<Product[]>([]);
+
 
 
     async function deleteProduct(id: number,) {
@@ -95,8 +99,10 @@ export default function ProdutoList() {
                                     {/* <Th color={'whiteAlpha.900'}>Imagem</Th> */}
                                     <Th color={'whiteAlpha.900'}>Nome</Th>
                                     <Th color={'whiteAlpha.900'}>Descrição</Th>
+                                    <Th color={'whiteAlpha.900'}>Ativo</Th>
                                     <Th color={'whiteAlpha.900'}>Preço</Th>
-                                    <Th color={'whiteAlpha.900'}>Quantidade</Th>
+                                    <Th color={'whiteAlpha.900'}>Categoria</Th>
+
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
@@ -106,20 +112,29 @@ export default function ProdutoList() {
                                     <Tr key={product.id}>
 
                                         <Td> {product.id}</Td>
+                                        {/* <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>imagem</Text>
+
+                                        </Td> */}
                                         <Td>
                                             <Text fontSize={14} color={'whiteAlpha.900'}>{product.nomeDoPrato}</Text>
 
                                         </Td>
+
                                         <Td>
                                             <Text fontSize={14} color={'whiteAlpha.900'}>{product.descricao}</Text>
-
-                                        </Td>
-                                        <Td>
-                                            <Text fontSize={14} color={'whiteAlpha.900'}>{product.valor}</Text>
                                         </Td>
 
                                         <Td>
-                                            <Text fontSize={14} color={'whiteAlpha.900'}> {product.tipoProdutoId}</Text>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}> {String(product.ativo)}</Text>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>R$ {product.valor}</Text>
+
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{product.categoria.nome}</Text>
+
                                         </Td>
 
                                         <Td>

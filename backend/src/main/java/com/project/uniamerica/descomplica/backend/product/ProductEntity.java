@@ -21,7 +21,7 @@ public class ProductEntity implements Serializable {
     private int id;
 
     @Getter @Setter
-    @Column(nullable = false, length = 45, unique = true)
+    @Column(nullable = false, length = 45)
     private String nomeDoPrato;
 
     @Getter @Setter
@@ -34,7 +34,7 @@ public class ProductEntity implements Serializable {
 
 
     @Getter @Setter
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE })
     @JoinColumn(name = "categoria_id")
     private ProductTypeEntity categoria;
 

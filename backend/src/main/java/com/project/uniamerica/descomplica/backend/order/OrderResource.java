@@ -69,6 +69,7 @@ public class OrderResource {
         requestEntity.setObservacao(orderDto.getObservacao());
         requestEntity.setTotal(orderDto.getTotal());
         requestEntity.setProduct(product);
+
        OrderEntity orderEntity =  orderService.save(requestEntity);
 
 

@@ -25,8 +25,17 @@ import { api } from "../services/api";
 
 type Pedidos = {
     id: number;
-    product_id: number;
-    status_id: number;
+    command: {
+        in: number,
+        cliente_id: number,
+    };
+    total: number;
+    status: string;
+    observacao: string;
+    product: {
+        id: number;
+        nomeDoPrato: string;
+    }
 }
 
 export default function PedidoList() {
@@ -34,7 +43,7 @@ export default function PedidoList() {
 
     async function deletePedido(id: number,) {
         console.log(id)
-    
+
         try {
             await api.delete(`orders/${id}`);
             getItems();
@@ -50,7 +59,7 @@ export default function PedidoList() {
             console.log(error);
         }
     }
-   
+
 
     useEffect(() => {
         getItems();
@@ -87,63 +96,61 @@ export default function PedidoList() {
                             <Thead>
                                 <Tr>
                                     <Th color={'whiteAlpha.900'}>id</Th>
-                                    <Th color={'whiteAlpha.900'}>Id_Produto</Th>
-                             
-                                    <Th color={'whiteAlpha.900'}>Id_Status</Th>
+                                    <Th color={'whaiteAlpha.900'}>observacao</Th>
+                                    <Th color={'whiteAlpha.900'}>status</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                            {data.map((order) => (
-                                <Tr key={order.id}>
-                                    <Td>
-                                    {order.id}
+                                {data.map((order) => (
+                                    <Tr key={order.id}>
 
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>{order.product_id}</Text>
-                                    </Td>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>{order.status_id}</Text>
-                                    </Td>
-                                
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{order.id}</Text>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{order.observacao}</Text>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{order.status}</Text>
+                                        </Td>
 
-                                    <Td>
-                                        <Link 
-                                        href={`/orders/edit/${order.id}`}
-                                        >
+                                        <Td>
+                                            <Link
+                                                href={`/orders/edit/${order.id}`}
+                                            >
+                                                <Button
+                                                    as="a"
+                                                    size="sm"
+                                                    fontSize="sm"
+                                                    colorScheme="yellow"
+                                                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                                                >
+                                                    Editar
+                                                </Button>
+                                            </Link>
+                                        </Td>
+                                        <Td>
                                             <Button
                                                 as="a"
                                                 size="sm"
                                                 fontSize="sm"
-                                                colorScheme="yellow"
-                                                leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                                            >
-                                                Editar
-                                            </Button>
-                                        </Link>
-                                    </Td>
-                                    <Td>
-                                        <Button
-                                            as="a"
-                                            size="sm"
-                                            fontSize="sm"
-                                            colorScheme="red"
-                                            onClick={() => deletePedido(order.id)}
-                                            leftIcon={
-                                                <Icon
-                                                    as={RiDeleteBinLine}
-                                                    fontSize="16"
+                                                colorScheme="red"
+                                                onClick={() => deletePedido(order.id)}
+                                                leftIcon={
+                                                    <Icon
+                                                        as={RiDeleteBinLine}
+                                                        fontSize="16"
 
-                                                />
-                                            }
-                                        >
-                                            Excluir
-                                        </Button>
-                                    </Td>
-                                </Tr>
-                                ))} 
+                                                    />
+                                                }
+                                            >
+                                                Excluir
+                                            </Button>
+                                        </Td>
+                                    </Tr>
+                                ))}
                             </Tbody>
                         </Table>
                     </Box>

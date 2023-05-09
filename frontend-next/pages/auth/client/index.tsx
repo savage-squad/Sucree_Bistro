@@ -5,12 +5,19 @@ import {
     Flex,
     FormControl,
     FormLabel,
+    Heading,
     HStack,
     Icon,
     Input,
     Link,
     Switch,
+    Table,
+    Tbody,
+    Td,
     Text,
+    Th,
+    Thead,
+    Tr,
     useColorModeValue,
 } from "@chakra-ui/react";
 // Assets
@@ -19,6 +26,7 @@ import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { useRouter } from 'next/router'
 import FooterComponents from "../../../src/components/footer";
+import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
 
 function LoginClient() {
     const router = useRouter()
@@ -64,162 +72,108 @@ function LoginClient() {
                     mt='10px'
                     mb='26px'
                     w={{ base: "90%", sm: "60%", lg: "40%", xl: "30%" }}>
-                    Use estes formulários incríveis para fazer login ou criar uma nova conta em seu projeto
-                    de graça.
+                 Está listá é dos clientes no sistema, para cadastrar um novo cliente clique no botão "Cadastrar novo"
                 </Text>
             </Flex>
             <Flex alignItems='center' justifyContent='center' mb='60px' mt='20px'>
-                <Flex
-                    direction='column'
-                    w='445px'
-                    background='transparent'
-                    borderRadius='15px'
-                    p='40px'
-                    mx={{ base: "100px" }}
-                    bg={bgColor}
-                    boxShadow='0 20px 27px 0 rgb(0 0 0 / 5%)'>
-                    <Text
-                        fontSize='xl'
-                        color={textColor}
-                        fontWeight='bold'
-                        textAlign='center'
-                        mb='22px'>
-                        Iniciar a secção com
-                    </Text>
-                    <HStack spacing='15px' justify='center' mb='22px'>
-                        <Flex
-                            justify='center'
-                            align='center'
-                            w='75px'
-                            h='75px'
-                            borderRadius='15px'
-                            border='1px solid lightgray'
-                            cursor='pointer'
-                            transition='all .25s ease'
-                            _hover={{ filter: "brightness(120%)", bg: bgIcons }}>
-                            <Link href='#'>
-                                <Icon
-                                    as={FaFacebook}
-                                    w='30px'
-                                    h='30px'
-                                    _hover={{ filter: "brightness(120%)" }}
-                                />
-                            </Link>
-                        </Flex>
-                        <Flex
-                            justify='center'
-                            align='center'
-                            w='75px'
-                            h='75px'
-                            borderRadius='15px'
-                            border='1px solid lightgray'
-                            cursor='pointer'
-                            transition='all .25s ease'
-                            _hover={{ filter: "brightness(120%)", bg: bgIcons }}>
-                            <Link href='#'>
-                                <Icon
-                                    as={FaGoogle}
-                                    w='30px'
-                                    h='30px'
-                                    _hover={{ filter: "brightness(120%)" }}
-                                />
-                            </Link>
-                        </Flex>
-                    </HStack>
-                    <Text
-                        fontSize='lg'
-                        color='gray.400'
-                        fontWeight='bold'
-                        textAlign='center'
-                        mb='22px'>
-                        ou
-                    </Text>
-                    <FormControl>
-                        <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                            CPF
-                        </FormLabel>
-                        <Input
-                            fontSize='sm'
-                            ms='4px'
-                            borderRadius='15px'
-                            type='number'
-                            maxLength={11}
-                            placeholder='CPF'
-                            mb='24px'
-                            size='lg'
-                        />
-                        <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                            Email
-                        </FormLabel>
-                        <Input
-                            fontSize='sm'
-                            ms='4px'
-                            borderRadius='15px'
-                            type='email'
-                            placeholder='Seu endereço de email'
-                            mb='24px'
-                            size='lg'
-                        />
-                        <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                            Senha
-                        </FormLabel>
-                        <Input
-                            fontSize='sm'
-                            ms='4px'
-                            borderRadius='15px'
-                            type='password'
-                            placeholder='Sua senha'
-                            mb='24px'
-                            size='lg'
-                        />
-                        <FormControl display='flex' alignItems='center' mb='24px'>
-                            <Switch id='remember-login' colorScheme='teal' me='10px' />
-                            <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
-                                Lembre de mim
-                            </FormLabel>
-                        </FormControl>
-                        <Button
-                            onClick={() => router.push('/home')}
-                            type='submit'
-                            bg='teal'
-                            fontSize='10px'
-                            color='white'
-                            fontWeight='bold'
-                            w='100%'
-                            h='45'
-                            mb='24px'
-                            _hover={{
-                                bg: "teal.200",
-                            }}
-                            _active={{
-                                bg: "teal",
-                            }}>
-                            <Text fontSize={15}>
-                                Entrar
-                            </Text>
-                        </Button>
-                    </FormControl>
-                    <Flex
-                        flexDirection='column'
-                        justifyContent='center'
-                        alignItems='center'
-                        maxW='100%'
-                        mt='0px'>
-                        <Text color={textColor} fontWeight='medium'>
-                            não tem uma conta?
-                            <Link
-                                onClick={() => router.push('/auth/client/register')}
-                                color="teal"
-                                as='span'
-                                ms='5px'
+             
+                    <Box flex="1" borderRadius={8} bg="#483D8B" p="10" maxW={1800} mt={20}>
+                        <Flex mb="8" justify="space-between" align="center">
+                            <Heading fontSize="lg" fontWeight="normal">
+                                <Text color="whiteAlpha.900" >
+                                    Lista de Produtos
 
-                                fontWeight='bold'>
-                                Registar-se
+                                </Text>
+
+                            </Heading>
+                            <Link >
+                                <Button
+                                    mr={"4"}
+                                    as="a"
+                                    size="sm"
+                                    fontSize="sm"
+                                    colorScheme="teal"
+                                    leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+                                    onClick={() => router.push('/auth/client/create')}
+                                >
+                                    Cadastrar novo
+                                </Button>
                             </Link>
-                        </Text>
-                    </Flex>
+                        </Flex>
+
+                        <Table colorScheme="whiteAlpha">
+                            <Thead>
+                                <Tr>
+                                    <Th color={'whiteAlpha.900'}>Id</Th>
+                                    <Th color={'whiteAlpha.900'}>Nome do cliente</Th>
+                                    <Th color={'whiteAlpha.900'}>Email</Th>
+                                    <Th color={'whiteAlpha.900'}>Contacto</Th>
+
+                                    
+                                    <Th width="8"></Th>
+                                    <Th width="8"></Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+           
+                                    <Tr >
+                                           
+                         
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}> #00001</Text>
+
+                                        </Td>
+                                     
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>Ducílio Manjate</Text>
+                                        </Td>
+
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>liomanjate@gmail.com </Text>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>45123456789 </Text>
+                                        </Td>
+
+                                        <Td>
+                                            <Link >
+                                                <Button
+                                                    as="a"
+                                                    size="sm"
+                                                    fontSize="sm"
+                                                    colorScheme="yellow"
+                                                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                                                    onClick={() => router.push('/auth/client/edit')}
+                                                >
+                                                    Editar
+                                                </Button>
+                                            </Link>
+                                        </Td>
+                                        <Td>
+                                            <Button
+                                                type="button"
+                                                as="a"
+                                                size="sm"
+                                                fontSize="sm"
+                                                colorScheme="red"
+                      
+                                                leftIcon={
+                                                    <Icon
+                                                        as={RiDeleteBinLine}
+                                                        fontSize="16"
+
+                                                    />
+                                                }
+                                            >
+                                                Excluir
+                                            </Button>
+                                        </Td>
+                                    </Tr>
+                         
+                            </Tbody>
+                        </Table>
+                    </Box>
                 </Flex>
-            </Flex>
             <FooterComponents/>
         </Flex>
     );

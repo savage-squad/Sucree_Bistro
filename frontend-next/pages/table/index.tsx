@@ -13,6 +13,7 @@ import {
     Thead,
     Tr,
 } from "@chakra-ui/react";
+import { table } from "console";
 import { subtle } from "crypto";
 import Link from "next/link";
 import { useState } from "react";
@@ -21,35 +22,48 @@ import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
 import SidebarWithHeader from "../../src/components/container";
 import FooterComponents from "../../src/components/footer";
 import { Header } from "../../src/components/hearder";
-import NavComponents from "../../src/components/nav";
-import { SideBar } from "../../src/components/SideBar";
+import { api } from "../services/api";
+// import NavComponents from "../../src/components/nav";
+// import { SideBar } from "../../src/components/s";
 
-export default function MesaList() {
-    const [data, setData] = useState([]);
-    const [mesaId, setMesaId] = useState(0);
+type Table = {
+    id: number;
+    referenciaMesa: string;
+    status: string;
+};
 
-    // async function deleteEndereco(mesa) {
-    //   setMesaId(mesa.id);
-    //   console.log(mesaId);
-    //   try {
-    //     await api.delete(`enderecos/${mesaId}`);
-    //     getItems();
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
-    // async function getItems() {
-    //   try {
-    //     const response = await api.get("products");
-    //     setData(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
 
-    // useEffect(() => {
-    //   getItems();
-    // }, []);
+
+
+
+export default function TableList() {
+
+    const [data, setData] = useState<Table[]>([]);
+
+
+    async function deleteTable(id: number,) {
+        console.log(id)
+
+        try {
+            await api.delete(`tables/${id}`);
+            getItems();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async function getItems() {
+        try {
+            const response = await api.get("tables");
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getItems();
+    }, []);
+
 
     return (
         <Box>
@@ -81,50 +95,58 @@ export default function MesaList() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
-                                    <Th color={'whiteAlpha.900'}>Nome</Th>
+                                    <Th color={'whiteAlpha.900'}>id</Th>
+                                    <Th color={'whiteAlpha.900'}>Referencia Mesa</Th>
+                                    <Th color={'whiteAlpha.900'}>Status</Th>
                                     <Th width="8"></Th>
                                     <Th width="8"></Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {/* {data.map((endereco) => ( */}
-                                <Tr>
-                                    <Td>
-                                        <Text fontSize={14} color={'whiteAlpha.900'}>Mesa 1</Text>
-                                    </Td>
-                                    <Td>
-                                        <Link href={`/#`}>
+                                {data.map((table) => (
+                                    <Tr key={table.id}>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{table.id}</Text>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{table.referenciaMesa}</Text>
+                                        </Td>
+                                        <Td>
+                                            <Text fontSize={14} color={'whiteAlpha.900'}>{table.status}</Text>
+                                        </Td>
+                                        <Td>
+                                            <Link href={`/#`}>
+                                                <Button
+                                                    as="a"
+                                                    size="sm"
+                                                    fontSize="sm"
+                                                    colorScheme="yellow"
+                                                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                                                >
+                                                    Editar
+                                                </Button>
+                                            </Link>
+                                        </Td>
+                                        <Td>
                                             <Button
                                                 as="a"
                                                 size="sm"
                                                 fontSize="sm"
-                                                colorScheme="yellow"
-                                                leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                                            >
-                                                Editar
-                                            </Button>
-                                        </Link>
-                                    </Td>
-                                    <Td>
-                                        <Button
-                                            as="a"
-                                            size="sm"
-                                            fontSize="sm"
-                                            colorScheme="red"
-                                            // onClick={}
-                                            leftIcon={
-                                                <Icon
-                                                    as={RiDeleteBinLine}
-                                                    fontSize="16"
+                                                colorScheme="red"
+                                                onClick={() => deleteTable(table.id)}
+                                                leftIcon={
+                                                    <Icon
+                                                        as={RiDeleteBinLine}
+                                                        fontSize="16"
 
-                                                />
-                                            }
-                                        >
-                                            Excluir
-                                        </Button>
-                                    </Td>
-                                </Tr>
-                                {/* ))} */}
+                                                    />
+                                                }
+                                            >
+                                                Excluir
+                                            </Button>
+                                        </Td>
+                                    </Tr>
+                                ))}
                             </Tbody>
                         </Table>
                     </Box>

@@ -88,7 +88,7 @@ function SignIn() {
       setToken(response.data.token);
 
       setLoadingRequest(false);
-      router.push("/product");
+      router.push("/dashboard");
     } catch (error) {
       setLoadingRequest(false);
       toast({

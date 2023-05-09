@@ -2,6 +2,8 @@
 package com.project.uniamerica.descomplica.backend.product;
 
 
+import com.project.uniamerica.descomplica.backend.order.OrderEntity;
+import com.project.uniamerica.descomplica.backend.productType.ProductTypeEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -37,9 +39,23 @@ public class ProductResource {
     @ApiOperation(value="Cadastra produto")
     public ResponseEntity<Object> saveProduct(@RequestBody @Valid ProductDto productDto) {
 
-        var productEntity = new ProductEntity();
-        BeanUtils.copyProperties(productDto, productEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productEntity));
+        ProductTypeEntity categoria = new ProductTypeEntity();
+        ProductEntity product= new ProductEntity();
+
+        categoria.setId(productDto.getCategoria().getId());
+        categoria.setNome(productDto.getCategoria().getNome());
+
+
+        product.setValor(productDto.getValor());
+        product.setNomeDoPrato(productDto.getNomeDoPrato());
+        product.setDescricao(productDto.getDescricao());
+        product.setId(productDto.getId());
+        product.setAtivo(productDto.isAtivo());
+        product.setCategoria(categoria);
+
+        ProductEntity productEntity =  productService.save(product);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(productEntity);
     }
 
 

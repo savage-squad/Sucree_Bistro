@@ -22,7 +22,7 @@ public class OrderEntity implements Serializable {
     private int id;
 
     @Getter @Setter
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "command_id")
     private CommandEntity command;
 
@@ -40,7 +40,7 @@ public class OrderEntity implements Serializable {
     private String observacao;
 
     @Getter @Setter
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 

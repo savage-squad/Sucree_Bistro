@@ -22,6 +22,7 @@ import {
     MenuItem,
     MenuList,
     WrapItem,
+    Divider,
 } from '@chakra-ui/react';
 import {
     FiHome,
@@ -35,7 +36,7 @@ import {
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
-import { FaClipboardList, FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaUserTie, } from 'react-icons/fa';
+import { FaClipboardList, FaListAlt, FaPizzaSlice, FaProductHunt, FaShoppingCart, FaSignOutAlt, FaUserTie, } from 'react-icons/fa';
 import { BiCategoryAlt } from 'react-icons/bi';
 import router from 'next/router';
 
@@ -47,13 +48,16 @@ interface LinkItemProps {
     route: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-    { name: 'Home', icon: FiHome, route: '/' },
+    { name: 'Dashboard', icon: FiHome, route: '/' },
     { name: 'Produtos', icon: FaProductHunt, route: '/product' },
-    { name: 'Categorias', icon: BiCategoryAlt, route: '/categories' },
     { name: 'Comanda', icon: FaListAlt, route: '/command' },
+
     { name: 'Mesa', icon: FaPizzaSlice, route: '/table' },
-    { name: 'Clientes', icon: FaUserTie, route: '/clients' },
+    // { name: 'Clientes', icon: FaUserTie, route: '/auth/client' },
     { name: 'Pedidos', icon: FaShoppingCart, route: '/orders' },
+
+    { name: 'Sair', icon: FaSignOutAlt, route: '/auth/signin' },
+
 ];
 
 
@@ -209,7 +213,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                                 <Avatar
                                     size={'sm'}
                                     src={
-                                        'https://github.com/DucilioManjate.png'
+                                        'https://github.com/Khensanepaulo.png'
                                     }
                                 />
                                 <VStack
@@ -217,7 +221,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                                     alignItems="flex-start"
                                     spacing="1px"
                                     ml="2">
-                                    <Text fontSize="sm">Ducilio Manjate</Text>
+                                    <Text fontSize="sm">Khensane Paulo</Text>
                                     <Text fontSize="xs" color="gray.600">
                                         Admin
                                     </Text>
